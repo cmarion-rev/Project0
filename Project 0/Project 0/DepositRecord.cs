@@ -9,6 +9,7 @@ namespace Project_0
         public DepositRecord()
         {
             TransactionID = ITransactionRecord.TransactionNumber++;
+            TransactionDateTime = DateTime.Now;
         }
 
         public int TransactionID { get; }
@@ -16,5 +17,7 @@ namespace Project_0
         public double TransactionAmount { get; set; }
 
         public Utility.TransactionErrorCodes TransactionCode { get; set; }
+
+        public DateTime TransactionDateTime { get; }
     }
 }
