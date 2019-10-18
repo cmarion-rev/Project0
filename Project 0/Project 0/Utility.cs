@@ -23,8 +23,12 @@ namespace Project_0
         {
             SUCCESS,
 
+            // Withdrawal Errors.
             OVERDRAFT,
             TERM_PROTECTION,
+
+            // Deposit Errors.
+            INVALID_AMOUNT,
         }
     }
 }
