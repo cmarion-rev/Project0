@@ -2,7 +2,9 @@
 
 
 Stack:
-    - C# Console App
+
+C# Console App
+
     
 A Net Banking Application
     - Checking Account	
