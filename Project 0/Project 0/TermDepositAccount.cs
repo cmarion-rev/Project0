@@ -29,6 +29,11 @@ namespace Project_0
 
         public int AccountNumber { get; }
 
+        /// <summary>
+        /// Deposits funds to account.
+        /// </summary>
+        /// <param name="newAmount">Amount to be deposited.</param>
+        /// <returns>Returns true if transaction is valid; Otherwise, false.</returns>
         public bool DepositAmount(double newAmount)
         {
             bool result = true;
@@ -50,6 +55,11 @@ namespace Project_0
             return result;
         }
 
+        /// <summary>
+        /// Withdraws funds from account, if possible.
+        /// </summary>
+        /// <param name="newAmount">Amount to be withdrawn.</param>
+        /// <returns>Returns true if transaction is valid; Otherwise, false.</returns>
         public bool WithdrawAmount(double newAmount)
         {
             bool result = true;
@@ -71,6 +81,11 @@ namespace Project_0
             return result;
         }
 
+        /// <summary>
+        /// Checks account for proper maturity before allowing withdrawal.
+        /// </summary>
+        /// <param name="newAmount">Amount to be withdrawn.</param>
+        /// <returns>Returns true if transaction is valid; Otherwise, false.</returns>
         private bool CheckMaturity(double newAmount)
         {
             bool result = true;
@@ -90,6 +105,11 @@ namespace Project_0
             return result;
         }
 
+        /// <summary>
+        /// Checks account for avaliable funds to be withdrawn.
+        /// </summary>
+        /// <param name="newAmount">Amount to be withdrawn.</param>
+        /// <returns>Returns true if transaction is valid; Otherwise, false.</returns>
         private bool CheckOverdrafting(double newAmount)
         {
             bool result = true;
