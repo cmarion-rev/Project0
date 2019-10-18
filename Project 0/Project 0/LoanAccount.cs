@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Project_0
 {
-    class LoanAccount : IAccountInfo
+    class LoanAccount : Account, IAccountInfo
     {
     }
 }
