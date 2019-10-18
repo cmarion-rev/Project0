@@ -4,8 +4,12 @@ using System.Text;
 
 namespace Project_0
 {
-    abstract class Account
+    interface Account
     {
+        public int CustomerID { get; set; }
 
+        public Customer Customer { get; set; }
+
+        public double AccountBalance { get; set; }
     }
 }
