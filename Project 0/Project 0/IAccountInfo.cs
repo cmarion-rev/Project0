@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Project_0
 {
-    interface IAccount
+    interface IAccountInfo : IDeposit, IWithdrawal
     {
         public int CustomerID { get; set; }
 
