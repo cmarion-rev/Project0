@@ -8,10 +8,10 @@ namespace Project_0
     {
         public static int TransactionNumber = 0;
 
-        public int TransactionID { get; set; }
+        public int TransactionID { get; }
 
         public double TransactionAmount { get; set; }
 
-        public Utility.TransactionErrorCodes TransactionCode { get; }
+        public Utility.TransactionErrorCodes TransactionCode { get; set; }
     }
 }
