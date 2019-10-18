@@ -19,5 +19,12 @@ namespace Project_0
             DISPLAY_TRANSACTIONS,
         }
 
+        public enum WithdrawalErrorCodes
+        {
+            SUCCESS,
+
+            OVERDRAFT,
+            TERM_PROTECTION,
+        }
     }
 }
