@@ -1,2 +1,0 @@
-M:\Revature\Project 0\Project0\Project 0\Project 0\obj\Debug\netcoreapp3.0\Project 0.AssemblyInfoInputs.cache
-M:\Revature\Project 0\Project0\Project 0\Project 0\obj\Debug\netcoreapp3.0\Project 0.AssemblyInfo.cs
