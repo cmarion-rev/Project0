@@ -21,7 +21,8 @@ namespace Project_0
 
         public enum TransactionErrorCodes
         {
-            SUCCESS,
+            WITHDRAW_SUCCESS,
+            DEPOSIT_SUCCESS,
 
             OVERDRAFT,
             TERM_PROTECTION,
