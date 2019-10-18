@@ -2,13 +2,13 @@
 
 
 Stack:
-    C# Console App
+    - C# Console App
     
 A Net Banking Application
-    Checking Account
-    Business Account
-    Loan
-    Term Deposit (Certificate of Deposit - CD)
+    - Checking Account	
+    - Business Account
+    - Loan
+    - Term Deposit (Certificate of Deposit - CD)
     
     Customer can have many accounts
     Business Account can have an overdraft
