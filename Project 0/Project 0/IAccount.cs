@@ -10,6 +10,6 @@ namespace Project_0
 
         public Customer Customer { get; set; }
 
-        public double AccountBalance { get; set; }
+        public double AccountBalance { get; }
     }
 }
