@@ -6,6 +6,7 @@ namespace Project_0
 {
     public class TermDepositAccount : Account, IAccountInfo
     {
+        public DateTime MaturityDate { get; set; }
 
         public TermDepositAccount(Customer newCustomer) : base()
         {
@@ -32,12 +33,12 @@ namespace Project_0
 
             if (newAmount > 0.0f)
             {
-
-            
+                totalRecords.Add(new DepositRecord() { TransactionAmount = newAmount, TransactionCode = Utility.TransactionErrorCodes.SUCCESS });
             }
             else
             {
-
+                result = false;
+                LastTransactionState = Utility.TransactionErrorCodes.INVALID_AMOUNT;
             }
 
             return result;
