@@ -1,11 +1,2 @@
-M:\Revature\Project 0\Project0\Project 0\Project 0\bin\Debug\netcoreapp3.0\Project 0.exe
-M:\Revature\Project 0\Project0\Project 0\Project 0\bin\Debug\netcoreapp3.0\Project 0.deps.json
-M:\Revature\Project 0\Project0\Project 0\Project 0\bin\Debug\netcoreapp3.0\Project 0.runtimeconfig.json
-M:\Revature\Project 0\Project0\Project 0\Project 0\bin\Debug\netcoreapp3.0\Project 0.runtimeconfig.dev.json
-M:\Revature\Project 0\Project0\Project 0\Project 0\bin\Debug\netcoreapp3.0\Project 0.dll
-M:\Revature\Project 0\Project0\Project 0\Project 0\bin\Debug\netcoreapp3.0\Project 0.pdb
-M:\Revature\Project 0\Project0\Project 0\Project 0\obj\Debug\netcoreapp3.0\Project 0.csprojAssemblyReference.cache
 M:\Revature\Project 0\Project0\Project 0\Project 0\obj\Debug\netcoreapp3.0\Project 0.AssemblyInfoInputs.cache
 M:\Revature\Project 0\Project0\Project 0\Project 0\obj\Debug\netcoreapp3.0\Project 0.AssemblyInfo.cs
-M:\Revature\Project 0\Project0\Project 0\Project 0\obj\Debug\netcoreapp3.0\Project 0.dll
-M:\Revature\Project 0\Project0\Project 0\Project 0\obj\Debug\netcoreapp3.0\Project 0.pdb
