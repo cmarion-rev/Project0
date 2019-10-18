@@ -9,8 +9,12 @@ namespace Project_0
         public TermDepositAccount(Customer newCustomer) : base()
         {
             AccountNumber = IAccountInfo.totalAccounts++;
+
+            // Set customer references.
             Customer = newCustomer;
             // CustomerID = newCustomer.CustomerID;
+
+            // Set initial account balance.
             AccountBalance = 0.0;
 
             // Default 1 Year term.
