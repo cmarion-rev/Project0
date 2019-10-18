@@ -6,6 +6,11 @@ namespace Project_0
 {
     abstract class Account
     {
-        
+        protected List<ITransactionRecord> totalRecords = new List<ITransactionRecord>();
+
+        public Account()
+        {
+            totalRecords = new List<ITransactionRecord>();
+        }
     }
 }
