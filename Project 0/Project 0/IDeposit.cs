@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Project_0
 {
-    interface IDeposit
+    public interface IDeposit
     {
         public bool DepositAmount(double newAmount);
     }

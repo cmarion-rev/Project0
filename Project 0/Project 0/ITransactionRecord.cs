@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Project_0
 {
-    interface ITransactionRecord
+    public interface ITransactionRecord
     {
         public static int TransactionNumber = 0;
 

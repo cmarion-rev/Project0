@@ -8,5 +8,12 @@ namespace Project_0
         {
             Console.WriteLine("Hello World!");
         }
+
+        static void DO()
+        {
+            TermDepositAccount A = new TermDepositAccount();
+
+            A.
+        }
     }
 }

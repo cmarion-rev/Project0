@@ -4,8 +4,12 @@ using System.Text;
 
 namespace Project_0
 {
-    interface IAccountInfo : IDeposit, IWithdrawal
+    public interface IAccountInfo : IDeposit, IWithdrawal, IAccountError
     {
+        protected static int totalAccounts = 0;
+
+        public int AccountNumber { get; }
+
         public int CustomerID { get; set; }
 
         public Customer Customer { get; set; }

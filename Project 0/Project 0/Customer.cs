@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Project_0
 {
-    class Customer
+    public class Customer
     {
     }
 }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Project_0
 {
-    class Utility
+    public class Utility
     {
         public enum OperationState
         {
@@ -21,8 +21,7 @@ namespace Project_0
 
         public enum TransactionErrorCodes
         {
-            WITHDRAW_SUCCESS,
-            DEPOSIT_SUCCESS,
+            SUCCESS,
 
             OVERDRAFT,
             TERM_PROTECTION,
