@@ -6,10 +6,10 @@ namespace Project_0
 {
     interface IWithdrawal
     {
-        public Utility.WithdrawalErrorCodes WithdrawState { get; }
+        public Utility.TransactionErrorCodes WithdrawState { get; }
 
         public bool WithdrawAmount(double newAmount);
 
-        public Utility.WithdrawalErrorCodes LastWithdrawError();
+        public Utility.TransactionErrorCodes LastWithdrawError();
     }
 }

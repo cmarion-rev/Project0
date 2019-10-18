@@ -19,7 +19,7 @@ namespace Project_0
             DISPLAY_TRANSACTIONS,
         }
 
-        public enum WithdrawalErrorCodes
+        public enum TransactionErrorCodes
         {
             SUCCESS,
 
