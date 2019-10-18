@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Project_0
 {
-    class CheckingAccount : Account
+    class CheckingAccount : IAccount
     {
 
     }
