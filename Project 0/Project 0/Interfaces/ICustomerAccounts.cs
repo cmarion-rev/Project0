@@ -19,5 +19,7 @@ namespace Project_0
         public List<LoanAccount> GetLoanAccounts();
 
         public Account GetAccount(int index);
+
+        public Account GetAccountByNumber(int accountNumber);
     }
 }
