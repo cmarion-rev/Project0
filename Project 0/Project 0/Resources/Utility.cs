@@ -6,6 +6,14 @@ namespace Project_0
 {
     public class Utility
     {
+        public enum AccountType
+        {
+            CHECKING,
+            BUSINESS,
+            TERM,
+            LOAN,
+        }
+
         public enum OperationState
         {
             REGISTER,
