@@ -6,21 +6,27 @@ using System.Linq;
 
 namespace Project_0
 {
-    public class Customer : ICustomerAccounts
+    public class Customer : ICustomerAccounts, ICustomerInformation
     {
-        private static int totalCustomers = 0;
-        protected static int GetNewCustomerNumber()
-        {
-            return ++totalCustomers;
-        }
-
         public int CustomerID { get; }
+
+        public string FirstName { get; set; }
+
+        public string LastName { get; set ; }
+
+        public string FullName
+        {
+            get 
+            { 
+                return string.Format("{0} {1}", FirstName, LastName); 
+            }
+        }
 
         private List<Account> customerAccounts = new List<Account>();
 
         public Customer()
         {
-            CustomerID = GetNewCustomerNumber();
+            CustomerID = ICustomerInformation.GetNewCustomerNumber();
             customerAccounts = new List<Account>();
         }
 
