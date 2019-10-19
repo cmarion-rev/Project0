@@ -10,26 +10,26 @@ namespace Project_0
     {
         private static int totalCustomers = 0;
 
-        public int CustomerID { get;  }
+        public int CustomerID { get; }
 
-        private List<Account> accounts = new List<Account>();
+        private List<Account> customerAccounts = new List<Account>();
 
         Customer()
         {
             CustomerID = ++totalCustomers;
-            accounts = new List<Account>();
+            customerAccounts = new List<Account>();
         }
 
         public List<Account> GetAccounts()
         {
-            return accounts;
+            return customerAccounts;
         }
 
         public List<CheckingAccount> GetCheckingAccounts()
         {
             List<CheckingAccount> result = new List<CheckingAccount>();
 
-            result = accounts.Where(account => account is CheckingAccount).ToList().Cast<CheckingAccount>().ToList();
+            result = customerAccounts.Where(account => account is CheckingAccount).ToList().Cast<CheckingAccount>().ToList();
 
             return result;
         }
@@ -38,7 +38,7 @@ namespace Project_0
         {
             List<BusinessAccount> result = new List<BusinessAccount>();
 
-            result = accounts.Where(account => account is BusinessAccount).ToList().Cast<BusinessAccount>().ToList();
+            result = customerAccounts.Where(account => account is BusinessAccount).ToList().Cast<BusinessAccount>().ToList();
 
             return result;
         }
@@ -47,7 +47,7 @@ namespace Project_0
         {
             List<TermDepositAccount> result = new List<TermDepositAccount>();
 
-            result = accounts.Where(account => account is TermDepositAccount).ToList().Cast<TermDepositAccount>().ToList();
+            result = customerAccounts.Where(account => account is TermDepositAccount).ToList().Cast<TermDepositAccount>().ToList();
 
             return result;
         }
@@ -56,29 +56,78 @@ namespace Project_0
         {
             List<LoanAccount> result = new List<LoanAccount>();
 
-            result = accounts.Where(account => account is LoanAccount).ToList().Cast<LoanAccount>().ToList();
+            result = customerAccounts.Where(account => account is LoanAccount).ToList().Cast<LoanAccount>().ToList();
 
             return result;
         }
 
         public Account GetAccount(int index)
         {
-            throw new NotImplementedException();
+            Account result = null;
+
+            if (index > -1)
+            {
+                if (index < customerAccounts.Count)
+                {
+                    result = customerAccounts[index];
+                }
+            }
+
+            return result;
         }
 
         public bool AddAccount(Account newAccount)
         {
-            throw new NotImplementedException();
+            bool result = true;
+
+            if (customerAccounts.Contains(newAccount))
+            {
+                result = false;
+            }
+            else
+            {
+                customerAccounts.Add(newAccount);
+            }
+
+            return result;
         }
 
         public bool RemoveAccount(Account newAccount)
         {
-            throw new NotImplementedException();
+            bool result = true;
+
+            int index = customerAccounts.IndexOf(newAccount);
+            if (index > -1)
+            {
+                customerAccounts.RemoveAt(index);
+            }
+            else
+            {
+                result = false;
+            }
+
+            return result;
         }
 
         public int GetNumberOfAccounts()
         {
-            return accounts.Count;
+            return customerAccounts.Count;
+        }
+
+        public Account GetAccountByNumber(int accountNumber)
+        {
+            Account result = null;
+
+            foreach (IAccountInfo currentAccount in customerAccounts)
+            {
+                if (currentAccount.AccountNumber == accountNumber)
+                {
+                    result = (currentAccount as Account);
+                    break;
+                }
+            }
+
+            return result;
         }
     }
 }
