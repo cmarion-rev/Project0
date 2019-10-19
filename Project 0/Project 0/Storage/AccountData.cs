@@ -8,23 +8,30 @@ namespace Project_0
     {
         private readonly Dictionary<Utility.AccountType, List<Account>> allAccounts = new Dictionary<Utility.AccountType, List<Account>>();
 
-        public static AccountData Instance { get; private set; }
+        private static AccountData workingInstance = null;
 
-        AccountData()
+        public static AccountData Instance
         {
-            if (Instance == null)
+            get
             {
-                Instance = this;
-                allAccounts = new Dictionary<Utility.AccountType, List<Account>>();
-
-                // Add new keys.
-                allAccounts.Add(Utility.AccountType.CHECKING, new List<Account>());
-                allAccounts.Add(Utility.AccountType.BUSINESS, new List<Account>());
-                allAccounts.Add(Utility.AccountType.TERM, new List<Account>());
-                allAccounts.Add(Utility.AccountType.LOAN, new List<Account>());
+                if (workingInstance == null)
+                {
+                    workingInstance = new AccountData();
+                }
+                return workingInstance;
             }
         }
 
+        AccountData()
+        {
+            allAccounts = new Dictionary<Utility.AccountType, List<Account>>();
+
+            // Add new keys.
+            allAccounts.Add(Utility.AccountType.CHECKING, new List<Account>());
+            allAccounts.Add(Utility.AccountType.BUSINESS, new List<Account>());
+            allAccounts.Add(Utility.AccountType.TERM, new List<Account>());
+            allAccounts.Add(Utility.AccountType.LOAN, new List<Account>());
+        }
 
         #region ADD ACCOUNTS
 
