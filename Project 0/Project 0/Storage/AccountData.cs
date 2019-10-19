@@ -159,27 +159,103 @@ namespace Project_0
 
         public Account GetAccount(int accountNumber)
         {
-            throw new NotImplementedException();
+            Account result = null;
+
+            foreach (var accountList in allAccounts)
+            {
+                switch (accountList.Key)
+                {
+                    case Utility.AccountType.CHECKING:
+                        result = GetCheckingAccount(accountNumber);
+                        break;
+
+                    case Utility.AccountType.BUSINESS:
+                        result = GetBusinessAccount(accountNumber);
+                        break;
+
+                    case Utility.AccountType.TERM:
+                        result = GetTermAccount(accountNumber);
+                        break;
+
+                    case Utility.AccountType.LOAN:
+                        result = GetLoanAccount(accountNumber);
+                        break;
+
+                    default:
+                        break;
+                }
+
+                if (result != null)
+                {
+                    break;
+                }
+            }
+
+            return result;
         }
 
         public BusinessAccount GetBusinessAccount(int accountNumber)
         {
-            throw new NotImplementedException();
+            BusinessAccount result = null;
+
+            foreach (BusinessAccount accountRecord in allAccounts[Utility.AccountType.BUSINESS])
+            {
+                if (accountRecord.AccountNumber == accountNumber)
+                {
+                    result = accountRecord;
+                    break;
+                }
+            }
+
+            return result;
         }
 
         public CheckingAccount GetCheckingAccount(int accountNumber)
         {
-            throw new NotImplementedException();
+            CheckingAccount result = null;
+
+            foreach (CheckingAccount accountRecord in allAccounts[Utility.AccountType.CHECKING])
+            {
+                if (accountRecord.AccountNumber == accountNumber)
+                {
+                    result = accountRecord;
+                    break;
+                }
+            }
+
+            return result;
         }
 
         public LoanAccount GetLoanAccount(int accountNumber)
         {
-            throw new NotImplementedException();
+            LoanAccount result = null;
+
+            foreach (LoanAccount accountRecord in allAccounts[Utility.AccountType.LOAN])
+            {
+                if (accountRecord.AccountNumber == accountNumber)
+                {
+                    result = accountRecord;
+                    break;
+                }
+            }
+
+            return result;
         }
 
         public TermDepositAccount GetTermAccount(int accountNumber)
         {
-            throw new NotImplementedException();
+            TermDepositAccount result = null;
+
+            foreach (TermDepositAccount accountRecord in allAccounts[Utility.AccountType.TERM])
+            {
+                if (accountRecord.AccountNumber == accountNumber)
+                {
+                    result = accountRecord;
+                    break;
+                }
+            }
+
+            return result;
         }
 
         #endregion
