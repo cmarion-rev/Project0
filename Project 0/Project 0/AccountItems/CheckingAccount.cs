@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Project_0
 {
-    class CheckingAccount : Account, IAccountInfo
+    public class CheckingAccount : Account, IAccountInfo
     {
         public CheckingAccount(Customer newCustomer) : base()
         {
