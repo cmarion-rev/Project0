@@ -30,27 +30,127 @@ namespace Project_0
 
         public bool AddAccount(Account newAccount)
         {
-           
-        }
+            bool result = true;
+
+            if (newAccount is CheckingAccount)
+            {
+                result = AddNewCheckingAccount(newAccount);
+            }
+            else if (newAccount is BusinessAccount)
+            {
+                result = AddNewBusinessAccount(newAccount);
+            }
+            else if (newAccount is TermDepositAccount)
+            {
+                result = AddNewTermAccount(newAccount);
+            }
+            else if (newAccount is LoanAccount)
+            {
+                result = AddNewLoanAccount(newAccount);
+            }
+
+            return result;
+        }       
 
         public bool AddBusinessAccount(BusinessAccount newAccount)
         {
-            throw new NotImplementedException();
+            bool result = true;
+
+            result = AddNewBusinessAccount(newAccount);
+
+            return result;
         }
 
         public bool AddCheckingAccount(CheckingAccount newAccount)
         {
-            throw new NotImplementedException();
+            bool result = true;
+
+            result = AddNewCheckingAccount(newAccount);
+
+            return result;
         }
 
         public bool AddLoanAccount(LoanAccount newAccount)
         {
-            throw new NotImplementedException();
+            bool result = true;
+
+            result = AddNewLoanAccount(newAccount);
+
+            return result;
         }
 
         public bool AddTermAccount(TermDepositAccount newAccount)
         {
-            throw new NotImplementedException();
+            bool result = true;
+
+            result = AddNewTermAccount(newAccount);
+
+            return result;
+        }
+
+
+        private bool AddNewCheckingAccount(Account newAccount)
+        {
+            bool result = true;
+
+            if (allAccounts[Utility.AccountType.CHECKING].Contains(newAccount))
+            {
+                result = false;
+            }
+            else
+            {
+                allAccounts[Utility.AccountType.CHECKING].Add(newAccount);
+            }
+
+            return result;
+        }
+
+        private bool AddNewBusinessAccount(Account newAccount)
+        {
+            bool result = true;
+
+            if (allAccounts[Utility.AccountType.BUSINESS].Contains(newAccount))
+            {
+                result = false;
+            }
+            else
+            {
+                allAccounts[Utility.AccountType.BUSINESS].Add(newAccount);
+            }
+
+            return result;
+        }
+
+        private bool AddNewTermAccount(Account newAccount)
+        {
+            bool result = true;
+
+            if (allAccounts[Utility.AccountType.TERM].Contains(newAccount))
+            {
+                result = false;
+            }
+            else
+            {
+                allAccounts[Utility.AccountType.TERM].Add(newAccount);
+            }
+
+            return result;
+        }
+
+        private bool AddNewLoanAccount(Account newAccount)
+        {
+            bool result = true;
+
+            if (allAccounts[Utility.AccountType.LOAN].Contains(newAccount))
+            {
+                result = false;
+            }
+            else
+            {
+                allAccounts[Utility.AccountType.LOAN].Add(newAccount);
+            }
+
+            return result;
         }
 
         #endregion
