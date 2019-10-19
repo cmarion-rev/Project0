@@ -21,6 +21,10 @@ namespace Project_0
             A.AddAccount(new CheckingAccount(A) { CustomerID = A.CustomerID });
 
             A.GetAccountByNumber(1);
+
+            A.GetCheckingAccounts();
+
+            A.GetTermDepositAccounts();
         }
     }
 }
