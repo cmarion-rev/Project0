@@ -24,7 +24,7 @@ namespace Project_0
             SUCCESS,
 
             // Withdrawal Errors.
-            OVERDRAFT,
+            OVERDRAFT_PROTECTION,
             TERM_PROTECTION,
 
             // Deposit Errors.

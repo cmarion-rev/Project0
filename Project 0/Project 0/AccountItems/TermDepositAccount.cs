@@ -127,7 +127,7 @@ namespace Project_0
             {
                 // Over Draft error.
                 result = false;
-                LastTransactionState = Utility.TransactionErrorCodes.OVERDRAFT;
+                LastTransactionState = Utility.TransactionErrorCodes.OVERDRAFT_PROTECTION;
             }
 
             return result;
