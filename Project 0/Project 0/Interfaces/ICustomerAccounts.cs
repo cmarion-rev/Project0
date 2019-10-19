@@ -8,7 +8,7 @@ namespace Project_0
     {
         public int GetNumberOfAccounts();
 
-        public List<Account> GetAccounts();
+        public List<Account> GetAllAccounts();
         
         public List<CheckingAccount> GetCheckingAccounts();
         
