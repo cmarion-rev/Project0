@@ -8,7 +8,6 @@ namespace Project_0
     {
         public bool AddAccount(Account newAccount);
 
-
         public bool RemoveAccount(Account newAccount);
     }
 }

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 
-
 namespace Project_0
 {
     public class Customer : ICustomerAccounts, ICustomerInformation
