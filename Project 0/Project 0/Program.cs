@@ -7,11 +7,21 @@ namespace Project_0
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
+
+            Do();
         }
 
-        static void DO()
+        static void Do()
         {
-           
+            Customer A = new Customer()
+            {
+              
+            };
+
+            A.AddAccount(new CheckingAccount(A) { CustomerID = A.CustomerID });
+
+
+            A.GetAccountByNumber(1);
         }
     }
 }
