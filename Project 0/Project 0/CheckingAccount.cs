@@ -30,6 +30,11 @@ namespace Project_0
 
         public Utility.TransactionErrorCodes LastTransactionState { get; private set; }
 
+        /// <summary>
+        /// Deposits funds to account.
+        /// </summary>
+        /// <param name="newAmount">Amount to be deposited.</param>
+        /// <returns>Returns true if transaction is valid; Otherwise, false.</returns>
         public bool DepositAmount(double newAmount)
         {
             bool result = true;
@@ -51,9 +56,54 @@ namespace Project_0
             return result;
         }
 
+        /// <summary>
+        /// Withdraws funds from account, if possible.
+        /// </summary>
+        /// <param name="newAmount">Amount to be withdrawn.</param>
+        /// <returns>Returns true if transaction is valid; Otherwise, false.</returns>
         public bool WithdrawAmount(double newAmount)
         {
-            throw new NotImplementedException();
+            bool result = true;
+            LastTransactionState = Utility.TransactionErrorCodes.SUCCESS;
+
+            // Check if amount selected is a valid number.
+            if (newAmount > 0.0)
+            {
+                // Check if withdraw amount does not exceed current account amount.
+                CheckOverdrafting(newAmount);
+            }
+            else
+            {
+                // Invalid amount selected.
+                result = false;
+                LastTransactionState = Utility.TransactionErrorCodes.INVALID_AMOUNT;
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Checks account for avaliable funds to be withdrawn.
+        /// </summary>
+        /// <param name="newAmount">Amount to be withdrawn.</param>
+        /// <returns>Returns true if transaction is valid; Otherwise, false.</returns>
+        private bool CheckOverdrafting(double newAmount)
+        {
+            bool result = true;
+
+            if (newAmount <= AccountBalance)
+            {
+                AccountBalance -= newAmount;
+                totalRecords.Add(new WithdrawalRecord() { TransactionAmount = newAmount, TransactionCode = Utility.TransactionErrorCodes.SUCCESS });
+            }
+            else
+            {
+                // Over Draft error.
+                result = false;
+                LastTransactionState = Utility.TransactionErrorCodes.OVERDRAFT;
+            }
+
+            return result;
         }
     }
 }
