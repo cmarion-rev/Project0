@@ -32,7 +32,23 @@ namespace Project_0
 
         public bool DepositAmount(double newAmount)
         {
-            throw new NotImplementedException();
+            bool result = true;
+            LastTransactionState = Utility.TransactionErrorCodes.SUCCESS;
+
+            // Check if amount selected is a valid number.
+            if (newAmount > 0.0f)
+            {
+                AccountBalance += newAmount;
+                totalRecords.Add(new DepositRecord() { TransactionAmount = newAmount, TransactionCode = Utility.TransactionErrorCodes.SUCCESS });
+            }
+            else
+            {
+                // Invalid amount selected.
+                result = false;
+                LastTransactionState = Utility.TransactionErrorCodes.INVALID_AMOUNT;
+            }
+
+            return result;
         }
 
         public bool WithdrawAmount(double newAmount)
