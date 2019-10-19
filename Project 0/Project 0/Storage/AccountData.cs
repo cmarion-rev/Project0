@@ -6,14 +6,31 @@ namespace Project_0
 {
     class AccountData : IAccountDataAddAccounts, IAccountDataGetAccounts, IAccountDataRemoveAccounts
     {
-        private List<CheckingAccount> allCheckingAccounts = new List<CheckingAccount>();
-        private List<BusinessAccount> allBusinessAccounts = new List<BusinessAccount>();
-        private List<TermDepositAccount> allTermAccounts = new List<TermDepositAccount>();
-        private List<LoanAccount> allLoanAccounts = new List<LoanAccount>();
+        private readonly Dictionary<Utility.AccountType, List<Account>> allAccounts = new Dictionary<Utility.AccountType, List<Account>>();
+
+        public static AccountData Instance { get; private set; }
+
+        AccountData()
+        {
+            if (Instance == null)
+            {
+                Instance = this;
+                allAccounts = new Dictionary<Utility.AccountType, List<Account>>();
+
+                // Add new keys.
+                allAccounts.Add(Utility.AccountType.CHECKING, new List<Account>());
+                allAccounts.Add(Utility.AccountType.BUSINESS, new List<Account>());
+                allAccounts.Add(Utility.AccountType.TERM, new List<Account>());
+                allAccounts.Add(Utility.AccountType.LOAN, new List<Account>());
+            }
+        }
+
+
+        #region ADD ACCOUNTS
 
         public bool AddAccount(Account newAccount)
         {
-            throw new NotImplementedException();
+           
         }
 
         public bool AddBusinessAccount(BusinessAccount newAccount)
@@ -35,6 +52,10 @@ namespace Project_0
         {
             throw new NotImplementedException();
         }
+
+        #endregion
+
+        #region GET ACCOUNTS
 
         public Account GetAccount(int accountNumber)
         {
@@ -61,6 +82,10 @@ namespace Project_0
             throw new NotImplementedException();
         }
 
+        #endregion
+
+        #region REMOVE ACCOUNTS
+
         public bool RemoveAccount(Account newAccount)
         {
             throw new NotImplementedException();
@@ -85,5 +110,7 @@ namespace Project_0
         {
             throw new NotImplementedException();
         }
+
+        #endregion
     }
 }
