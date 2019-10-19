@@ -264,27 +264,124 @@ namespace Project_0
 
         public bool RemoveAccount(Account newAccount)
         {
-            throw new NotImplementedException();
+            bool result = false;
+
+            if (newAccount is CheckingAccount)
+            {
+                result = RemoveCheckingAccount(newAccount as CheckingAccount);
+            }
+            else if (newAccount is BusinessAccount)
+            {
+                result = RemoveBusinessAccount(newAccount as BusinessAccount);
+            }
+            else if (newAccount is TermDepositAccount)
+            {
+                result = RemoveTermAccount(newAccount as TermDepositAccount);
+            }
+            else if (newAccount is LoanAccount)
+            {
+                result = RemoveLoanAccount(newAccount as LoanAccount);
+            }
+
+            return result;
         }
 
         public bool RemoveBusinessAccount(BusinessAccount newAccount)
         {
-            throw new NotImplementedException();
+            bool result = false;
+            int accountIndex = allAccounts[Utility.AccountType.BUSINESS].IndexOf(newAccount);
+
+            if (accountIndex > -1)
+            {
+                Customer currentCustomer = newAccount.Customer;
+
+                // Check if current account has remaining balance.
+                if (newAccount.AccountBalance > 0.0 | newAccount.OverdraftBalance > 0.0)
+                {
+                    // Run account close confirmation.
+                }
+
+                // Remove all relation to this account object.
+                result = RemoveSpecificAccount(currentCustomer, Utility.AccountType.BUSINESS, newAccount, accountIndex);
+            }
+
+            return result;
         }
 
         public bool RemoveCheckingAccount(CheckingAccount newAccount)
         {
-            throw new NotImplementedException();
+            bool result = false;
+            int accountIndex = allAccounts[Utility.AccountType.CHECKING].IndexOf(newAccount);
+
+            if (accountIndex > -1)
+            {
+                Customer currentCustomer = newAccount.Customer;
+
+                // Check if current account has remaining balance.
+                if (newAccount.AccountBalance > 0.0)
+                {
+                    // Run account close confirmation.
+                }
+
+                // Remove all relation to this account object.
+                result = RemoveSpecificAccount(currentCustomer, Utility.AccountType.CHECKING, newAccount, accountIndex);
+            }
+
+            return result;
         }
 
         public bool RemoveLoanAccount(LoanAccount newAccount)
         {
-            throw new NotImplementedException();
+            bool result = false;
+            int accountIndex = allAccounts[Utility.AccountType.LOAN].IndexOf(newAccount);
+
+            if (accountIndex > -1)
+            {
+                Customer currentCustomer = newAccount.Customer;
+
+                // Check if current account has remaining balance.
+                if (newAccount.AccountBalance > 0.0)
+                {
+                    // Run account close confirmation.
+                }
+
+                // Remove all relation to this account object.
+                result = RemoveSpecificAccount(currentCustomer, Utility.AccountType.LOAN, newAccount, accountIndex);
+            }
+
+            return result;
         }
 
         public bool RemoveTermAccount(TermDepositAccount newAccount)
         {
-            throw new NotImplementedException();
+            bool result = false;
+            int accountIndex = allAccounts[Utility.AccountType.TERM].IndexOf(newAccount);
+
+            if (accountIndex > -1)
+            {
+                Customer currentCustomer = newAccount.Customer;
+
+                // Check if current account has remaining balance.
+                if (newAccount.AccountBalance > 0.0)
+                {
+                    // Run account close confirmation.
+                }
+
+                // Remove all relation to this account object.
+                result = RemoveSpecificAccount(currentCustomer, Utility.AccountType.TERM, newAccount, accountIndex);
+            }
+
+            return result;
+        }
+        
+        private bool RemoveSpecificAccount(Customer currentCustomer, Utility.AccountType currentAccountType, Account currentAccount, int accountIndex)
+        {
+            bool result = true;
+
+            result = currentCustomer.RemoveAccount(currentAccount);
+            allAccounts[currentAccountType].RemoveAt(accountIndex);
+
+            return true;
         }
 
         #endregion
