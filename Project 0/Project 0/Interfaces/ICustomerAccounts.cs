@@ -6,6 +6,8 @@ namespace Project_0
 {
     interface ICustomerAccounts : ICustomerAccountUpdates
     {
+        public int GetNumberOfAccounts();
+
         public List<Account> GetAccounts();
         
         public List<CheckingAccount> GetCheckingAccounts();
