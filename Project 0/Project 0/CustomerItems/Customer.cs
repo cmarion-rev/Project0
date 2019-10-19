@@ -9,6 +9,10 @@ namespace Project_0
     public class Customer : ICustomerAccounts
     {
         private static int totalCustomers = 0;
+        protected static int GetNewCustomerNumber()
+        {
+            return ++totalCustomers;
+        }
 
         public int CustomerID { get; }
 
@@ -16,11 +20,11 @@ namespace Project_0
 
         public Customer()
         {
-            CustomerID = ++totalCustomers;
+            CustomerID = GetNewCustomerNumber();
             customerAccounts = new List<Account>();
         }
 
-        public List<Account> GetAccounts()
+        public List<Account> GetAllAccounts()
         {
             return customerAccounts;
         }
