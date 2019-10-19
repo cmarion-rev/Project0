@@ -125,7 +125,7 @@ namespace Project_0
             }
             else
             {
-                // Maturity not reached.
+                // Over Draft error.
                 result = false;
                 LastTransactionState = Utility.TransactionErrorCodes.OVERDRAFT;
             }
