@@ -11,9 +11,7 @@ namespace Project_0
 
         static void DO()
         {
-            TermDepositAccount A = new TermDepositAccount();
-
-            A.
+           
         }
     }
 }
