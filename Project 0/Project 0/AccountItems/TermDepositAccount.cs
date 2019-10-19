@@ -8,7 +8,7 @@ namespace Project_0
     {
         public TermDepositAccount(Customer newCustomer) : base()
         {
-            AccountNumber = IAccountInfo.totalAccounts++;
+            AccountNumber = IAccountInfo.GetNewAccountNumber();
 
             // Set customer references.
             Customer = newCustomer;
