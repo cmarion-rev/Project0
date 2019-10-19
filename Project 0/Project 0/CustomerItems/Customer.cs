@@ -14,7 +14,7 @@ namespace Project_0
 
         private List<Account> customerAccounts = new List<Account>();
 
-        Customer()
+        public Customer()
         {
             CustomerID = ++totalCustomers;
             customerAccounts = new List<Account>();
