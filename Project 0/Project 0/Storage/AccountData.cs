@@ -57,7 +57,7 @@ namespace Project_0
             }
 
             return result;
-        }       
+        }
 
         public bool AddBusinessAccount(BusinessAccount newAccount)
         {
@@ -380,7 +380,7 @@ namespace Project_0
 
             return result;
         }
-        
+
         private bool RemoveSpecificAccount(Customer currentCustomer, Utility.AccountType currentAccountType, Account currentAccount, int accountIndex)
         {
             bool result = true;
