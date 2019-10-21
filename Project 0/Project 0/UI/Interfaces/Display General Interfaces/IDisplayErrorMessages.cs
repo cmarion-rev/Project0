@@ -13,5 +13,7 @@ namespace Project_0.GeneralInterfaces
         public void DisplayInvalidSelection();
 
         public void DisplayInvalidIndexOption();
+
+        public void DisplayReturningToMainMenu();
     }
 }
