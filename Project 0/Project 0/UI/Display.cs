@@ -80,7 +80,24 @@ namespace Project_0
 
         public int GetUserOptionNumberSelection()
         {
-            throw new NotImplementedException();
+            int result = -1;
+
+            // Wait for user input.
+            Console.Write("Please select a number: ");
+            string inputLine = Console.ReadLine().Trim();
+
+            // Check for valid input.
+            if (int.TryParse(inputLine, out result))
+            {
+                // Check if entered amount was a positive value.
+
+            }
+            else
+            {
+                result = -1;
+            }
+
+            return result;
         }
 
         public Utility.OperationState GetUserSelection(Utility.MainMenuOptions menuOptions)
