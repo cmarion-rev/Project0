@@ -11,22 +11,26 @@ namespace Project_0
 
         public void DisplayInvalidAmount()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("ERROR!");
+            Console.WriteLine("INVALID AMOUNT ENTERED!");
         }
 
         public void DisplayInvalidIndexOption()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("ERROR!");
+            Console.WriteLine("INVALID SELECTION NUMBER!");
         }
 
         public void DisplayInvalidSelection()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("ERROR!");
+            Console.WriteLine("INVALID SELECTION ENTERED!");
         }
         
         public void DisplayWithdrawalOverdraftProtection()
         {
-            throw new NotImplementedException();
+            Console.WriteLine("WARNING!");
+            Console.WriteLine("AMOUNT SELECTED EXCEEDS ACCOUNT BALANCE!");
         }
 
         #endregion
