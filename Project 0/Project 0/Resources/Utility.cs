@@ -38,5 +38,19 @@ namespace Project_0
             // Deposit Errors.
             INVALID_AMOUNT,
         }
+
+        [Flags]
+        public enum MainMenuOptions
+        {
+            REGISTER_NEW_CUSTOMER = 1 << 0,
+            OPEN_NEW_ACCOUNT = 1 << 1,
+            CLOSE_ACCOUNT = 1 << 2,
+            WITHDRAW_AMOUNT = 1 << 3,
+            DEPOSIT_AMOUNT = 1 << 4,
+            TRANSFER_AMOUNT = 1 << 5,
+            PAY_LOAN_INSTALLMENT = 1 << 6,
+            DISPLAY_ALL_ACCOUNTS = 1 << 7,
+            DISPLAY_ALL_TRANSACTIONS = 1 << 8,
+        }
     }
 }
