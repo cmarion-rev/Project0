@@ -63,7 +63,7 @@ namespace Project_0
             menuOption = GetCurrentMainMenuOptions();
 
             // If customer is selected, display customer.
-            if (activeCustomer!=null)
+            if (activeCustomer != null)
             {
                 workingDisplay?.DisplayCustomerInformation(activeCustomer);
             }
@@ -238,7 +238,7 @@ namespace Project_0
                         case Utility.AccountType.BUSINESS:
                             result = true;
                             break;
-                     
+
                         default:
                             break;
                     }
@@ -316,7 +316,7 @@ namespace Project_0
                     }
                 }
             }
-                       
+
             return result;
         }
 
@@ -361,7 +361,7 @@ namespace Project_0
             do
             {
                 bool continueProcessing = true;
-                
+
                 workingDisplay?.ClearDisplay();
                 workingDisplay?.DisplayNewCustomerScreen();
 
@@ -378,7 +378,7 @@ namespace Project_0
                     }
                 }
             } while (firstName.Length < 1 || lastName.Length < 1);
-                      
+
             // Create new customer object.
             activeCustomer = new Customer()
             {
@@ -388,22 +388,6 @@ namespace Project_0
 
             // Add customer object to storage space.
             workingCustomerStorage?.AddCustomer(activeCustomer);
-        }
-
-        private bool ValidateName(string newName)
-        {
-            bool result = true;
-
-            foreach (char letter in newName)
-            {
-                if (!char.IsLetter(letter))
-                {
-                    result = false;
-                    break;
-                }
-            }
-
-            return result;
         }
 
         private bool ProcessFirstName(ref string firstName)
@@ -435,9 +419,9 @@ namespace Project_0
                     }
 
                     // Validate string is good.
-                    if (ValidateName(firstName))
+                    if (Utility.ValidateName(firstName))
                     {
-                        firstName = CaptializeName(firstName);
+                        firstName = Utility.CaptializeName(firstName);
                     }
                     else
                     {
@@ -482,12 +466,12 @@ namespace Project_0
                     }
 
                     // Validate string is good.
-                    if (ValidateName(lastName))
+                    if (Utility.ValidateName(lastName))
                     {
-                        lastName = CaptializeName(lastName);
+                        lastName = Utility.CaptializeName(lastName);
                     }
                     else
-                    { 
+                    {
                         // Display error to user and restart loop.
                         lastName = "";
                         workingDisplay?.DisplayInvalidEntry();
@@ -495,18 +479,6 @@ namespace Project_0
                         result = false;
                     }
                 }
-            }
-
-            return result;
-        }
-
-        private string CaptializeName(string newName)
-        {
-            string result = "";
-
-            for (int index = 0; index < newName.Length; index++)
-            {
-                result += index > 0 ? char.ToLower(newName[index]) : char.ToUpper(newName[index]);
             }
 
             return result;

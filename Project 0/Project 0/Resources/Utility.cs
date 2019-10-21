@@ -6,6 +6,8 @@ namespace Project_0
 {
     public class Utility
     {
+        #region ENUMERATORS
+
         public enum AccountType
         {
             CHECKING,
@@ -61,5 +63,39 @@ namespace Project_0
             //
             EXIT_PROGRAM = 1 << 16,
         }
+
+        #endregion
+
+        #region FUNCTIONS
+
+        public static bool ValidateName(string newName)
+        {
+            bool result = true;
+
+            foreach (char letter in newName)
+            {
+                if (!char.IsLetter(letter))
+                {
+                    result = false;
+                    break;
+                }
+            }
+
+            return result;
+        }
+        
+        public static string CaptializeName(string newName)
+        {
+            string result = "";
+
+            for (int index = 0; index < newName.Length; index++)
+            {
+                result += index > 0 ? char.ToLower(newName[index]) : char.ToUpper(newName[index]);
+            }
+
+            return result;
+        }
+
+        #endregion
     }
 }
