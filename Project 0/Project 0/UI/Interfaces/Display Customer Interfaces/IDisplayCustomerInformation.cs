@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Project_0
+namespace Project_0.CustomerInterfaces
 {
     interface IDisplayCustomerInformation
     {
