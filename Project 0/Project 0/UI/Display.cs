@@ -64,6 +64,7 @@ namespace Project_0
             // Display exit program option.
             Console.WriteLine();
             Console.WriteLine("(Q) Exit Program.");
+            Console.WriteLine();
         }
 
         public void ClearDisplay()
@@ -80,9 +81,61 @@ namespace Project_0
             throw new NotImplementedException();
         }
 
-        public Utility.OperationState GetUserSelection()
+        public Utility.OperationState GetUserSelection(Utility.MainMenuOptions menuOptions)
         {
-            throw new NotImplementedException();
+            Utility.OperationState result = Utility.OperationState.INVALID_OPTION;
+
+            string inputLine = Console.ReadLine();
+            int inputValue = -1;
+            if (int.TryParse(inputLine, out inputValue))
+            {
+                switch (inputValue)
+                {
+                    case 1:
+
+                        break;
+
+                    case 2:
+
+                        break;
+
+                    case 3:
+
+                        break;
+
+                    case 4:
+
+                        break;
+
+                    case 5:
+
+                        break;
+
+                    case 6:
+
+                        break;
+
+                    case 7:
+
+                        break;
+
+                    case 8:
+
+                        break;
+
+                    case 9:
+
+                        break;
+
+                    default:
+                        result = Utility.OperationState.INVALID_OPTION;
+                        break;
+                }
+            }
+
+
+
+            return result;
         }
 
         public double GetUserValueInput()
