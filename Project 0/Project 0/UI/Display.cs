@@ -302,20 +302,7 @@ namespace Project_0
         
         public void DisplayAccountForDepositing(IAccountInfo newAccount)
         {
-            string accountType = GetAccountType(newAccount);
-
-            Console.WriteLine("Account # {0}", newAccount.AccountNumber);
-            Console.WriteLine("Account Type: {0}", accountType);
-
-            // Check for business account.
-            if (newAccount is BusinessAccount)
-            {
-                Console.WriteLine("Account Balance: {0}", (newAccount.AccountBalance - (newAccount as BusinessAccount).OverdraftBalance).ToString("C2"));
-            }
-            else
-            {
-                Console.WriteLine("Account Balance: {0}", newAccount.AccountBalance.ToString("C2"));
-            }
+            DisplayAccountInfo(newAccount);
 
             Console.WriteLine();
             Console.Write("Please enter amount to deposit: ");
@@ -333,14 +320,20 @@ namespace Project_0
 
         #region ACCOUNT WITHDRAWAL OPTIONS
 
-        public void DisplayAccountForWithdrawing(Account newAccount)
+        public void DisplayAccountForWithdrawing(IAccountInfo newAccount)
         {
-            throw new NotImplementedException();
+            DisplayAccountInfo(newAccount);
+
+            Console.WriteLine();
+            Console.Write("Please enter amount to withdraw: ");
         }
 
         public void DisplayWithdrawalAccountOptions(Account[] allAccounts)
         {
-            throw new NotImplementedException();
+            DisplayAllCustomerAccounts(allAccounts);
+
+            Console.WriteLine();
+            Console.Write("Please enter account number to withdraw from: ");
         }
 
         #endregion
@@ -377,6 +370,24 @@ namespace Project_0
         }
 
         #endregion
+
+        private void DisplayAccountInfo(IAccountInfo newAccount)
+        {
+            string accountType = GetAccountType(newAccount);
+
+            Console.WriteLine("Account # {0}", newAccount.AccountNumber);
+            Console.WriteLine("Account Type: {0}", accountType);
+
+            // Check for business account.
+            if (newAccount is BusinessAccount)
+            {
+                Console.WriteLine("Account Balance: {0}", (newAccount.AccountBalance - (newAccount as BusinessAccount).OverdraftBalance).ToString("C2"));
+            }
+            else
+            {
+                Console.WriteLine("Account Balance: {0}", newAccount.AccountBalance.ToString("C2"));
+            }
+        }
         
         private string GetAccountType(IAccountInfo newAccount)
         {
