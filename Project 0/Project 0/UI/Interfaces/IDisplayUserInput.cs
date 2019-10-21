@@ -8,6 +8,6 @@ namespace Project_0
     {
         public Utility.OperationState GetUserSelection();
 
-
+        public bool WaitForUserConfirmation();
     }
 }
