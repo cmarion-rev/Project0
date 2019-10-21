@@ -324,12 +324,52 @@ namespace Project_0
 
         public void DisplayAllCustomerAccounts(Account[] allAccounts)
         {
-            throw new NotImplementedException();
+                int accountNumber = 0;
+                string accountType = "";
+                double currentBalance = 0.0;
+
+            Console.WriteLine("Account #\t:\tAccount Type\t:\tAccount Balance");
+            foreach (IAccountInfo item in allAccounts)
+            {
+                accountNumber = item.AccountNumber;
+
+                // Check for type of account.
+                if (item is CheckingAccount)
+                {
+                    currentBalance = item.AccountBalance;
+                    accountType = "Checking";
+                }
+                else if (item is BusinessAccount)
+                {
+                    currentBalance = item.AccountBalance - (item as BusinessAccount).OverdraftBalance;
+                    accountType = "Business";
+                }
+                else if (item is LoanAccount)
+                {
+                    currentBalance = item.AccountBalance;
+                    accountType = "Loan";
+                }
+                else if (item is TermDepositAccount)
+                {
+                    currentBalance = item.AccountBalance;
+                    accountType = "CD";
+                }
+                else
+                {
+                    accountType = "INVALID!";
+                    currentBalance = -1.0;
+                }
+
+                // Display this account.
+                Console.WriteLine("{0,9}\t:\t{1,12}\t:\t{2,15}", accountNumber.ToString("D1"), accountType, currentBalance.ToString("C2"));
+            }
         }
 
         public void DisplayCustomerInformation(Customer newCustomer)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Customer: {0}", newCustomer.FullName);
+            Console.WriteLine("Customer ID: {0}", newCustomer.CustomerID);
+            Console.WriteLine();
         }
 
         #endregion
