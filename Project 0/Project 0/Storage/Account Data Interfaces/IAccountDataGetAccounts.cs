@@ -15,5 +15,7 @@ namespace Project_0
         public TermDepositAccount GetTermAccount(int accountNumber);
                     
         public LoanAccount GetLoanAccount(int accountNumber);
+
+        public int GetAccountsCount();
     }
 }

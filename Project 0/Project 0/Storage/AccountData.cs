@@ -164,6 +164,18 @@ namespace Project_0
 
         #region GET ACCOUNTS
 
+        public int GetAccountsCount()
+        {
+            int result = 0;
+
+            foreach (var item in allAccounts)
+            {
+                result += item.Value.Count;
+            }
+
+            return result;
+        }
+
         public Account GetAccount(int accountNumber)
         {
             Account result = null;
