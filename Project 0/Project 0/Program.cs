@@ -8,23 +8,9 @@ namespace Project_0
         {
             Console.WriteLine("Hello World!");
 
-            Do();
-        }
+            AccountProcessing mainProgram = AccountProcessing.Instance;
 
-        static void Do()
-        {
-            Customer A = new Customer()
-            {
-              
-            };
-
-            A.AddAccount(new CheckingAccount(A) { CustomerID = A.CustomerID });
-
-            A.GetAccountByNumber(1);
-
-            A.GetCheckingAccounts();
-
-            A.GetTermDepositAccounts();
+            mainProgram.Start();
         }
     }
 }
