@@ -87,7 +87,6 @@ namespace Project_0
             int result = -1;
 
             // Wait for user input.
-            Console.Write("Please select a number: ");
             string inputLine = Console.ReadLine().Trim();
 
             // Check for valid input.
@@ -210,7 +209,6 @@ namespace Project_0
             double result = -1.0;
 
             // Wait for user input.
-            Console.Write("Please enter amount: ");
             string inputLine = Console.ReadLine().Trim();
 
             // Check for valid input.
@@ -302,14 +300,33 @@ namespace Project_0
 
         #region ACCOUNT DEPOSIT OPTIONS
         
-        public void DisplayAccountForDepositing(Account newAccount)
+        public void DisplayAccountForDepositing(IAccountInfo newAccount)
         {
-            throw new NotImplementedException();
+            string accountType = GetAccountType(newAccount);
+
+            Console.WriteLine("Account # {0}", newAccount.AccountNumber);
+            Console.WriteLine("Account Type: {0}", accountType);
+
+            // Check for business account.
+            if (newAccount is BusinessAccount)
+            {
+                Console.WriteLine("Account Balance: {0}", (newAccount.AccountBalance - (newAccount as BusinessAccount).OverdraftBalance).ToString("C2"));
+            }
+            else
+            {
+                Console.WriteLine("Account Balance: {0}", newAccount.AccountBalance.ToString("C2"));
+            }
+
+            Console.WriteLine();
+            Console.Write("Please enter amount to deposit: ");
         }
 
         public void DisplayDepositAccountOptions(Account[] allAccounts)
         {
-            throw new NotImplementedException();
+            DisplayAllCustomerAccounts(allAccounts);
+
+            Console.WriteLine();
+            Console.Write("Please enter account number to deposit to: ");
         }
 
         #endregion
@@ -361,6 +378,34 @@ namespace Project_0
 
         #endregion
         
+        private string GetAccountType(IAccountInfo newAccount)
+        {
+            string result = "";
+
+            if (newAccount is CheckingAccount)
+            {
+                result = "Checking";
+            }
+            else if (newAccount is BusinessAccount)
+            {
+                result = "Business";
+            }
+            else if (newAccount is LoanAccount)
+            {
+                result = "Loan";
+            }
+            else if (newAccount is TermDepositAccount)
+            {
+                result = "CD";
+            }
+            else
+            {
+                result = "INVALID!";
+            }
+
+            return result;
+        }
+
         #endregion
 
         #region CUSTOMER OPTIONS
