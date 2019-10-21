@@ -57,6 +57,12 @@ namespace Project_0
             Console.WriteLine("Returning to Main Menu.");
         }
 
+        public void DisplayInvalidEntry()
+        {
+            Console.WriteLine("ERROR!");
+            Console.WriteLine("INVALID ENTRY INPUTTED!");
+        }
+
         #endregion
 
         #region MENUS
