@@ -7,5 +7,7 @@ namespace Project_0
     interface IDisplayAccountDeposit
     {
         public void DisplayAccountForDepositing(Account newAccount);
+
+        public void DisplayDepositAccountOptions(Account[] allAccounts);
     }
 }
