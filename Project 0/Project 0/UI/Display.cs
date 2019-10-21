@@ -527,6 +527,11 @@ namespace Project_0
             Console.WriteLine();
         }
 
+        public void DisplayNewCustomerScreen()
+        {
+            Console.WriteLine("New Customer");
+        }
+
         public void DisplayCustomerFirstNameRequest(string newName = "")
         {
             Console.Write("First Name: {0}", newName);
