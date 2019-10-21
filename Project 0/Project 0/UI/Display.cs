@@ -270,6 +270,15 @@ namespace Project_0
             return result;
         }
 
+        public string GetUserStringInput()
+        {
+            string result = "";
+
+            result = Console.ReadLine().Trim();
+
+            return result;
+        }
+
         #endregion
 
         #region ACCOUNT OPTIONS

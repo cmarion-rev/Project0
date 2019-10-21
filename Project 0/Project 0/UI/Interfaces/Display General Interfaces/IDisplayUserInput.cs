@@ -13,5 +13,7 @@ namespace Project_0.GeneralInterfaces
         public int GetUserOptionNumberSelection();
 
         public double GetUserValueInput();
+
+        public string GetUserStringInput();
     }
 }
