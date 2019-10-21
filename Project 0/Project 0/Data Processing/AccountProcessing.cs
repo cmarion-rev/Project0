@@ -48,71 +48,79 @@ namespace Project_0
             // Start main program loop.
             do
             {
-                Utility.MainMenuOptions menuOption = 0;
-
-                // Clear display for next menu draw.
-                workingDisplay?.ClearDisplay();
-
-                // Get avaliable options for Main Menu.
-                menuOption = GetCurrentMainMenuOptions();
-
-                // Display Main Menu.
-                workingDisplay?.DisplayMainMenu(menuOption);
-
-                // Get user menu selection.
-                Utility.OperationState? userReturn = workingDisplay?.GetUserSelection(menuOption);
-
-                // Process user input value.
-                if (userReturn != null)
-                {
-                    switch (userReturn.GetValueOrDefault())
-                    {
-                        case Utility.OperationState.REGISTER:
-                            break;
-
-                        case Utility.OperationState.OPEN_ACCOUNT:
-                            break;
-
-                        case Utility.OperationState.CLOSE_ACCOUNT:
-                            break;
-
-                        case Utility.OperationState.WITHDRAW:
-                            break;
-
-                        case Utility.OperationState.DEPOSIT:
-                            break;
-
-                        case Utility.OperationState.TRANSFER:
-                            break;
-
-                        case Utility.OperationState.PAY_LOAN:
-                            break;
-
-                        case Utility.OperationState.DISPLAY_ACCOUNTS:
-                            break;
-
-                        case Utility.OperationState.DISPLAY_TRANSACTIONS:
-                            break;
-
-                        case Utility.OperationState.EXIT_PROGRAM:
-                            isGameLoopActive = false;
-                            break;
-
-                        case Utility.OperationState.INVALID_OPTION:
-                        default:
-                            workingDisplay?.DisplayInvalidSelection();
-                            workingDisplay?.WaitForUserConfirmation();
-                            break;
-                    }
-                }
-                else
-                {
-                    workingDisplay?.DisplayInvalidSelection();
-                    workingDisplay?.WaitForUserConfirmation();
-                }
-
+                isGameLoopActive = MainProgramLoop(isGameLoopActive);
             } while (isGameLoopActive);
         }
+
+        private bool MainProgramLoop(bool isGameLoopActive)
+        {
+            Utility.MainMenuOptions menuOption = 0;
+
+            // Clear display for next menu draw.
+            workingDisplay?.ClearDisplay();
+
+            // Get avaliable options for Main Menu.
+            menuOption = GetCurrentMainMenuOptions();
+
+            // Display Main Menu.
+            workingDisplay?.DisplayMainMenu(menuOption);
+
+            // Get user menu selection.
+            Utility.OperationState? userReturn = workingDisplay?.GetUserSelection(menuOption);
+
+            // Process user input value.
+            if (userReturn != null)
+            {
+                switch (userReturn.GetValueOrDefault())
+                {
+                    case Utility.OperationState.REGISTER:
+                        break;
+
+                    case Utility.OperationState.OPEN_ACCOUNT:
+                        break;
+
+                    case Utility.OperationState.CLOSE_ACCOUNT:
+                        break;
+
+                    case Utility.OperationState.WITHDRAW:
+                        break;
+
+                    case Utility.OperationState.DEPOSIT:
+                        break;
+
+                    case Utility.OperationState.TRANSFER:
+                        break;
+
+                    case Utility.OperationState.PAY_LOAN:
+                        break;
+
+                    case Utility.OperationState.DISPLAY_ACCOUNTS:
+                        break;
+
+                    case Utility.OperationState.DISPLAY_TRANSACTIONS:
+                        break;
+
+                    case Utility.OperationState.EXIT_PROGRAM:
+                        isGameLoopActive = false;
+                        break;
+
+                    case Utility.OperationState.INVALID_OPTION:
+                    default:
+                        workingDisplay?.DisplayInvalidSelection();
+                        workingDisplay?.WaitForUserConfirmation();
+                        break;
+                }
+            }
+            else
+            {
+                workingDisplay?.DisplayInvalidSelection();
+                workingDisplay?.WaitForUserConfirmation();
+            }
+
+            return isGameLoopActive;
+        }
+
+        #region INITIAL SETUP METHODS
 
         private void LinkToDevices()
         {
@@ -135,6 +143,8 @@ namespace Project_0
         {
             activeAccount = null;
         }
+
+        #endregion 
 
         #region MAIN MENU METHODS
 
