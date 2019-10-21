@@ -37,6 +37,11 @@ namespace Project_0
             throw new NotImplementedException();
         }
 
+        public void ClearDisplay()
+        {
+            Console.Clear();
+        }
+
         #endregion
 
         #region USER INPUTS
@@ -144,7 +149,7 @@ namespace Project_0
         {
             throw new NotImplementedException();
         }
-     
+
         #endregion
     }
 }

@@ -7,5 +7,7 @@ namespace Project_0.GeneralInterfaces
     interface IDisplayMainMenu
     {
         public void DisplayMainMenu(Utility.MainMenuOptions newOptions);
+
+        public void ClearDisplay();
     }
 }
