@@ -503,7 +503,7 @@ namespace Project_0
                     workingDisplay?.DisplayAccountOptions();
                     optionInput = workingDisplay?.GetUserOptionNumberSelection();
 
-                    switch ((Utility.AccountType)optionInput.GetValueOrDefault(-1))
+                    switch ((Utility.AccountType)(optionInput.GetValueOrDefault(-1) - 1))
                     {
                         case Utility.AccountType.CHECKING:
                             CreateNewCheckingAccount();
@@ -521,7 +521,8 @@ namespace Project_0
                             CreateNewLoanAccount();
                             break;
 
-                        case (Utility.AccountType)9:
+                        case (Utility.AccountType)(-1):
+                            optionInput = 0;
                             break;
 
                         default:
@@ -532,7 +533,6 @@ namespace Project_0
                             break;
                     }
                 } while (optionInput < 0 || optionInput == null);
-
             }
         }
 
