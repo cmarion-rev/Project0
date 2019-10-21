@@ -380,7 +380,7 @@ namespace Project_0
             Console.Write("Please select an option: ");
         }
 
-        private void DisplayAccountInfo(IAccountInfo newAccount)
+        public void DisplayAccountInfo(IAccountInfo newAccount)
         {
             string accountType = GetAccountType(newAccount);
 

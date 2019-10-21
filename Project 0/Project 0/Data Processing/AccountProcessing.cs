@@ -790,6 +790,11 @@ namespace Project_0
                     {
                         // Process deposit.
                         (activeAccount as IAccountInfo).DepositAmount(userInput.GetValueOrDefault(0.0));
+
+                        // Display changed results.
+                        workingDisplay?.ClearDisplay();
+                        workingDisplay?.DisplayCustomerInformation(activeCustomer);
+                        workingDisplay?.DisplayAccountInfo(activeAccount as IAccountInfo);
                     }
                     else
                     {

@@ -14,5 +14,6 @@ namespace Project_0
                                 IDisplayAccountOptions,
                                 IDisplayNewAccountOption
     {
+        public void DisplayAccountInfo(IAccountInfo newAccount);
     }
 }
