@@ -62,6 +62,12 @@ namespace Project_0
             // Get avaliable options for Main Menu.
             menuOption = GetCurrentMainMenuOptions();
 
+            // If customer is selected, display customer.
+            if (activeCustomer!=null)
+            {
+                workingDisplay?.DisplayCustomerInformation(activeCustomer);
+            }
+
             // Display Main Menu.
             workingDisplay?.DisplayMainMenu(menuOption);
 
