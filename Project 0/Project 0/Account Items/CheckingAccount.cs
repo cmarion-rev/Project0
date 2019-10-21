@@ -14,6 +14,7 @@ namespace Project_0
             // Set customer references.
             Customer = newCustomer;
             CustomerID = newCustomer.CustomerID;
+            Customer.AddAccount(this);
 
             // Set initial account balance.
             AccountBalance = 0.0;

@@ -84,6 +84,7 @@ namespace Project_0
                         break;
 
                     case Utility.OperationState.OPEN_ACCOUNT:
+                        OpenNewAccount();
                         break;
 
                     case Utility.OperationState.CLOSE_ACCOUNT:
@@ -488,7 +489,87 @@ namespace Project_0
 
         #region OPEN ACCOUNT METHODS
 
+        private void OpenNewAccount()
+        {
+            // Check if a customer is selected.
+            if (activeCustomer!=null)
+            {
+                int? optionInput = -1;
 
+                do
+                {
+                    workingDisplay?.ClearDisplay();
+                    workingDisplay?.DisplayAccountOptions();
+                    optionInput = workingDisplay?.GetUserOptionNumberSelection();
+
+                    switch ((Utility.AccountType)optionInput.GetValueOrDefault(-1))
+                    {
+                        case Utility.AccountType.CHECKING:
+                            CreateNewCheckingAccount();
+                            break;
+
+                        case Utility.AccountType.BUSINESS:
+
+                            break;
+
+                        case Utility.AccountType.TERM:
+
+                            break;
+
+                        case Utility.AccountType.LOAN:
+
+                            break;
+
+                        default:
+                            // Invalid Selection.
+                            workingDisplay?.DisplayInvalidSelection();
+                            workingDisplay?.WaitForUserConfirmation();
+                            optionInput = -1;
+                            break;
+                    }
+                } while (optionInput < 0 || optionInput == null);
+
+            }
+        }
+
+        public void CreateNewCheckingAccount()
+        {
+            bool isGoodResult = false;
+            double? startingBalance = 0.0;
+
+            // Loop for starting balance of account.
+            do
+            {
+                workingDisplay?.ClearDisplay();
+                workingDisplay?.DisplayCustomerInformation(activeCustomer);
+                workingDisplay?.DisplayNewCheckingAccountBalance();
+                startingBalance = workingDisplay?.GetUserValueInput();
+
+                if (startingBalance!= null)
+                {
+                    if (startingBalance>0)
+                    {
+                        isGoodResult = true;
+                    }
+                    else
+                    {
+                        isGoodResult = false;
+                    }
+                }
+                else
+                {
+                    isGoodResult = false;
+                }
+
+            } while (!isGoodResult);
+
+            // Initialize new account.
+            activeAccount = new CheckingAccount(activeCustomer);
+            (activeAccount as CheckingAccount).DepositAmount(startingBalance.GetValueOrDefault(0.0));
+
+            // Add new checking account to account storage.
+            workingAccountStorage?.AddAccount(activeAccount);
+        }
 
         #endregion
 
