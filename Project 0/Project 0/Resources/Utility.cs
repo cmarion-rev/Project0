@@ -98,6 +98,38 @@ namespace Project_0
             return result;
         }
 
+        public static void SeperateAccounts(List<Account> allAccounts,
+                                            ref List<CheckingAccount> allCheckingAccounts,
+                                            ref List<BusinessAccount> allBusinessAccounts,
+                                            ref List<TermDepositAccount> allTermAccounts,
+                                            ref List<LoanAccount> allLoanAccounts)
+        {
+            foreach (IAccountInfo item in allAccounts)
+            {
+                switch (item.AccountType)
+                {
+                    case AccountType.CHECKING:
+                        allCheckingAccounts.Add(item as CheckingAccount);
+                        break;
+
+                    case AccountType.BUSINESS:
+                        allBusinessAccounts.Add(item as BusinessAccount);
+                        break;
+
+                    case AccountType.TERM:
+                        allTermAccounts.Add(item as TermDepositAccount);
+                        break;
+
+                    case AccountType.LOAN:
+                        allLoanAccounts.Add(item as LoanAccount);
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+        }
+
         #endregion
     }
 }

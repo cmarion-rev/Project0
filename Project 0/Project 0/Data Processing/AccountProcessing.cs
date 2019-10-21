@@ -717,7 +717,7 @@ namespace Project_0
                     List<LoanAccount> allLoanAccounts = new List<LoanAccount>();
 
                     // Split appart main account list.
-                    SeperateAccounts(allAccounts, ref allCheckingAccounts, ref allBusinessAccounts, ref allTermAccounts, ref allLoanAccounts);
+                    Utility.SeperateAccounts(allAccounts, ref allCheckingAccounts, ref allBusinessAccounts, ref allTermAccounts, ref allLoanAccounts);
 
                     // Display header.
                     workingDisplay?.ClearDisplay();
@@ -733,37 +733,7 @@ namespace Project_0
             }
         }
 
-        private void SeperateAccounts(List<Account> allAccounts,
-                                      ref List<CheckingAccount> allCheckingAccounts,
-                                      ref List<BusinessAccount> allBusinessAccounts,
-                                      ref List<TermDepositAccount> allTermAccounts,
-                                      ref List<LoanAccount> allLoanAccounts)
-        {
-            foreach (IAccountInfo item in allAccounts)
-            {
-                switch (item.AccountType)
-                {
-                    case Utility.AccountType.CHECKING:
-                        allCheckingAccounts.Add(item as CheckingAccount);
-                        break;
-                    
-                    case Utility.AccountType.BUSINESS:
-                        allBusinessAccounts.Add(item as BusinessAccount);
-                        break;
-                    
-                    case Utility.AccountType.TERM:
-                        allTermAccounts.Add(item as TermDepositAccount);
-                        break;
-                    
-                    case Utility.AccountType.LOAN:
-                        allLoanAccounts.Add(item as LoanAccount);
-                        break;
-                 
-                    default:
-                        break;
-                }
-            }
-        }
+      
 
         private void DisplayAllAccounts(List<CheckingAccount> allCheckingAccounts,
                                        List<BusinessAccount> allBusinessAccounts,
