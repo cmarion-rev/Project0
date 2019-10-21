@@ -52,11 +52,6 @@ namespace Project_0
             Console.WriteLine("AMOUNT SELECTED EXCEEDS ACCOUNT BALANCE!");
         }
 
-        public void DisplayReturningToMainMenu()
-        {
-            Console.WriteLine("Returning to Main Menu.");
-        }
-
         public void DisplayInvalidEntry()
         {
             Console.WriteLine("ERROR!");
@@ -101,6 +96,12 @@ namespace Project_0
             Console.WriteLine("(Q) Exit Program.");
             Console.WriteLine();
             Console.WriteLine();
+        }
+
+        public void DisplayReturningToMainMenu()
+        {
+            Console.WriteLine();
+            Console.WriteLine("Returning to Main Menu.");
         }
 
         public void ClearDisplay()
@@ -611,6 +612,8 @@ namespace Project_0
                 // Display this account.
                 Console.WriteLine("{0,9}\t \t{1,12}\t \t{2,15}", accountNumber.ToString("D1"), accountType, currentBalance.ToString("C2"));
             }
+
+            Console.WriteLine();
         }
 
         public void DisplayAllCustomerAccountsByType(Utility.AccountType currentAccountType, Account[] allAccountsByType)
@@ -673,6 +676,8 @@ namespace Project_0
                 // Display this account.
                 Console.WriteLine("{0,9}\t \t{1,15}", accountNumber.ToString("D1"), currentBalance.ToString("C2"));
             }
+
+            Console.WriteLine();
         }
 
         public void DisplayCustomerInformation(Customer newCustomer)
