@@ -370,6 +370,61 @@ namespace Project_0
             Console.Write("Please select an option: ");
         }
 
+        private void DisplayAccountInfo(IAccountInfo newAccount)
+        {
+            string accountType = GetAccountType(newAccount);
+
+            Console.WriteLine("Account # {0}", newAccount.AccountNumber);
+            Console.WriteLine("Account Type: {0}", accountType);
+
+            // Check for business account.
+            switch (newAccount.AccountType)
+            {
+                case Utility.AccountType.BUSINESS:
+                Console.WriteLine("Account Balance: {0}", (newAccount.AccountBalance - (newAccount as BusinessAccount).OverdraftBalance).ToString("C2"));
+                    break;
+                
+                case Utility.AccountType.CHECKING:
+                case Utility.AccountType.TERM:
+                case Utility.AccountType.LOAN:
+                Console.WriteLine("Account Balance: {0}", newAccount.AccountBalance.ToString("C2"));
+                    break;
+             
+                default:
+                    break;
+            }
+        }
+
+        private string GetAccountType(IAccountInfo newAccount)
+        {
+            string result = "";
+
+            switch (newAccount.AccountType)
+            {
+                case Utility.AccountType.CHECKING:
+                    result = "Checking";
+                    break;
+
+                case Utility.AccountType.BUSINESS:
+                    result = "Business";
+                    break;
+
+                case Utility.AccountType.TERM:
+                    result = "CD";
+                    break;
+
+                case Utility.AccountType.LOAN:
+                    result = "Loan";
+                    break;
+
+                default:
+                    result = "INVALID!";
+                    break;
+            }
+
+            return result;
+        }
+        
         #region ACCOUNT DEPOSIT OPTIONS
 
         public void DisplayAccountForDepositing(IAccountInfo newAccount)
@@ -464,60 +519,29 @@ namespace Project_0
 
         #endregion
 
-        private void DisplayAccountInfo(IAccountInfo newAccount)
+        #region NEW ACCOUNT OPTIONS
+
+        public void DisplayNewCheckingAccountBalance()
         {
-            string accountType = GetAccountType(newAccount);
-
-            Console.WriteLine("Account # {0}", newAccount.AccountNumber);
-            Console.WriteLine("Account Type: {0}", accountType);
-
-            // Check for business account.
-            switch (newAccount.AccountType)
-            {
-                case Utility.AccountType.BUSINESS:
-                Console.WriteLine("Account Balance: {0}", (newAccount.AccountBalance - (newAccount as BusinessAccount).OverdraftBalance).ToString("C2"));
-                    break;
-                
-                case Utility.AccountType.CHECKING:
-                case Utility.AccountType.TERM:
-                case Utility.AccountType.LOAN:
-                Console.WriteLine("Account Balance: {0}", newAccount.AccountBalance.ToString("C2"));
-                    break;
-             
-                default:
-                    break;
-            }
+            Console.WriteLine("Enter starting balance amount: ");
         }
 
-        private string GetAccountType(IAccountInfo newAccount)
+        public void DisplayNewBusinessAccountBalance()
         {
-            string result = "";
-
-            switch (newAccount.AccountType)
-            {
-                case Utility.AccountType.CHECKING:
-                    result = "Checking";
-                    break;
-
-                case Utility.AccountType.BUSINESS:
-                    result = "Business";
-                    break;
-
-                case Utility.AccountType.TERM:
-                    result = "CD";
-                    break;
-
-                case Utility.AccountType.LOAN:
-                    result = "Loan";
-                    break;
-
-                default:
-                    result = "INVALID!";
-                    break;
-            }
-
-            return result;
+            Console.WriteLine("Enter starting balance amount: ");
         }
+
+        public void DisplayNewLoanAccountBalance()
+        {
+            Console.WriteLine("Enter initial loan amount: ");
+        }
+
+        public void DisplayNewTermAccountBalance()
+        {
+            Console.WriteLine("Enter initial CD amount: ");
+        }
+
+        #endregion
 
         #endregion
 

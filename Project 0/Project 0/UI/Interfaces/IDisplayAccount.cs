@@ -11,7 +11,8 @@ namespace Project_0
                                 IDisplayAccountWithdraw, 
                                 IDisplayAccountTransfer, 
                                 IDisplayAccountLoanPayment,
-                                IDisplayAccountOptions
+                                IDisplayAccountOptions,
+                                IDisplayNewAccountOption
     {
     }
 }
