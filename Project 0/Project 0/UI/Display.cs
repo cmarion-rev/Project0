@@ -549,12 +549,26 @@ namespace Project_0
 
         public void DisplayCustomerFirstNameRequest(string newName = "")
         {
-            Console.Write("First Name: {0}", newName);
+            if (newName.Length>0)
+            {
+                Console.WriteLine("First Name: {0}", newName);
+            }
+            else
+            {
+                Console.Write("First Name: ");
+            }
         }
 
         public void DisplayCustomerLastNameRequest(string newName = "")
         {
-            Console.Write("Last Name: {0}", newName);
+            if (newName.Length > 0)
+            {
+                Console.WriteLine("Last Name: {0}", newName);
+            }
+            else
+            {
+                Console.Write("Last Name: ");
+            }
         }
 
         #endregion
