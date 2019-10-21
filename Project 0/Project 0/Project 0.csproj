@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <Folder Include="Interfaces\" />
+    <Folder Include="Storage\Customer Data Interfaces\" />
   </ItemGroup>
 
 </Project>
