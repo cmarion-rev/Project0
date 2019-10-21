@@ -371,7 +371,7 @@ namespace Project_0
                         continue;
                     }
                 }
-            } while (firstName.Length < 1 && lastName.Length < 1);
+            } while (firstName.Length < 1 || lastName.Length < 1);
 
             activeCustomer = new Customer()
             {
