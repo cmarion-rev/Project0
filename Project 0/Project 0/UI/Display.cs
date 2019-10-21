@@ -254,7 +254,50 @@ namespace Project_0
 
         public void DisplayAllAccountTransactions(ITransactionRecord[] allTransactions)
         {
-            throw new NotImplementedException();
+            // DateTime a;
+            // a.ToShortDateString() + a.ToShortTimeString();
+
+            int transactionID = -1;
+            double transactionAmount = -1.0;
+            bool isDeposit = true;
+            DateTime timeStamp;
+
+            Console.WriteLine("Post ID #\t:\tDeposit Amount\t:\tWithdraw Amount\t:\tDate / Time");
+
+            foreach (ITransactionRecord item in allTransactions)
+            {
+                // Check if transaction was marked as valid.
+                if (item.TransactionCode == Utility.TransactionErrorCodes.SUCCESS)
+                {
+                    transactionID = item.TransactionID;
+                    transactionAmount = item.TransactionAmount;
+                    timeStamp = item.TransactionDateTime;
+
+                    // Check if transaction is deposit or withdrawal.
+                    if (item is DepositRecord)
+                    {
+                        isDeposit = true;
+                    }
+                    else if (item is WithdrawalRecord)
+                    {
+                        isDeposit = false;
+                    }
+                    else
+                    {
+                        // Error condition! 
+                        // Skip this record!
+                        continue;
+                    }
+
+                    // Output record.
+                    Console.WriteLine("{0,9}\t \t{1,14}\t \t{2,15}\t \t{3}", 
+                                        transactionID, 
+                                        isDeposit ? transactionAmount.ToString("C2") : "", 
+                                        isDeposit ? "" : (-transactionAmount).ToString("C2"), 
+                                        $"{timeStamp.ToShortDateString()} - {timeStamp.ToShortTimeString()}");
+                }
+            }
+
         }
 
         #region ACCOUNT DEPOSIT OPTIONS
@@ -361,7 +404,7 @@ namespace Project_0
                 }
 
                 // Display this account.
-                Console.WriteLine("{0,9}\t:\t{1,12}\t:\t{2,15}", accountNumber.ToString("D1"), accountType, currentBalance.ToString("C2"));
+                Console.WriteLine("{0,9}\t \t{1,12}\t \t{2,15}", accountNumber.ToString("D1"), accountType, currentBalance.ToString("C2"));
             }
         }
 
