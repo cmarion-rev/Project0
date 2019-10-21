@@ -376,12 +376,18 @@ namespace Project_0
 
         public void DisplayLoanAccountSelection(Account[] allAccounts)
         {
-            throw new NotImplementedException();
+            DisplayAllCustomerAccounts(allAccounts);
+
+            Console.WriteLine();
+            Console.Write("Please enter account number to deposit to: ");
         }
 
-        public void DisplayLoanInstallment()
+        public void DisplayLoanInstallment(IAccountInfo newAccount)
         {
-            throw new NotImplementedException();
+            DisplayAccountInfo(newAccount);
+
+            Console.WriteLine();
+            Console.Write("Please enter amount of installment: ");
         }
 
         #endregion
