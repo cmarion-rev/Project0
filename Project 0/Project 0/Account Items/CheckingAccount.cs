@@ -9,14 +9,17 @@ namespace Project_0
         public CheckingAccount(Customer newCustomer) : base()
         {
             AccountNumber = IAccountInfo.GetNewAccountNumber();
+            AccountType = Utility.AccountType.CHECKING;
 
             // Set customer references.
             Customer = newCustomer;
-            // CustomerID = newCustomer.CustomerID;
+            CustomerID = newCustomer.CustomerID;
 
             // Set initial account balance.
             AccountBalance = 0.0;
         }
+
+        public Utility.AccountType AccountType { get; private set; }
 
         public static double InterestRate { get; set; }
 

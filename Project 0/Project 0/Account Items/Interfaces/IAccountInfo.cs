@@ -12,6 +12,8 @@ namespace Project_0
             return ++totalAccounts;
         }
 
+        public Utility.AccountType AccountType { get; }
+
         public int AccountNumber { get; }
 
         public int CustomerID { get; set; }

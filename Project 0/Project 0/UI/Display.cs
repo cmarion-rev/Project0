@@ -23,9 +23,9 @@ namespace Project_0
 
         Display()
         {
-            
+
         }
-        
+
         #region ERROR MESSAGES
 
         public void DisplayInvalidAmount()
@@ -45,7 +45,7 @@ namespace Project_0
             Console.WriteLine("ERROR!");
             Console.WriteLine("INVALID SELECTION ENTERED!");
         }
-        
+
         public void DisplayWithdrawalOverdraftProtection()
         {
             Console.WriteLine("WARNING!");
@@ -65,16 +65,16 @@ namespace Project_0
         {
             // Check if Register New Customer option is set.
             Console.WriteLine((newOptions & Utility.MainMenuOptions.REGISTER_NEW_CUSTOMER) == Utility.MainMenuOptions.REGISTER_NEW_CUSTOMER ? "(1) Register new customer." : "");
-            
+
             // Check if Open New Account option is set.
             Console.WriteLine((newOptions & Utility.MainMenuOptions.OPEN_NEW_ACCOUNT) == Utility.MainMenuOptions.OPEN_NEW_ACCOUNT ? "(2) Open new account." : "");
-            
+
             // Check if Close Account option is set.
             Console.WriteLine((newOptions & Utility.MainMenuOptions.CLOSE_ACCOUNT) == Utility.MainMenuOptions.CLOSE_ACCOUNT ? "(3) Close account." : "");
 
             // Check if Deposit Amount option is set.
             Console.WriteLine((newOptions & Utility.MainMenuOptions.DEPOSIT_AMOUNT) == Utility.MainMenuOptions.DEPOSIT_AMOUNT ? "(4) Deposit to account." : "");
-            
+
             // Check if Withdraw Amount option is set.
             Console.WriteLine((newOptions & Utility.MainMenuOptions.WITHDRAW_AMOUNT) == Utility.MainMenuOptions.WITHDRAW_AMOUNT ? "(5) Withdraw from account." : "");
 
@@ -83,7 +83,7 @@ namespace Project_0
 
             // Check if Pay Loan Installment option is set.
             Console.WriteLine((newOptions & Utility.MainMenuOptions.PAY_LOAN_INSTALLMENT) == Utility.MainMenuOptions.PAY_LOAN_INSTALLMENT ? "(7) Pay loan installment." : "");
-            
+
             // Check if Display Accounts option is set.
             Console.WriteLine((newOptions & Utility.MainMenuOptions.DISPLAY_ALL_ACCOUNTS) == Utility.MainMenuOptions.DISPLAY_ALL_ACCOUNTS ? "(8) Display all accounts." : "");
 
@@ -144,7 +144,7 @@ namespace Project_0
                 {
                     case 1:
                         // Register new account.
-                        if ((menuOptions&Utility.MainMenuOptions.REGISTER_NEW_CUSTOMER) == Utility.MainMenuOptions.REGISTER_NEW_CUSTOMER)
+                        if ((menuOptions & Utility.MainMenuOptions.REGISTER_NEW_CUSTOMER) == Utility.MainMenuOptions.REGISTER_NEW_CUSTOMER)
                         {
                             result = Utility.OperationState.REGISTER;
                         }
@@ -312,10 +312,10 @@ namespace Project_0
                     }
 
                     // Output record.
-                    Console.WriteLine("{0,9}\t \t{1,14}\t \t{2,15}\t \t{3}", 
-                                        transactionID, 
-                                        isDeposit ? transactionAmount.ToString("C2") : "", 
-                                        isDeposit ? "" : (-transactionAmount).ToString("C2"), 
+                    Console.WriteLine("{0,9}\t \t{1,14}\t \t{2,15}\t \t{3}",
+                                        transactionID,
+                                        isDeposit ? transactionAmount.ToString("C2") : "",
+                                        isDeposit ? "" : (-transactionAmount).ToString("C2"),
                                         $"{timeStamp.ToShortDateString()} - {timeStamp.ToShortTimeString()}");
                 }
             }
@@ -323,7 +323,7 @@ namespace Project_0
         }
 
         #region ACCOUNT DEPOSIT OPTIONS
-        
+
         public void DisplayAccountForDepositing(IAccountInfo newAccount)
         {
             DisplayAccountInfo(newAccount);
@@ -386,7 +386,7 @@ namespace Project_0
             DisplayAccountInfo(sourceAccount);
 
             Console.WriteLine();
-            
+
             Console.WriteLine("Destination Account");
             DisplayAccountInfo(destinationAccount);
 
@@ -424,39 +424,48 @@ namespace Project_0
             Console.WriteLine("Account Type: {0}", accountType);
 
             // Check for business account.
-            if (newAccount is BusinessAccount)
+            switch (newAccount.AccountType)
             {
+                case Utility.AccountType.BUSINESS:
                 Console.WriteLine("Account Balance: {0}", (newAccount.AccountBalance - (newAccount as BusinessAccount).OverdraftBalance).ToString("C2"));
-            }
-            else
-            {
+                    break;
+                
+                case Utility.AccountType.CHECKING:
+                case Utility.AccountType.TERM:
+                case Utility.AccountType.LOAN:
                 Console.WriteLine("Account Balance: {0}", newAccount.AccountBalance.ToString("C2"));
+                    break;
+             
+                default:
+                    break;
             }
         }
-        
+
         private string GetAccountType(IAccountInfo newAccount)
         {
             string result = "";
 
-            if (newAccount is CheckingAccount)
+            switch (newAccount.AccountType)
             {
-                result = "Checking";
-            }
-            else if (newAccount is BusinessAccount)
-            {
-                result = "Business";
-            }
-            else if (newAccount is LoanAccount)
-            {
-                result = "Loan";
-            }
-            else if (newAccount is TermDepositAccount)
-            {
-                result = "CD";
-            }
-            else
-            {
-                result = "INVALID!";
+                case Utility.AccountType.CHECKING:
+                    result = "Checking";
+                    break;
+
+                case Utility.AccountType.BUSINESS:
+                    result = "Business";
+                    break;
+
+                case Utility.AccountType.TERM:
+                    result = "CD";
+                    break;
+
+                case Utility.AccountType.LOAN:
+                    result = "Loan";
+                    break;
+
+                default:
+                    result = "INVALID!";
+                    break;
             }
 
             return result;
@@ -468,9 +477,9 @@ namespace Project_0
 
         public void DisplayAllCustomerAccounts(Account[] allAccounts)
         {
-                int accountNumber = 0;
-                string accountType = "";
-                double currentBalance = 0.0;
+            int accountNumber = 0;
+            string accountType = "";
+            double currentBalance = 0.0;
 
             Console.WriteLine("Account #\t:\tAccount Type\t:\tAccount Balance");
             foreach (IAccountInfo item in allAccounts)
@@ -478,30 +487,32 @@ namespace Project_0
                 accountNumber = item.AccountNumber;
 
                 // Check for type of account.
-                if (item is CheckingAccount)
+                switch (item.AccountType)
                 {
-                    currentBalance = item.AccountBalance;
-                    accountType = "Checking";
-                }
-                else if (item is BusinessAccount)
-                {
-                    currentBalance = item.AccountBalance - (item as BusinessAccount).OverdraftBalance;
-                    accountType = "Business";
-                }
-                else if (item is LoanAccount)
-                {
-                    currentBalance = item.AccountBalance;
-                    accountType = "Loan";
-                }
-                else if (item is TermDepositAccount)
-                {
-                    currentBalance = item.AccountBalance;
-                    accountType = "CD";
-                }
-                else
-                {
-                    accountType = "INVALID!";
-                    currentBalance = -1.0;
+                    case Utility.AccountType.CHECKING:
+                        currentBalance = item.AccountBalance;
+                        accountType = "Checking";
+                        break;
+
+                    case Utility.AccountType.BUSINESS:
+                        currentBalance = item.AccountBalance - (item as BusinessAccount).OverdraftBalance;
+                        accountType = "Business";
+                        break;
+
+                    case Utility.AccountType.TERM:
+                        currentBalance = item.AccountBalance;
+                        accountType = "Loan";
+                        break;
+
+                    case Utility.AccountType.LOAN:
+                        currentBalance = item.AccountBalance;
+                        accountType = "CD";
+                        break;
+
+                    default:
+                        accountType = "INVALID!";
+                        currentBalance = -1.0;
+                        break;
                 }
 
                 // Display this account.

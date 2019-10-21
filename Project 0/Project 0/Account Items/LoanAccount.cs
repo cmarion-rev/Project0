@@ -9,14 +9,17 @@ namespace Project_0
         public LoanAccount(Customer newCustomer) : base()
         {
             AccountNumber = IAccountInfo.GetNewAccountNumber();
+            AccountType = Utility.AccountType.LOAN;
 
             // Set customer references.
             Customer = newCustomer;
-            // CustomerID = newCustomer.CustomerID;
+            CustomerID = newCustomer.CustomerID;
 
             // Set initial account balance.
             AccountBalance = 0.0;
         }
+
+        public Utility.AccountType AccountType { get; private set; }
 
         public int AccountNumber { get; }
 

@@ -9,15 +9,18 @@ namespace Project_0
         public BusinessAccount(Customer newCustomer) : base()
         {
             AccountNumber = IAccountInfo.GetNewAccountNumber();
+            AccountType = Utility.AccountType.BUSINESS;
 
             // Set customer references.
             Customer = newCustomer;
-            // CustomerID = newCustomer.CustomerID;
+            CustomerID = newCustomer.CustomerID;
 
             // Set initial account balance.
             AccountBalance = 0.0;
             OverdraftBalance = 0.0;
         }
+
+        public Utility.AccountType AccountType { get; private set; }
 
         public int AccountNumber { get; }
 

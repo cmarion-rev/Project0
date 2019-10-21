@@ -9,10 +9,11 @@ namespace Project_0
         public TermDepositAccount(Customer newCustomer) : base()
         {
             AccountNumber = IAccountInfo.GetNewAccountNumber();
+            AccountType = Utility.AccountType.TERM;
 
             // Set customer references.
             Customer = newCustomer;
-            // CustomerID = newCustomer.CustomerID;
+            CustomerID = newCustomer.CustomerID;
 
             // Set initial account balance.
             AccountBalance = 0.0;
@@ -20,6 +21,8 @@ namespace Project_0
             // Default 1 Year term.
             MaturityDate = DateTime.Now.AddYears(1);
         }
+
+        public Utility.AccountType AccountType { get; private set; }
 
         public DateTime MaturityDate { get; set; }
 
