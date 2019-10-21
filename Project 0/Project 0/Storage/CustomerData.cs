@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Project_0
 {
-    class CustomerData
+    class CustomerData : ICustomerDataAddCustomer, ICustomerDataGetCustomer, ICustomerDataRemoveCustomer
     {
         private readonly List<Customer> allCustomer = new List<Customer>();
 
@@ -25,6 +25,31 @@ namespace Project_0
         CustomerData()
         {
             allCustomer = new List<Customer>();
+        }
+
+        public bool AddCustomer(Customer newCustomer)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Customer GetCustomer(int customerID)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Customer[] GetAllCustomers()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool RemoveCustomer(Customer newCustomer)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool RemoveCustomer(int customerID)
+        {
+            throw new NotImplementedException();
         }
     }
 }
