@@ -25,6 +25,9 @@ namespace Project_0
             PAY_LOAN,
             DISPLAY_ACCOUNTS,
             DISPLAY_TRANSACTIONS,
+
+
+            EXIT_PROGRAM,
         }
 
         public enum TransactionErrorCodes
@@ -51,6 +54,10 @@ namespace Project_0
             PAY_LOAN_INSTALLMENT = 1 << 6,
             DISPLAY_ALL_ACCOUNTS = 1 << 7,
             DISPLAY_ALL_TRANSACTIONS = 1 << 8,
+            //
+
+            //
+            EXIT_PROGRAM = 1 << 16,
         }
     }
 }
