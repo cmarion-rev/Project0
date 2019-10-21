@@ -90,10 +90,10 @@ namespace Project_0
                     case Utility.OperationState.CLOSE_ACCOUNT:
                         break;
 
-                    case Utility.OperationState.WITHDRAW:
+                    case Utility.OperationState.DEPOSIT:
                         break;
 
-                    case Utility.OperationState.DEPOSIT:
+                    case Utility.OperationState.WITHDRAW:
                         break;
 
                     case Utility.OperationState.TRANSFER:
@@ -699,7 +699,27 @@ namespace Project_0
 
         #endregion
 
-        #region DISPLAY CUSTOMER ACCOUNTS
+        #region CLOSE ACCOUNT METHODS
+
+        #endregion
+
+        #region DEPOSIT TO ACCOUNT METHODS
+
+        #endregion
+
+        #region WITHDRAW FROM ACCOUNT METHODS
+
+        #endregion
+
+        #region TRANSFER BETWEEN ACCOUNTS METHODS
+
+        #endregion
+
+        #region PAY LOAN INSTALLMENT METHODS
+
+        #endregion
+
+        #region DISPLAY CUSTOMER ACCOUNTS METHODS
 
         private void DisplayCustomerAccounts()
         {
@@ -733,12 +753,10 @@ namespace Project_0
             }
         }
 
-      
-
         private void DisplayAllAccounts(List<CheckingAccount> allCheckingAccounts,
-                                       List<BusinessAccount> allBusinessAccounts,
-                                       List<TermDepositAccount> allTermAccounts,
-                                       List<LoanAccount> allLoanAccounts)
+                                        List<BusinessAccount> allBusinessAccounts,
+                                        List<TermDepositAccount> allTermAccounts,
+                                        List<LoanAccount> allLoanAccounts)
         {
             // Check if any checking accounts.
             if (allCheckingAccounts.Count > 0)
@@ -764,6 +782,10 @@ namespace Project_0
                 workingDisplay?.DisplayAllCustomerAccountsByType(Utility.AccountType.LOAN, allLoanAccounts.ToArray());
             }
         }
+
+        #endregion
+
+        #region DISPLAY ACCOUNT TRANSACTION METHODS
 
         #endregion
 
