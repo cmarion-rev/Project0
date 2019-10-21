@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Project_0.UI.Interfaces
+using Project_0.AccountInterfaces;
+
+namespace Project_0
 {
     interface IDisplayAccount : IDisplayAccountTransactions, IDisplayAccountDeposit, IDisplayAccountWithdraw, IDisplayAccountTransfer, IDisplayAccountLoanPayment
     {
