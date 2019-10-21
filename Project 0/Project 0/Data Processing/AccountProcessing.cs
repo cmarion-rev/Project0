@@ -24,5 +24,316 @@ namespace Project_0
         {
 
         }
+
+        #region WORKING SPACE
+
+        Customer activeCustomer;
+        Account activeAccount;
+
+        Display workingDisplay;
+        CustomerData workingCustomerStorage;
+        AccountData workingAccountStorage;
+
+        public void Start()
+        {
+            bool isGameLoopActive = true;
+
+            // Setup inital internal linkage.
+            LinkToDevices();
+
+            // Clear active components.
+            ResetActiveAccount();
+            ResetActiveCustomer();
+
+            // Start main program loop.
+            do
+            {
+                Utility.MainMenuOptions menuOption = 0;
+
+                // Clear display for next menu draw.
+                workingDisplay?.ClearDisplay();
+
+                // Get avaliable options for Main Menu.
+                menuOption = GetCurrentMainMenuOptions();
+
+                // Display Main Menu.
+                workingDisplay?.DisplayMainMenu(menuOption);
+
+                // Get user menu selection.
+                Utility.OperationState? userReturn = workingDisplay?.GetUserSelection(menuOption);
+
+                // Process user input value.
+                if (userReturn != null)
+                {
+                    switch (userReturn.GetValueOrDefault())
+                    {
+                        case Utility.OperationState.REGISTER:
+                            break;
+
+                        case Utility.OperationState.OPEN_ACCOUNT:
+                            break;
+
+                        case Utility.OperationState.CLOSE_ACCOUNT:
+                            break;
+
+                        case Utility.OperationState.WITHDRAW:
+                            break;
+
+                        case Utility.OperationState.DEPOSIT:
+                            break;
+
+                        case Utility.OperationState.TRANSFER:
+                            break;
+
+                        case Utility.OperationState.PAY_LOAN:
+                            break;
+
+                        case Utility.OperationState.DISPLAY_ACCOUNTS:
+                            break;
+
+                        case Utility.OperationState.DISPLAY_TRANSACTIONS:
+                            break;
+
+                        case Utility.OperationState.EXIT_PROGRAM:
+                            isGameLoopActive = false;
+                            break;
+
+                        case Utility.OperationState.INVALID_OPTION:
+                        default:
+                            workingDisplay?.DisplayInvalidSelection();
+                            workingDisplay?.WaitForUserConfirmation();
+                            break;
+                    }
+                }
+                else
+                {
+                    workingDisplay?.DisplayInvalidSelection();
+                    workingDisplay?.WaitForUserConfirmation();
+                }
+
+            } while (isGameLoopActive);
+        }
+
+        private void LinkToDevices()
+        {
+            // Link to Customer Storage.
+            workingCustomerStorage = CustomerData.Instance;
+
+            // Link to Account Storage.
+            workingAccountStorage = AccountData.Instance;
+
+            // Link to Display.
+            workingDisplay = Display.Instance;
+        }
+
+        private void ResetActiveCustomer()
+        {
+            activeCustomer = null;
+        }
+
+        private void ResetActiveAccount()
+        {
+            activeAccount = null;
+        }
+
+        #region MAIN MENU METHODS
+
+        private Utility.MainMenuOptions GetCurrentMainMenuOptions()
+        {
+            Utility.MainMenuOptions result = 0;
+
+            // Check if new customers can be created.
+            if (workingCustomerStorage != null)
+            {
+                result |= Utility.MainMenuOptions.REGISTER_NEW_CUSTOMER;
+            }
+
+            // Check if current customer exists.
+            if (activeCustomer != null)
+            {
+                // Check if accounts can be created.
+                if (workingAccountStorage != null)
+                {
+                    result |= Utility.MainMenuOptions.OPEN_NEW_ACCOUNT;
+
+                    // Check if customer has accounts that can be closed.
+                    if (activeCustomer.GetAllAccounts().Count > 0)
+                    {
+                        List<Account> allAccounts = activeCustomer.GetAllAccounts();
+
+                        result |= Utility.MainMenuOptions.CLOSE_ACCOUNT;
+                        result |= Utility.MainMenuOptions.DISPLAY_ALL_ACCOUNTS;
+
+                        // Check if customer has more that one account, to allow transferring.
+                        if (activeCustomer.GetAllAccounts().Count > 1)
+                        {
+                            // Check if atleast two accounts can be part of transfer.
+                            if (CheckCustomerAccountsForTransferable(allAccounts))
+                            {
+                                result |= Utility.MainMenuOptions.TRANSFER_AMOUNT;
+                            }
+                        }
+
+                        // Check if customer has a depositable account.
+                        if (CheckCustomerAccountsForDepositable(allAccounts))
+                        {
+                            result |= Utility.MainMenuOptions.DEPOSIT_AMOUNT;
+                        }
+
+                        // Check if customer has a withdrawable account.
+                        if (CheckCustomerAccountsForWithdrawable(allAccounts))
+                        {
+                            result |= Utility.MainMenuOptions.WITHDRAW_AMOUNT;
+                        }
+
+                        // Check if customer has a loan account for paying installments to.
+                        if (CheckCustomerAccountsForLoanPayable(allAccounts))
+                        {
+                            result |= Utility.MainMenuOptions.PAY_LOAN_INSTALLMENT;
+                        }
+                    }
+                }
+            }
+
+            // Check if any account is available for displaying transactions.
+            if (workingAccountStorage?.GetAccountsCount() > 0)
+            {
+                result |= Utility.MainMenuOptions.DISPLAY_ALL_TRANSACTIONS;
+            }
+
+            // Enable exit program.
+            result |= Utility.MainMenuOptions.EXIT_PROGRAM;
+
+            return result;
+        }
+
+        private bool CheckCustomerAccountsForDepositable(List<Account> allAccounts)
+        {
+            bool result = false;
+
+            if (allAccounts != null)
+            {
+                foreach (IAccountInfo currentAccount in allAccounts)
+                {
+                    switch (currentAccount.AccountType)
+                    {
+                        case Utility.AccountType.CHECKING:
+                        case Utility.AccountType.BUSINESS:
+                            result = true;
+                            break;
+                     
+                        default:
+                            break;
+                    }
+
+                    // Exit loop on valid account find.
+                    if (result)
+                    {
+                        break;
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        private bool CheckCustomerAccountsForTransferable(List<Account> allAccounts)
+        {
+            bool result = false;
+            int count = 0;
+
+            if (allAccounts != null)
+            {
+                foreach (IAccountInfo currentAccount in allAccounts)
+                {
+                    switch (currentAccount.AccountType)
+                    {
+                        case Utility.AccountType.CHECKING:
+                        case Utility.AccountType.BUSINESS:
+                            ++count;
+                            break;
+
+                        default:
+                            break;
+                    }
+
+                    // Exit loop on valid account find.
+                    if (count > 1)
+                    {
+                        result = true;
+                        break;
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        private bool CheckCustomerAccountsForWithdrawable(List<Account> allAccounts)
+        {
+            bool result = false;
+
+            if (allAccounts != null)
+            {
+                foreach (IAccountInfo currentAccount in allAccounts)
+                {
+                    switch (currentAccount.AccountType)
+                    {
+                        case Utility.AccountType.CHECKING:
+                        case Utility.AccountType.BUSINESS:
+                            result = true;
+                            break;
+
+                        case Utility.AccountType.TERM:
+                            result = (currentAccount as TermDepositAccount).MaturityDate.Subtract(DateTime.Now).TotalDays < 0;
+                            break;
+
+                        default:
+                            break;
+                    }
+
+                    // Exit loop on valid account find.
+                    if (result)
+                    {
+                        break;
+                    }
+                }
+            }
+                       
+            return result;
+        }
+
+        private bool CheckCustomerAccountsForLoanPayable(List<Account> allAccounts)
+        {
+            bool result = false;
+
+            if (allAccounts != null)
+            {
+                foreach (IAccountInfo currentAccount in allAccounts)
+                {
+                    switch (currentAccount.AccountType)
+                    {
+                        case Utility.AccountType.LOAN:
+                            result = true;
+                            break;
+
+                        default:
+                            break;
+                    }
+
+                    // Exit loop on valid account find.
+                    if (result)
+                    {
+                        break;
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        #endregion
+
+        #endregion
     }
 }
