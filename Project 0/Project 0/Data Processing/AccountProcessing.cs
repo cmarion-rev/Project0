@@ -499,6 +499,7 @@ namespace Project_0
                 do
                 {
                     workingDisplay?.ClearDisplay();
+                    workingDisplay?.DisplayCustomerInformation(activeCustomer);
                     workingDisplay?.DisplayAccountOptions();
                     optionInput = workingDisplay?.GetUserOptionNumberSelection();
 

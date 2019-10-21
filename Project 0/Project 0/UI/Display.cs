@@ -344,19 +344,19 @@ namespace Project_0
                 switch ((Utility.AccountType)index)
                 {
                     case Utility.AccountType.CHECKING:
-                        Console.WriteLine($"{index + 1} Checking Account");
+                        Console.WriteLine($"({index + 1}) Checking Account");
                         break;
 
                     case Utility.AccountType.BUSINESS:
-                        Console.WriteLine($"{index + 1} Business Account");
+                        Console.WriteLine($"({index + 1}) Business Account");
                         break;
 
                     case Utility.AccountType.TERM:
-                        Console.WriteLine($"{index + 1} CD Account");
+                        Console.WriteLine($"({index + 1}) CD Account");
                         break;
 
                     case Utility.AccountType.LOAN:
-                        Console.WriteLine($"{index + 1} Loan Account");
+                        Console.WriteLine($"({index + 1}) Loan Account");
                         break;
 
                     default:
