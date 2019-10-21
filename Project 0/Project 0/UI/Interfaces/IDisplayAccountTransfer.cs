@@ -6,9 +6,9 @@ namespace Project_0
 {
     interface IDisplayAccountTransfer
     {
-        public void DisplayAccountTransferSource(Account[] newAccount);
+        public void DisplayTransferSourceAccount(Account[] allAccounts);
         
-        public void DisplayAccountTransferDestination(Account[] newAccount);
+        public void DisplayTransferDestinationAccount(Account[] allAccounts);
 
         public void DisplayAccountTransfer(Account[] sourceAccount, Account[] destinationAccount);
     }
