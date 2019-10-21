@@ -185,7 +185,24 @@ namespace Project_0
 
         public double GetUserValueInput()
         {
-            throw new NotImplementedException();
+            double result = -1.0;
+
+            // Wait for user input.
+            Console.Write("Please enter amount: ");
+            string inputLine = Console.ReadLine().Trim();
+
+            // Check for valid input.
+            if (double.TryParse(inputLine, out result))
+            {
+                // Check if entered amount was a positive value.
+
+            }
+            else
+            {
+                result = -1.0;
+            }
+
+            return result;
         }
 
         public bool WaitForUserConfirmation()
