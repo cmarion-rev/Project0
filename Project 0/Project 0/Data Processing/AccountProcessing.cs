@@ -492,7 +492,7 @@ namespace Project_0
         private void OpenNewAccount()
         {
             // Check if a customer is selected.
-            if (activeCustomer!=null)
+            if (activeCustomer != null)
             {
                 int? optionInput = -1;
 
@@ -509,7 +509,7 @@ namespace Project_0
                             break;
 
                         case Utility.AccountType.BUSINESS:
-
+                            CreateNewBusinessAccount();
                             break;
 
                         case Utility.AccountType.TERM:
@@ -532,7 +532,7 @@ namespace Project_0
             }
         }
 
-        public void CreateNewCheckingAccount()
+        private void CreateNewCheckingAccount()
         {
             bool isGoodResult = false;
             double? startingBalance = 0.0;
@@ -540,14 +540,16 @@ namespace Project_0
             // Loop for starting balance of account.
             do
             {
+                // Display initial information for setting up initial balance.
                 workingDisplay?.ClearDisplay();
                 workingDisplay?.DisplayCustomerInformation(activeCustomer);
                 workingDisplay?.DisplayNewCheckingAccountBalance();
                 startingBalance = workingDisplay?.GetUserValueInput();
 
-                if (startingBalance!= null)
+                // Check if input value was valid.
+                if (startingBalance != null)
                 {
-                    if (startingBalance>0)
+                    if (startingBalance > 0)
                     {
                         isGoodResult = true;
                     }
@@ -566,6 +568,47 @@ namespace Project_0
             // Initialize new account.
             activeAccount = new CheckingAccount(activeCustomer);
             (activeAccount as CheckingAccount).DepositAmount(startingBalance.GetValueOrDefault(0.0));
+
+            // Add new checking account to account storage.
+            workingAccountStorage?.AddAccount(activeAccount);
+        }
+
+        private void CreateNewBusinessAccount()
+        {
+            bool isGoodResult = false;
+            double? startingBalance = 0.0;
+
+            // Loop for starting balance of account.
+            do
+            {
+                // Display initial information for setting up initial balance.
+                workingDisplay?.ClearDisplay();
+                workingDisplay?.DisplayCustomerInformation(activeCustomer);
+                workingDisplay?.DisplayNewBusinessAccountBalance();
+                startingBalance = workingDisplay?.GetUserValueInput();
+
+                // Check if input value was valid.
+                if (startingBalance != null)
+                {
+                    if (startingBalance > 0)
+                    {
+                        isGoodResult = true;
+                    }
+                    else
+                    {
+                        isGoodResult = false;
+                    }
+                }
+                else
+                {
+                    isGoodResult = false;
+                }
+
+            } while (!isGoodResult);
+
+            // Initialize new account.
+            activeAccount = new BusinessAccount(activeCustomer);
+            (activeAccount as BusinessAccount).DepositAmount(startingBalance.GetValueOrDefault(0.0));
 
             // Add new checking account to account storage.
             workingAccountStorage?.AddAccount(activeAccount);
