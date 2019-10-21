@@ -46,12 +46,22 @@ namespace Project_0
 
         public Customer GetCustomer(int customerID)
         {
-            throw new NotImplementedException();
+            Customer result = null;
+
+            if (customerID > -1)
+            {
+                if (customerID < allCustomer.Count)
+                {
+                    result = allCustomer[customerID];
+                }
+            }
+
+            return result;
         }
 
         public Customer[] GetAllCustomers()
         {
-            throw new NotImplementedException();
+            return allCustomer.ToArray();
         }
 
         public bool RemoveCustomer(Customer newCustomer)
