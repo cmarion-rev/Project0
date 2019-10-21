@@ -342,17 +342,32 @@ namespace Project_0
 
         public void DisplayTransferSourceAccount(Account[] allAccounts)
         {
-            throw new NotImplementedException();
+            DisplayAllCustomerAccounts(allAccounts);
+
+            Console.WriteLine();
+            Console.Write("Please enter account number to transfer from: ");
         }
 
         public void DisplayTransferDestinationAccount(Account[] allAccounts)
         {
-            throw new NotImplementedException();
+            DisplayAllCustomerAccounts(allAccounts);
+
+            Console.WriteLine();
+            Console.Write("Please enter account number to transfer to: ");
         }
 
-        public void DisplayAccountTransfer(Account[] sourceAccount, Account[] destinationAccount)
+        public void DisplayAccountTransfer(IAccountInfo sourceAccount, IAccountInfo destinationAccount)
         {
-            throw new NotImplementedException();
+            Console.WriteLine("Source Account");
+            DisplayAccountInfo(sourceAccount);
+
+            Console.WriteLine();
+            
+            Console.WriteLine("Destination Account");
+            DisplayAccountInfo(destinationAccount);
+
+            Console.WriteLine();
+            Console.Write("Please enter amount to transfer: ");
         }
 
         #endregion

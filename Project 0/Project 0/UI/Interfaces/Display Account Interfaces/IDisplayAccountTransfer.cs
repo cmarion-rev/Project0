@@ -10,6 +10,6 @@ namespace Project_0.AccountInterfaces
         
         public void DisplayTransferDestinationAccount(Account[] allAccounts);
 
-        public void DisplayAccountTransfer(Account[] sourceAccount, Account[] destinationAccount);
+        public void DisplayAccountTransfer(IAccountInfo sourceAccount, IAccountInfo destinationAccount);
     }
 }
