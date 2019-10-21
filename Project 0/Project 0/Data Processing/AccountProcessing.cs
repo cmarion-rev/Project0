@@ -513,7 +513,7 @@ namespace Project_0
                             break;
 
                         case Utility.AccountType.TERM:
-
+                            CreateNewTermAccount();
                             break;
 
                         case Utility.AccountType.LOAN:
@@ -562,7 +562,6 @@ namespace Project_0
                 {
                     isGoodResult = false;
                 }
-
             } while (!isGoodResult);
 
             // Initialize new account.
@@ -603,7 +602,6 @@ namespace Project_0
                 {
                     isGoodResult = false;
                 }
-
             } while (!isGoodResult);
 
             // Initialize new account.
@@ -644,12 +642,51 @@ namespace Project_0
                 {
                     isGoodResult = false;
                 }
-
             } while (!isGoodResult);
 
             // Initialize new account.
             activeAccount = new LoanAccount(activeCustomer);
             (activeAccount as LoanAccount).DepositAmount(startingBalance.GetValueOrDefault(0.0));
+
+            // Add new checking account to account storage.
+            workingAccountStorage?.AddAccount(activeAccount);
+        }
+
+        private void CreateNewTermAccount()
+        {
+            bool isGoodResult = false;
+            double? startingBalance = 0.0;
+
+            // Loop for starting balance of account.
+            do
+            {
+                // Display initial information for setting up initial balance.
+                workingDisplay?.ClearDisplay();
+                workingDisplay?.DisplayCustomerInformation(activeCustomer);
+                workingDisplay?.DisplayNewTermAccountBalance();
+                startingBalance = workingDisplay?.GetUserValueInput();
+
+                // Check if input value was valid.
+                if (startingBalance != null)
+                {
+                    if (startingBalance > 0)
+                    {
+                        isGoodResult = true;
+                    }
+                    else
+                    {
+                        isGoodResult = false;
+                    }
+                }
+                else
+                {
+                    isGoodResult = false;
+                }
+            } while (!isGoodResult);
+
+            // Initialize new account.
+            activeAccount = new TermDepositAccount(activeCustomer);
+            (activeAccount as TermDepositAccount).DepositAmount(startingBalance.GetValueOrDefault(0.0));
 
             // Add new checking account to account storage.
             workingAccountStorage?.AddAccount(activeAccount);
