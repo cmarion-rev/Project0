@@ -130,6 +130,13 @@ namespace Project_0
             }
         }
 
+        public static void RebuildAccountListForModifiableAccounts(ref List<Account> allAccounts, List<CheckingAccount> allCheckingAccounts, List<BusinessAccount> allBusinessAccounts)
+        {
+            allAccounts.Clear();
+            allAccounts.AddRange(allCheckingAccounts);
+            allAccounts.AddRange(allBusinessAccounts);
+        }
+
         #endregion
     }
 }
