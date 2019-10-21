@@ -16,6 +16,8 @@ namespace Project_0
 
         public enum OperationState
         {
+            INVALID_OPTION = -1,
+
             REGISTER,
             OPEN_ACCOUNT,
             CLOSE_ACCOUNT,
