@@ -6,5 +6,23 @@ namespace Project_0
 {
     class AccountProcessing
     {
+        private static AccountProcessing workingInstance = null;
+
+        public static AccountProcessing Instance
+        {
+            get
+            {
+                if (workingInstance == null)
+                {
+                    workingInstance = new AccountProcessing();
+                }
+                return workingInstance;
+            }
+        }
+
+        AccountProcessing()
+        {
+
+        }
     }
 }
