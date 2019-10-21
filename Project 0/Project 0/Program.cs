@@ -6,8 +6,6 @@ namespace Project_0
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-
             AccountProcessing mainProgram = AccountProcessing.Instance;
 
             mainProgram.Start();
