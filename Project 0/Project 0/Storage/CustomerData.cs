@@ -29,7 +29,19 @@ namespace Project_0
 
         public bool AddCustomer(Customer newCustomer)
         {
-            throw new NotImplementedException();
+            bool result = true;
+
+            int customerIndex = allCustomer.IndexOf(newCustomer);
+            if (customerIndex < 0)
+            {
+                allCustomer.Add(newCustomer);
+            }
+            else
+            {
+                result = false;
+            }
+            
+            return result;
         }
 
         public Customer GetCustomer(int customerID)
