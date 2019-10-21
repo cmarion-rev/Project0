@@ -7,7 +7,9 @@ using Project_0.CustomerInterfaces;
 namespace Project_0
 {
     interface IDisplayCustomer : IDisplayCustomerAccounts,
-                                 IDisplayCustomerInformation
+                                 IDisplayCustomerInformation, 
+                                 IDisplayRegisterCustomer
+                                    
     {
     }
 }

@@ -527,6 +527,16 @@ namespace Project_0
             Console.WriteLine();
         }
 
+        public void DisplayCustomerFirstNameRequest(string newName = "")
+        {
+            Console.Write("First Name: {0}", newName);
+        }
+
+        public void DisplayCustomerLastNameRequest(string newName = "")
+        {
+            Console.Write("Last Name: {0}", newName);
+        }
+
         #endregion
     }
 }
