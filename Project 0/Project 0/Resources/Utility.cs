@@ -14,6 +14,8 @@ namespace Project_0
             BUSINESS,
             TERM,
             LOAN,
+
+            _COUNT,
         }
 
         public enum OperationState

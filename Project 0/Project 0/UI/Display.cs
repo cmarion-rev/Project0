@@ -337,6 +337,39 @@ namespace Project_0
 
         }
 
+        public void DisplayAccountOptions()
+        {
+            for (int index = 0; index < (int)Utility.AccountType._COUNT; ++index)
+            {
+                switch ((Utility.AccountType)index)
+                {
+                    case Utility.AccountType.CHECKING:
+                        Console.WriteLine($"{index+1} Checking Account");
+                        break;
+                    
+                    case Utility.AccountType.BUSINESS:
+                        Console.WriteLine($"{index+1} Business Account");
+                        break;
+                    
+                    case Utility.AccountType.TERM:
+                        Console.WriteLine($"{index+1} CD Account");
+                        break;
+                    
+                    case Utility.AccountType.LOAN:
+                        Console.WriteLine($"{index+1} Loan Account");
+                        break;
+                 
+                    default:
+                        break;
+                }
+            }
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("(0) Return to Main Menu");
+            Console.WriteLine();
+            Console.Write("Please select an option: ");
+        }
+
         #region ACCOUNT DEPOSIT OPTIONS
 
         public void DisplayAccountForDepositing(IAccountInfo newAccount)
