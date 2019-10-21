@@ -66,12 +66,55 @@ namespace Project_0
 
         public bool RemoveCustomer(Customer newCustomer)
         {
-            throw new NotImplementedException();
+            bool result = true;
+            int customerIndex = allCustomer.IndexOf(newCustomer);
+           
+            if (customerIndex > -1)
+            {
+                // Remove all relevant accounts from current customer.
+                List<Account> allCustomerAccounts = newCustomer.GetAllAccounts();
+                if (allCustomerAccounts.Count > 0)
+                {
+                    AccountData activeAccounts = AccountData.Instance;
+                    foreach (Account item in allCustomerAccounts)
+                    {
+                        activeAccounts.RemoveAccount(item);
+                    }
+                }
+
+                // Remove customer from data set.
+                allCustomer.RemoveAt(customerIndex);
+            }
+            else
+            {
+                result = false;
+            }
+
+            return result;
         }
 
         public bool RemoveCustomer(int customerID)
         {
-            throw new NotImplementedException();
+            bool result = true;
+
+            if (customerID > -1)
+            {
+                if (customerID < allCustomer.Count)
+                {
+                    Customer currentCustomer = allCustomer[customerID];
+                    result = RemoveCustomer(currentCustomer);
+                }
+                else
+                {
+                    result = false;
+                }
+            }
+            else
+            {
+                result = false;
+            }
+
+            return result;
         }
     }
 }
