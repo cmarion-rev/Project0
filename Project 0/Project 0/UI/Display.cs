@@ -65,6 +65,7 @@ namespace Project_0
             Console.WriteLine();
             Console.WriteLine("(Q) Exit Program.");
             Console.WriteLine();
+            Console.WriteLine();
         }
 
         public void ClearDisplay()
@@ -85,46 +86,87 @@ namespace Project_0
         {
             Utility.OperationState result = Utility.OperationState.INVALID_OPTION;
 
-            string inputLine = Console.ReadLine();
+            // Wait for user input.
+            Console.Write("Please select an option: ");
+            string inputLine = Console.ReadLine().Trim();
             int inputValue = -1;
-            if (int.TryParse(inputLine, out inputValue))
+
+            // Check first value for selected user input.
+            if (int.TryParse(inputLine.Substring(0, 1), out inputValue))
             {
+                // Check inputted value against avaliable options.
                 switch (inputValue)
                 {
                     case 1:
-
+                        // Register new account.
+                        if ((menuOptions&Utility.MainMenuOptions.REGISTER_NEW_CUSTOMER) == Utility.MainMenuOptions.REGISTER_NEW_CUSTOMER)
+                        {
+                            result = Utility.OperationState.REGISTER;
+                        }
                         break;
 
                     case 2:
-
+                        // Open new account.
+                        if ((menuOptions & Utility.MainMenuOptions.OPEN_NEW_ACCOUNT) == Utility.MainMenuOptions.OPEN_NEW_ACCOUNT)
+                        {
+                            result = Utility.OperationState.OPEN_ACCOUNT;
+                        }
                         break;
 
                     case 3:
-
+                        // Close account.
+                        if ((menuOptions & Utility.MainMenuOptions.CLOSE_ACCOUNT) == Utility.MainMenuOptions.CLOSE_ACCOUNT)
+                        {
+                            result = Utility.OperationState.CLOSE_ACCOUNT;
+                        }
                         break;
 
                     case 4:
-
+                        // Deposit.
+                        if ((menuOptions & Utility.MainMenuOptions.DEPOSIT_AMOUNT) == Utility.MainMenuOptions.DEPOSIT_AMOUNT)
+                        {
+                            result = Utility.OperationState.DEPOSIT;
+                        }
                         break;
 
                     case 5:
-
+                        // Withdraw.
+                        if ((menuOptions & Utility.MainMenuOptions.WITHDRAW_AMOUNT) == Utility.MainMenuOptions.WITHDRAW_AMOUNT)
+                        {
+                            result = Utility.OperationState.WITHDRAW;
+                        }
                         break;
 
                     case 6:
-
+                        // Transfer.
+                        if ((menuOptions & Utility.MainMenuOptions.TRANSFER_AMOUNT) == Utility.MainMenuOptions.TRANSFER_AMOUNT)
+                        {
+                            result = Utility.OperationState.TRANSFER;
+                        }
                         break;
 
                     case 7:
-
+                        // Pay loan.
+                        if ((menuOptions & Utility.MainMenuOptions.PAY_LOAN_INSTALLMENT) == Utility.MainMenuOptions.PAY_LOAN_INSTALLMENT)
+                        {
+                            result = Utility.OperationState.PAY_LOAN;
+                        }
                         break;
 
                     case 8:
-
+                        // Display accounts.
+                        if ((menuOptions & Utility.MainMenuOptions.DISPLAY_ALL_ACCOUNTS) == Utility.MainMenuOptions.DISPLAY_ALL_ACCOUNTS)
+                        {
+                            result = Utility.OperationState.DISPLAY_ACCOUNTS;
+                        }
                         break;
 
                     case 9:
-
+                        // Display transactions.
+                        if ((menuOptions & Utility.MainMenuOptions.DISPLAY_ALL_TRANSACTIONS) == Utility.MainMenuOptions.DISPLAY_ALL_TRANSACTIONS)
+                        {
+                            result = Utility.OperationState.DISPLAY_TRANSACTIONS;
+                        }
                         break;
 
                     default:
@@ -132,8 +174,11 @@ namespace Project_0
                         break;
                 }
             }
-
-
+            else if (char.ToUpper(inputLine[0]) == 'Q')
+            {
+                // Exit program called.
+                result = Utility.OperationState.EXIT_PROGRAM;
+            }
 
             return result;
         }
