@@ -613,6 +613,68 @@ namespace Project_0
             }
         }
 
+        public void DisplayAllCustomerAccountsByType(Utility.AccountType currentAccountType, Account[] allAccountsByType)
+        {
+            int accountNumber = 0;
+            double currentBalance = 0.0;
+
+            switch (currentAccountType)
+            {
+                case Utility.AccountType.CHECKING:
+                    Console.WriteLine("---Checking Accounts---");
+                    break;
+
+                case Utility.AccountType.BUSINESS:
+                    Console.WriteLine("---Business Accounts---");
+                    break;
+
+                case Utility.AccountType.TERM:
+                    Console.WriteLine("---CD Term Accounts---");
+                    break;
+
+                case Utility.AccountType.LOAN:
+                    Console.WriteLine("---Loan Accounts---");
+                    break;
+
+                default:
+                    // Invalid Account Type.
+                    // Break from function.
+                    return;
+            }
+
+            Console.WriteLine("Account #\t:\tAccount Balance");
+            foreach (IAccountInfo item in allAccountsByType)
+            {
+                accountNumber = item.AccountNumber;
+
+                // Check for type of account.
+                switch (currentAccountType)
+                {
+                    case Utility.AccountType.CHECKING:
+                        currentBalance = item.AccountBalance;
+                        break;
+
+                    case Utility.AccountType.BUSINESS:
+                        currentBalance = item.AccountBalance - (item as BusinessAccount).OverdraftBalance;
+                        break;
+
+                    case Utility.AccountType.TERM:
+                        currentBalance = item.AccountBalance;
+                        break;
+
+                    case Utility.AccountType.LOAN:
+                        currentBalance = item.AccountBalance;
+                        break;
+
+                    default:
+                        break;
+                }
+
+                // Display this account.
+                Console.WriteLine("{0,9}\t \t{1,15}", accountNumber.ToString("D1"), currentBalance.ToString("C2"));
+            }
+        }
+
         public void DisplayCustomerInformation(Customer newCustomer)
         {
             Console.WriteLine("Customer: {0}", newCustomer.FullName);
