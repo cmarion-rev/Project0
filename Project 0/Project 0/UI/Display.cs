@@ -344,21 +344,21 @@ namespace Project_0
                 switch ((Utility.AccountType)index)
                 {
                     case Utility.AccountType.CHECKING:
-                        Console.WriteLine($"{index+1} Checking Account");
+                        Console.WriteLine($"{index + 1} Checking Account");
                         break;
-                    
+
                     case Utility.AccountType.BUSINESS:
-                        Console.WriteLine($"{index+1} Business Account");
+                        Console.WriteLine($"{index + 1} Business Account");
                         break;
-                    
+
                     case Utility.AccountType.TERM:
-                        Console.WriteLine($"{index+1} CD Account");
+                        Console.WriteLine($"{index + 1} CD Account");
                         break;
-                    
+
                     case Utility.AccountType.LOAN:
-                        Console.WriteLine($"{index+1} Loan Account");
+                        Console.WriteLine($"{index + 1} Loan Account");
                         break;
-                 
+
                     default:
                         break;
                 }
@@ -381,15 +381,19 @@ namespace Project_0
             switch (newAccount.AccountType)
             {
                 case Utility.AccountType.BUSINESS:
-                Console.WriteLine("Account Balance: {0}", (newAccount.AccountBalance - (newAccount as BusinessAccount).OverdraftBalance).ToString("C2"));
+                    Console.WriteLine("Account Balance: {0}", (newAccount.AccountBalance - (newAccount as BusinessAccount).OverdraftBalance).ToString("C2"));
                     break;
-                
-                case Utility.AccountType.CHECKING:
+
                 case Utility.AccountType.TERM:
-                case Utility.AccountType.LOAN:
-                Console.WriteLine("Account Balance: {0}", newAccount.AccountBalance.ToString("C2"));
+                    Console.WriteLine("Account Balance: {0}", newAccount.AccountBalance.ToString("C2"));
+                    Console.WriteLine("Maturity Date: {0}", (newAccount as TermDepositAccount).MaturityDate.ToShortDateString());
                     break;
-             
+
+                case Utility.AccountType.CHECKING:
+                case Utility.AccountType.LOAN:
+                    Console.WriteLine("Account Balance: {0}", newAccount.AccountBalance.ToString("C2"));
+                    break;
+
                 default:
                     break;
             }
@@ -424,7 +428,7 @@ namespace Project_0
 
             return result;
         }
-        
+
         #region ACCOUNT DEPOSIT OPTIONS
 
         public void DisplayAccountForDepositing(IAccountInfo newAccount)
@@ -614,7 +618,7 @@ namespace Project_0
 
         public void DisplayCustomerFirstNameRequest(string newName = "")
         {
-            if (newName.Length>0)
+            if (newName.Length > 0)
             {
                 Console.WriteLine("First Name: {0}", newName);
             }
