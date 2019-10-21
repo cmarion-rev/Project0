@@ -74,6 +74,7 @@ namespace Project_0
                 switch (userReturn.GetValueOrDefault())
                 {
                     case Utility.OperationState.REGISTER:
+                        RegisterNewCustomer();
                         break;
 
                     case Utility.OperationState.OPEN_ACCOUNT:
@@ -344,6 +345,145 @@ namespace Project_0
 
         #endregion
 
+        #region REGISTER NEW CUSTOMER METHODS
+
+        public void RegisterNewCustomer()
+        {
+            string firstName = "";
+            string lastName = "";
+
+            do
+            {
+                bool continueProcessing = true;
+                
+                workingDisplay?.ClearDisplay();
+                workingDisplay?.DisplayNewCustomerScreen();
+
+                // Process first name.
+                continueProcessing = ProcessFirstName(ref firstName);
+                if (continueProcessing)
+                {
+                    // Process last name.
+                    continueProcessing = ProcessLastName(ref lastName);
+                    if (!continueProcessing)
+                    {
+                        // Restart loop on fail.
+                        continue;
+                    }
+                }
+            } while (firstName.Length < 1 && lastName.Length < 1);
+
+            activeCustomer = new Customer()
+            {
+                FirstName = firstName,
+                LastName = lastName,
+            };
+
+            workingCustomerStorage?.AddCustomer(activeCustomer);
+        }
+
+        private bool ValidateName(string newName)
+        {
+            bool result = true;
+
+            foreach (char letter in newName)
+            {
+                if (!char.IsLetter(letter))
+                {
+                    result = false;
+                    break;
+                }
+            }
+
+            return result;
+        }
+
+        private bool ProcessFirstName(ref string firstName)
+        {
+            bool result = true;
+
+            if (firstName.Length > 0)
+            {
+                workingDisplay?.DisplayCustomerFirstNameRequest(firstName);
+            }
+            else
+            {
+                workingDisplay?.DisplayCustomerFirstNameRequest();
+                firstName = workingDisplay?.GetUserStringInput();
+                if (firstName == null)
+                {
+                    // Display error to user and restart loop.
+                    firstName = "";
+                    workingDisplay?.DisplayInvalidEntry();
+                    workingDisplay?.WaitForUserConfirmation();
+                    result = false;
+                }
+                else
+                {
+                    // Validate string is good.
+                    if (firstName.Length > 30)
+                    {
+                        firstName = firstName.Substring(0, 30);
+                    }
+
+                    if (!ValidateName(firstName))
+                    {
+                        // Display error to user and restart loop.
+                        firstName = "";
+                        workingDisplay?.DisplayInvalidEntry();
+                        workingDisplay?.WaitForUserConfirmation();
+                        result = false;
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        private bool ProcessLastName(ref string lastName)
+        {
+            bool result = true;
+
+            if (lastName.Length > 0)
+            {
+                workingDisplay?.DisplayCustomerLastNameRequest(lastName);
+            }
+            else
+            {
+                workingDisplay?.DisplayCustomerLastNameRequest();
+                lastName = workingDisplay?.GetUserStringInput();
+                if (lastName == null)
+                {
+                    // Display error to user and restart loop.
+                    lastName = "";
+                    workingDisplay?.DisplayInvalidEntry();
+                    workingDisplay?.WaitForUserConfirmation();
+                    result = false;
+                }
+                else
+                {
+                    // Validate string is good.
+                    if (lastName.Length > 30)
+                    {
+                        lastName = lastName.Substring(0, 30);
+                    }
+
+                    if (!ValidateName(lastName))
+                    {
+                        // Display error to user and restart loop.
+                        lastName = "";
+                        workingDisplay?.DisplayInvalidEntry();
+                        workingDisplay?.WaitForUserConfirmation();
+                        result = false;
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        #endregion
+        
         #endregion
     }
 }
