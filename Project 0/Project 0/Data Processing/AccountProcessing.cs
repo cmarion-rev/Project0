@@ -520,6 +520,9 @@ namespace Project_0
                             CreateNewLoanAccount();
                             break;
 
+                        case (Utility.AccountType)9:
+                            break;
+
                         default:
                             // Invalid Selection.
                             workingDisplay?.DisplayInvalidSelection();

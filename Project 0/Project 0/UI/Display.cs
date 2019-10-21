@@ -365,7 +365,7 @@ namespace Project_0
             }
             Console.WriteLine();
             Console.WriteLine();
-            Console.WriteLine("(0) Return to Main Menu");
+            Console.WriteLine("(9) Return to Main Menu");
             Console.WriteLine();
             Console.Write("Please select an option: ");
         }
