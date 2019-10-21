@@ -372,13 +372,15 @@ namespace Project_0
                     }
                 }
             } while (firstName.Length < 1 || lastName.Length < 1);
-
+                      
+            // Create new customer object.
             activeCustomer = new Customer()
             {
                 FirstName = firstName,
                 LastName = lastName,
             };
 
+            // Add customer object to storage space.
             workingCustomerStorage?.AddCustomer(activeCustomer);
         }
 
@@ -420,13 +422,18 @@ namespace Project_0
                 }
                 else
                 {
-                    // Validate string is good.
+                    // Limit string to 30 characters.
                     if (firstName.Length > 30)
                     {
                         firstName = firstName.Substring(0, 30);
                     }
 
-                    if (!ValidateName(firstName))
+                    // Validate string is good.
+                    if (ValidateName(firstName))
+                    {
+                        firstName = CaptializeName(firstName);
+                    }
+                    else
                     {
                         // Display error to user and restart loop.
                         firstName = "";
@@ -462,14 +469,19 @@ namespace Project_0
                 }
                 else
                 {
-                    // Validate string is good.
+                    // Limit string to 30 characters.
                     if (lastName.Length > 30)
                     {
                         lastName = lastName.Substring(0, 30);
                     }
 
-                    if (!ValidateName(lastName))
+                    // Validate string is good.
+                    if (ValidateName(lastName))
                     {
+                        lastName = CaptializeName(lastName);
+                    }
+                    else
+                    { 
                         // Display error to user and restart loop.
                         lastName = "";
                         workingDisplay?.DisplayInvalidEntry();
@@ -477,6 +489,18 @@ namespace Project_0
                         result = false;
                     }
                 }
+            }
+
+            return result;
+        }
+
+        private string CaptializeName(string newName)
+        {
+            string result = "";
+
+            for (int index = 0; index < newName.Length; index++)
+            {
+                result += index > 0 ? char.ToLower(newName[index]) : char.ToUpper(newName[index]);
             }
 
             return result;
