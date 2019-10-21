@@ -11,5 +11,7 @@ namespace Project_0
         public bool WaitForUserConfirmation();
 
         public int GetUserOptionNumberSelection();
+
+        public double GetUserValueInput();
     }
 }
