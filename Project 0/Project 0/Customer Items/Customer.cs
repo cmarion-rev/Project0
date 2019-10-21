@@ -21,7 +21,7 @@ namespace Project_0
             }
         }
 
-        private List<Account> customerAccounts = new List<Account>();
+        private readonly List<Account> customerAccounts = new List<Account>();
 
         public Customer()
         {
