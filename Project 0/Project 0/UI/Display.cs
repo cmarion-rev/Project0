@@ -120,14 +120,17 @@ namespace Project_0
             string inputLine = Console.ReadLine().Trim();
 
             // Check for valid input.
-            if (int.TryParse(inputLine, out result))
+            if (inputLine.Length > 0)
             {
-                // Check if entered amount was a positive value.
+                if (int.TryParse(inputLine, out result))
+                {
+                    // Check if entered amount was a positive value.
 
-            }
-            else
-            {
-                result = -1;
+                }
+                else
+                {
+                    result = -1;
+                }
             }
 
             return result;
@@ -143,92 +146,95 @@ namespace Project_0
             int inputValue = -1;
 
             // Check first value for selected user input.
-            if (int.TryParse(inputLine.Substring(0, 1), out inputValue))
+            if (inputLine.Length > 0)
             {
-                // Check inputted value against avaliable options.
-                switch (inputValue)
+                if (int.TryParse(inputLine.Substring(0, 1), out inputValue))
                 {
-                    case 1:
-                        // Register new account.
-                        if ((menuOptions & Utility.MainMenuOptions.REGISTER_NEW_CUSTOMER) == Utility.MainMenuOptions.REGISTER_NEW_CUSTOMER)
-                        {
-                            result = Utility.OperationState.REGISTER;
-                        }
-                        break;
+                    // Check inputted value against avaliable options.
+                    switch (inputValue)
+                    {
+                        case 1:
+                            // Register new account.
+                            if ((menuOptions & Utility.MainMenuOptions.REGISTER_NEW_CUSTOMER) == Utility.MainMenuOptions.REGISTER_NEW_CUSTOMER)
+                            {
+                                result = Utility.OperationState.REGISTER;
+                            }
+                            break;
 
-                    case 2:
-                        // Open new account.
-                        if ((menuOptions & Utility.MainMenuOptions.OPEN_NEW_ACCOUNT) == Utility.MainMenuOptions.OPEN_NEW_ACCOUNT)
-                        {
-                            result = Utility.OperationState.OPEN_ACCOUNT;
-                        }
-                        break;
+                        case 2:
+                            // Open new account.
+                            if ((menuOptions & Utility.MainMenuOptions.OPEN_NEW_ACCOUNT) == Utility.MainMenuOptions.OPEN_NEW_ACCOUNT)
+                            {
+                                result = Utility.OperationState.OPEN_ACCOUNT;
+                            }
+                            break;
 
-                    case 3:
-                        // Close account.
-                        if ((menuOptions & Utility.MainMenuOptions.CLOSE_ACCOUNT) == Utility.MainMenuOptions.CLOSE_ACCOUNT)
-                        {
-                            result = Utility.OperationState.CLOSE_ACCOUNT;
-                        }
-                        break;
+                        case 3:
+                            // Close account.
+                            if ((menuOptions & Utility.MainMenuOptions.CLOSE_ACCOUNT) == Utility.MainMenuOptions.CLOSE_ACCOUNT)
+                            {
+                                result = Utility.OperationState.CLOSE_ACCOUNT;
+                            }
+                            break;
 
-                    case 4:
-                        // Deposit.
-                        if ((menuOptions & Utility.MainMenuOptions.DEPOSIT_AMOUNT) == Utility.MainMenuOptions.DEPOSIT_AMOUNT)
-                        {
-                            result = Utility.OperationState.DEPOSIT;
-                        }
-                        break;
+                        case 4:
+                            // Deposit.
+                            if ((menuOptions & Utility.MainMenuOptions.DEPOSIT_AMOUNT) == Utility.MainMenuOptions.DEPOSIT_AMOUNT)
+                            {
+                                result = Utility.OperationState.DEPOSIT;
+                            }
+                            break;
 
-                    case 5:
-                        // Withdraw.
-                        if ((menuOptions & Utility.MainMenuOptions.WITHDRAW_AMOUNT) == Utility.MainMenuOptions.WITHDRAW_AMOUNT)
-                        {
-                            result = Utility.OperationState.WITHDRAW;
-                        }
-                        break;
+                        case 5:
+                            // Withdraw.
+                            if ((menuOptions & Utility.MainMenuOptions.WITHDRAW_AMOUNT) == Utility.MainMenuOptions.WITHDRAW_AMOUNT)
+                            {
+                                result = Utility.OperationState.WITHDRAW;
+                            }
+                            break;
 
-                    case 6:
-                        // Transfer.
-                        if ((menuOptions & Utility.MainMenuOptions.TRANSFER_AMOUNT) == Utility.MainMenuOptions.TRANSFER_AMOUNT)
-                        {
-                            result = Utility.OperationState.TRANSFER;
-                        }
-                        break;
+                        case 6:
+                            // Transfer.
+                            if ((menuOptions & Utility.MainMenuOptions.TRANSFER_AMOUNT) == Utility.MainMenuOptions.TRANSFER_AMOUNT)
+                            {
+                                result = Utility.OperationState.TRANSFER;
+                            }
+                            break;
 
-                    case 7:
-                        // Pay loan.
-                        if ((menuOptions & Utility.MainMenuOptions.PAY_LOAN_INSTALLMENT) == Utility.MainMenuOptions.PAY_LOAN_INSTALLMENT)
-                        {
-                            result = Utility.OperationState.PAY_LOAN;
-                        }
-                        break;
+                        case 7:
+                            // Pay loan.
+                            if ((menuOptions & Utility.MainMenuOptions.PAY_LOAN_INSTALLMENT) == Utility.MainMenuOptions.PAY_LOAN_INSTALLMENT)
+                            {
+                                result = Utility.OperationState.PAY_LOAN;
+                            }
+                            break;
 
-                    case 8:
-                        // Display accounts.
-                        if ((menuOptions & Utility.MainMenuOptions.DISPLAY_ALL_ACCOUNTS) == Utility.MainMenuOptions.DISPLAY_ALL_ACCOUNTS)
-                        {
-                            result = Utility.OperationState.DISPLAY_ACCOUNTS;
-                        }
-                        break;
+                        case 8:
+                            // Display accounts.
+                            if ((menuOptions & Utility.MainMenuOptions.DISPLAY_ALL_ACCOUNTS) == Utility.MainMenuOptions.DISPLAY_ALL_ACCOUNTS)
+                            {
+                                result = Utility.OperationState.DISPLAY_ACCOUNTS;
+                            }
+                            break;
 
-                    case 9:
-                        // Display transactions.
-                        if ((menuOptions & Utility.MainMenuOptions.DISPLAY_ALL_TRANSACTIONS) == Utility.MainMenuOptions.DISPLAY_ALL_TRANSACTIONS)
-                        {
-                            result = Utility.OperationState.DISPLAY_TRANSACTIONS;
-                        }
-                        break;
+                        case 9:
+                            // Display transactions.
+                            if ((menuOptions & Utility.MainMenuOptions.DISPLAY_ALL_TRANSACTIONS) == Utility.MainMenuOptions.DISPLAY_ALL_TRANSACTIONS)
+                            {
+                                result = Utility.OperationState.DISPLAY_TRANSACTIONS;
+                            }
+                            break;
 
-                    default:
-                        result = Utility.OperationState.INVALID_OPTION;
-                        break;
+                        default:
+                            result = Utility.OperationState.INVALID_OPTION;
+                            break;
+                    }
                 }
-            }
-            else if (char.ToUpper(inputLine[0]) == 'Q')
-            {
-                // Exit program called.
-                result = Utility.OperationState.EXIT_PROGRAM;
+                else if (char.ToUpper(inputLine[0]) == 'Q')
+                {
+                    // Exit program called.
+                    result = Utility.OperationState.EXIT_PROGRAM;
+                }
             }
 
             return result;
@@ -242,14 +248,17 @@ namespace Project_0
             string inputLine = Console.ReadLine().Trim();
 
             // Check for valid input.
-            if (double.TryParse(inputLine, out result))
+            if (inputLine.Length > 0)
             {
-                // Check if entered amount was a positive value.
+                if (double.TryParse(inputLine, out result))
+                {
+                    // Check if entered amount was a positive value.
 
-            }
-            else
-            {
-                result = -1.0;
+                }
+                else
+                {
+                    result = -1.0;
+                }
             }
 
             return result;
