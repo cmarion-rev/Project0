@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 
 namespace Project_0
 {
@@ -207,7 +208,23 @@ namespace Project_0
 
         public bool WaitForUserConfirmation()
         {
-            throw new NotImplementedException();
+            bool result = false;
+
+            // Wait for user input.
+            Console.Write("Press 'Enter' to continue.");
+
+            // Waiting loop for Enter key press.
+            while (!result)
+            {
+                ConsoleKeyInfo inputKey = Console.ReadKey(false);
+                if (inputKey.Key == ConsoleKey.Enter)
+                {
+                    result = true;
+                }
+                Thread.Sleep(5);
+            }
+
+            return result;
         }
 
         #endregion
