@@ -7,5 +7,7 @@ namespace Project_0
     interface IDisplayAccountWithdraw
     {
         public void DisplayAccountForWithdrawing(Account newAccount);
+
+        public void DisplayWithdrawalAccountOptions(Account[] allAccounts);
     }
 }
