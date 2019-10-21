@@ -7,6 +7,25 @@ namespace Project_0
 {
     class Display : IDisplayGeneral, IDisplayAccount, IDisplayCustomer
     {
+        private static Display workingInstance = null;
+
+        public static Display Instance
+        {
+            get
+            {
+                if (workingInstance == null)
+                {
+                    workingInstance = new Display();
+                }
+                return workingInstance;
+            }
+        }
+
+        Display()
+        {
+            
+        }
+        
         #region ERROR MESSAGES
 
         public void DisplayInvalidAmount()
