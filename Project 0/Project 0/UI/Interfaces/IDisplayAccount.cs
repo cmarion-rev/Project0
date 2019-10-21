@@ -6,7 +6,11 @@ using Project_0.AccountInterfaces;
 
 namespace Project_0
 {
-    interface IDisplayAccount : IDisplayAccountTransactions, IDisplayAccountDeposit, IDisplayAccountWithdraw, IDisplayAccountTransfer, IDisplayAccountLoanPayment
+    interface IDisplayAccount : IDisplayAccountTransactions, 
+                                IDisplayAccountDeposit, 
+                                IDisplayAccountWithdraw, 
+                                IDisplayAccountTransfer, 
+                                IDisplayAccountLoanPayment
     {
     }
 }
