@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Data Processing\AccountProcessing.cs~RF58a5543.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Interfaces\" />
   </ItemGroup>
 

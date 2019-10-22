@@ -759,7 +759,7 @@ namespace Project_0
 
                 if (isAccountFound)
                 {
-                    ProcessCloseAccountConfirmation();
+                    ProcessCloseAccountConfirmation(actualValue);
                 }
                 else
                 {
@@ -768,7 +768,7 @@ namespace Project_0
             }
         }
 
-        private void ProcessCloseAccountConfirmation()
+        private void ProcessCloseAccountConfirmation(int accountNumber)
         {
             // Display header.
             workingDisplay?.ClearDisplay();
@@ -787,18 +787,20 @@ namespace Project_0
                     if (char.ToUpper(lastChance[0]) == 'Y')
                     {
                         // Close account.
-                        FinalAccountCloseProcess();
+                        FinalAccountCloseProcess(accountNumber);
                     }
                 }
             }
         }
 
-        private void FinalAccountCloseProcess()
+        private void FinalAccountCloseProcess(int accountNumber)
         {
             if (workingAccountStorage != null)
             {
                 workingAccountStorage.RemoveAccount(activeAccount);
                 activeAccount = null;
+
+                workingDisplay?.DisplayAccountCloseCompleted(accountNumber);
             }
         }
 
