@@ -74,7 +74,7 @@ namespace Project_0
             if (newAmount > 0.0)
             {
                 // Check if withdraw amount does not exceed current account amount.
-                CheckOverdrafting(newAmount);
+                result = CheckOverdrafting(newAmount);
             }
             else
             {
