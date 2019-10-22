@@ -12,7 +12,8 @@ namespace Project_0
                                 IDisplayAccountTransfer, 
                                 IDisplayAccountLoanPayment,
                                 IDisplayAccountOptions,
-                                IDisplayNewAccountOption
+                                IDisplayNewAccountOption,
+                                IDisplayAccountClose
     {
         public void DisplayAccountInfo(IAccountInfo newAccount);
     }
