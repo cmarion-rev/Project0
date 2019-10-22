@@ -109,6 +109,7 @@ namespace Project_0
                         break;
 
                     case Utility.OperationState.DISPLAY_TRANSACTIONS:
+                        DisplayTransactionsForAccount();
                         break;
 
                     case Utility.OperationState.EXIT_PROGRAM:
@@ -1029,6 +1030,83 @@ namespace Project_0
         #endregion
 
         #region DISPLAY ACCOUNT TRANSACTION METHODS
+
+        private void DisplayTransactionsForAccount()
+        {
+            if (activeCustomer != null)
+            {
+                // Get all accounts for current selected customer.
+                List<Account> allAccounts = activeCustomer.GetAllAccounts();
+
+                // Check if any account exists.
+                if (allAccounts.Count > 0)
+                {
+                    List<CheckingAccount> allCheckingAccounts = new List<CheckingAccount>();
+                    List<BusinessAccount> allBusinessAccounts = new List<BusinessAccount>();
+                    List<TermDepositAccount> allTermAccounts = new List<TermDepositAccount>();
+                    List<LoanAccount> allLoanAccounts = new List<LoanAccount>();
+
+                    // Split appart main account list.
+                    Utility.SeperateAccounts(allAccounts, ref allCheckingAccounts, ref allBusinessAccounts, ref allTermAccounts, ref allLoanAccounts);
+
+                    // Display header.
+                    workingDisplay?.ClearDisplay();
+                    workingDisplay?.DisplayCustomerInformation(activeCustomer);
+
+                    // Process user input selection.
+                    ProcessAccountForTransactionDisplay(allAccounts);
+
+                    // Await user to return to main menu.
+                    workingDisplay?.DisplayReturningToMainMenu();
+                    workingDisplay?.WaitForUserConfirmation();
+                }
+            }
+        }
+
+        private void ProcessAccountForTransactionDisplay(List<Account> allAccounts)
+        {
+            int? accountID = -1;
+//            workingDisplay?.DisplayTransactionAccountSelection();
+            accountID = workingDisplay?.GetUserOptionNumberSelection();
+
+            // Check if account selected is in current list.
+            if (accountID != null)
+            {
+                bool isFound = false;
+                int actualID = accountID.GetValueOrDefault(-1);
+                foreach (IAccountInfo currentAccount in allAccounts)
+                {
+                    if (currentAccount.AccountNumber == actualID)
+                    {
+                        activeAccount = (currentAccount as Account);
+                        DisplayAccountTransactions();
+                        isFound = true;
+                        break;
+                    }
+                }
+
+                if (!isFound)
+                {
+                    workingDisplay?.DisplayInvalidSelection();
+                }
+            }
+        }
+
+        private void DisplayAccountTransactions()
+        {
+            if (activeAccount != null)
+            {
+                // Display header
+                workingDisplay?.ClearDisplay();
+                workingDisplay?.DisplayCustomerInformation(activeCustomer);
+                workingDisplay?.DisplayAccountInfo(activeAccount as IAccountInfo);
+             
+                // Display records.
+                workingDisplay.DisplayAllAccountTransactions(activeAccount.GetTransactionRecords());
+
+                activeAccount = null;
+            }
+        }
 
         #endregion
 
