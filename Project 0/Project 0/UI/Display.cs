@@ -275,7 +275,7 @@ namespace Project_0
             // Waiting loop for Enter key press.
             while (!result)
             {
-                ConsoleKeyInfo inputKey = Console.ReadKey(false);
+                ConsoleKeyInfo inputKey = Console.ReadKey(true);
                 if (inputKey.Key == ConsoleKey.Enter)
                 {
                     result = true;
@@ -298,6 +298,11 @@ namespace Project_0
         #endregion
 
         #region ACCOUNT OPTIONS
+
+        public void DisplayAccountTransactionSelection()
+        {
+            Console.Write("Please select an account number to display all transactions for: ");
+        }
 
         public void DisplayAllAccountTransactions(ITransactionRecord[] allTransactions)
         {

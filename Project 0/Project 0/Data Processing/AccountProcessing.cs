@@ -1054,7 +1054,7 @@ namespace Project_0
                     workingDisplay?.DisplayCustomerInformation(activeCustomer);
 
                     // Process user input selection.
-                    ProcessAccountForTransactionDisplay(allAccounts);
+                    ProcessAccountForTransactionDisplay(allAccounts, allCheckingAccounts, allBusinessAccounts, allTermAccounts, allLoanAccounts);
 
                     // Await user to return to main menu.
                     workingDisplay?.DisplayReturningToMainMenu();
@@ -1063,10 +1063,15 @@ namespace Project_0
             }
         }
 
-        private void ProcessAccountForTransactionDisplay(List<Account> allAccounts)
+        private void ProcessAccountForTransactionDisplay(List<Account> allAccounts, 
+                                                         List<CheckingAccount> allCheckingAccounts,
+                                                         List<BusinessAccount> allBusinessAccounts,
+                                                         List<TermDepositAccount> allTermAccounts,
+                                                         List<LoanAccount> allLoanAccounts)
         {
             int? accountID = -1;
-//            workingDisplay?.DisplayTransactionAccountSelection();
+            DisplayAllAccounts(allCheckingAccounts, allBusinessAccounts, allTermAccounts, allLoanAccounts);
+            workingDisplay?.DisplayAccountTransactionSelection();
             accountID = workingDisplay?.GetUserOptionNumberSelection();
 
             // Check if account selected is in current list.
