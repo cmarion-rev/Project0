@@ -184,6 +184,7 @@ namespace Project_0
                     {
                         result |= Utility.MainMenuOptions.CLOSE_ACCOUNT;
                         result |= Utility.MainMenuOptions.DISPLAY_ALL_ACCOUNTS;
+                        result |= Utility.MainMenuOptions.DISPLAY_ALL_TRANSACTIONS;
 
                         // Check if customer has more that one account, to allow transferring.
                         if (allAccounts.Count > 1)
@@ -214,12 +215,6 @@ namespace Project_0
                         }
                     }
                 }
-            }
-
-            // Check if any account is available for displaying transactions.
-            if (workingAccountStorage?.GetAccountsCount() > 0)
-            {
-                result |= Utility.MainMenuOptions.DISPLAY_ALL_TRANSACTIONS;
             }
 
             // Enable exit program.
