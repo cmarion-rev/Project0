@@ -175,17 +175,16 @@ namespace Project_0
                 if (workingAccountStorage != null)
                 {
                     result |= Utility.MainMenuOptions.OPEN_NEW_ACCOUNT;
+                    List<Account> allAccounts = activeCustomer.GetAllAccounts();
 
                     // Check if customer has accounts that can be closed.
-                    if (activeCustomer.GetAllAccounts().Count > 0)
+                    if (allAccounts.Count > 0)
                     {
-                        List<Account> allAccounts = activeCustomer.GetAllAccounts();
-
                         result |= Utility.MainMenuOptions.CLOSE_ACCOUNT;
                         result |= Utility.MainMenuOptions.DISPLAY_ALL_ACCOUNTS;
 
                         // Check if customer has more that one account, to allow transferring.
-                        if (activeCustomer.GetAllAccounts().Count > 1)
+                        if (allAccounts.Count > 1)
                         {
                             // Check if atleast two accounts can be part of transfer.
                             if (CheckCustomerAccountsForTransferable(allAccounts))
@@ -716,7 +715,6 @@ namespace Project_0
                 // Check if any account exists.
                 if (allAccounts.Count > 0)
                 {
-                    int? accountID = -1;
                     List<CheckingAccount> allCheckingAccounts = new List<CheckingAccount>();
                     List<BusinessAccount> allBusinessAccounts = new List<BusinessAccount>();
                     List<TermDepositAccount> allTermAccounts = new List<TermDepositAccount>();
@@ -733,38 +731,44 @@ namespace Project_0
                     Utility.RebuildAccountListForModifiableAccounts(ref allAccounts, allCheckingAccounts, allBusinessAccounts);
 
                     // Display account selection message.
-                    workingDisplay?.DisplayDepositAccountOptions(allAccounts.ToArray());
-                    accountID = workingDisplay?.GetUserOptionNumberSelection();
-
-                    // Check if account selected is in current list.
-                    if (accountID != null)
-                    {
-                        bool isValueFound = false;
-                        int actualID = accountID.GetValueOrDefault(-1);
-                        foreach (IAccountInfo currentAccount in allAccounts)
-                        {
-                            if (currentAccount.AccountNumber == actualID)
-                            {
-                                isValueFound = true;
-                                activeAccount = (currentAccount as Account);
-                                break;
-                            }
-                        }
-
-                        // Check if value was found.
-                        if (isValueFound)
-                        {
-                            ProcessDepositAmount();
-                        }
-                        else
-                        {
-                            workingDisplay?.DisplayInvalidSelection();
-                        }
-                    }
+                    SelectDepositAccount(allAccounts);
 
                     // Await user to return to main menu.
                     workingDisplay?.DisplayReturningToMainMenu();
                     workingDisplay?.WaitForUserConfirmation();
+                }
+            }
+        }
+
+        private void SelectDepositAccount(List<Account> allAccounts)
+        {
+            int? accountID = -1;
+            workingDisplay?.DisplayDepositAccountOptions(allAccounts.ToArray());
+            accountID = workingDisplay?.GetUserOptionNumberSelection();
+
+            // Check if account selected is in current list.
+            if (accountID != null)
+            {
+                bool isValueFound = false;
+                int actualID = accountID.GetValueOrDefault(-1);
+                foreach (IAccountInfo currentAccount in allAccounts)
+                {
+                    if (currentAccount.AccountNumber == actualID)
+                    {
+                        isValueFound = true;
+                        activeAccount = (currentAccount as Account);
+                        break;
+                    }
+                }
+
+                // Check if value was found.
+                if (isValueFound)
+                {
+                    ProcessDepositAmount();
+                }
+                else
+                {
+                    workingDisplay?.DisplayInvalidSelection();
                 }
             }
         }
