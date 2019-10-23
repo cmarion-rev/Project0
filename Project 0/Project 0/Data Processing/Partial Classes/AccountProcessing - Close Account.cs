@@ -20,6 +20,7 @@ namespace Project_0
                     List<BusinessAccount> allBusinessAccounts = new List<BusinessAccount>();
                     List<TermDepositAccount> allTermAccounts = new List<TermDepositAccount>();
                     List<LoanAccount> allLoanAccounts = new List<LoanAccount>();
+                    bool isGoodProcess = false;
 
                     // Split appart main account list.
                     Utility.SeperateAccounts(allAccounts, ref allCheckingAccounts, ref allBusinessAccounts, ref allTermAccounts, ref allLoanAccounts);
@@ -31,16 +32,21 @@ namespace Project_0
                     DisplayAllAccounts(allCheckingAccounts, allBusinessAccounts, allTermAccounts, allLoanAccounts);
 
                     // Display account selection message.
-                    SelectCloseAccount(allAccounts);
+                    isGoodProcess = SelectCloseAccount(allAccounts);
 
                     // Await user to return to main menu.
-                    ReturningToMainMenu();
+                    if (isGoodProcess)
+                    {
+                        ReturningToMainMenu();
+                    }
                 }
             }
         }
 
-        private void SelectCloseAccount(List<Account> allAccounts)
+        private bool SelectCloseAccount(List<Account> allAccounts)
         {
+            bool result = false;
+
             int? accountID = -1;
 
             workingDisplay?.DisplayAccountCloseSelection();
@@ -64,17 +70,21 @@ namespace Project_0
 
                 if (isAccountFound)
                 {
-                    ProcessCloseAccountConfirmation(actualValue);
+                    result = ProcessCloseAccountConfirmation(actualValue);
                 }
                 else
                 {
-                    InvalidSelection();
+                    InvalidSelection(true);
                 }
             }
+
+            return result;
         }
 
-        private void ProcessCloseAccountConfirmation(int accountNumber)
+        private bool ProcessCloseAccountConfirmation(int accountNumber)
         {
+            bool result = true;
+
             // Display header.
             FullAccountHeader();
 
@@ -94,6 +104,8 @@ namespace Project_0
                     }
                 }
             }
+
+            return result;
         }
 
         private void FinalAccountCloseProcess(int accountNumber)
