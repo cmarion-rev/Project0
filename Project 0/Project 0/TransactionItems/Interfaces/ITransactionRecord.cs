@@ -6,7 +6,11 @@ namespace Project_0
 {
     public interface ITransactionRecord
     {
-        public static int TransactionNumber = 0;
+        private static int TransactionNumber = 0;
+        public static int GenerateNewID()
+        {
+            return ++TransactionNumber;
+        }
 
         public int TransactionID { get; }
 

@@ -8,7 +8,7 @@ namespace Project_0
     {
         public DepositRecord()
         {
-            TransactionID = ITransactionRecord.TransactionNumber++;
+            TransactionID = ITransactionRecord.GenerateNewID();
             TransactionDateTime = DateTime.Now;
         }
 

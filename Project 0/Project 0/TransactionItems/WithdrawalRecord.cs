@@ -8,7 +8,7 @@ namespace Project_0
     {
         public WithdrawalRecord()
         {
-            TransactionID = ITransactionRecord.TransactionNumber++;
+            TransactionID = ITransactionRecord.GenerateNewID();
             TransactionDateTime = DateTime.Now;
         }
 
