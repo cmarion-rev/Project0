@@ -30,8 +30,8 @@ namespace Project_0
                     Utility.SeperateAccounts(allAccounts, allCheckingAccounts, allBusinessAccounts, allTermAccounts, null);
 
                     // Rebuild accounts list for depositable accounts.
-                    Utility.RebuildAccountListForDepositableAccounts(ref allDepositableAccounts, allCheckingAccounts, allBusinessAccounts);
-                    Utility.RebuildAccountListForWithdrawableAccounts(ref allWithdrawableAccounts, allCheckingAccounts, allBusinessAccounts, allTermAccounts);
+                    Utility.RebuildAccountListForDepositableAccounts(allDepositableAccounts, allCheckingAccounts, allBusinessAccounts);
+                    Utility.RebuildAccountListForWithdrawableAccounts(allWithdrawableAccounts, allCheckingAccounts, allBusinessAccounts, allTermAccounts);
 
                     // Start account transfer process.
                     isGoodProcess = ProcessAccountTransfer(allDepositableAccounts, allWithdrawableAccounts);

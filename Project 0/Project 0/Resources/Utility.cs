@@ -143,16 +143,16 @@ namespace Project_0
             }
         }
 
-        public static void RebuildAccountListForDepositableAccounts(ref List<Account> allAccounts, List<CheckingAccount> allCheckingAccounts, List<BusinessAccount> allBusinessAccounts)
+        public static void RebuildAccountListForDepositableAccounts(List<Account> allAccounts, List<CheckingAccount> allCheckingAccounts, List<BusinessAccount> allBusinessAccounts)
         {
             allAccounts.Clear();
             allAccounts.AddRange(allCheckingAccounts);
             allAccounts.AddRange(allBusinessAccounts);
         }
 
-        public static void RebuildAccountListForWithdrawableAccounts(ref List<Account> allAccounts, List<CheckingAccount> allCheckingAccounts, List<BusinessAccount> allBusinessAccounts, List<TermDepositAccount> allTermAccounts)
+        public static void RebuildAccountListForWithdrawableAccounts(List<Account> allAccounts, List<CheckingAccount> allCheckingAccounts, List<BusinessAccount> allBusinessAccounts, List<TermDepositAccount> allTermAccounts)
         {
-            RebuildAccountListForDepositableAccounts(ref allAccounts, allCheckingAccounts, allBusinessAccounts);
+            RebuildAccountListForDepositableAccounts(allAccounts, allCheckingAccounts, allBusinessAccounts);
 
             // Check for term accounts for  maturity.
             foreach (TermDepositAccount item in allTermAccounts)

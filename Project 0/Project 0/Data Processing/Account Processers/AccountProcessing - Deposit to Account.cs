@@ -25,7 +25,7 @@ namespace Project_0
                     Utility.SeperateAccounts(allAccounts, allCheckingAccounts, allBusinessAccounts, null, null);
 
                     // Rebuild accounts list for depositable accounts.
-                    Utility.RebuildAccountListForDepositableAccounts(ref allAccounts, allCheckingAccounts, allBusinessAccounts);
+                    Utility.RebuildAccountListForDepositableAccounts(allAccounts, allCheckingAccounts, allBusinessAccounts);
 
                     // Display header.
                     CustomerHeader();
