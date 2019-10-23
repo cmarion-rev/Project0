@@ -28,21 +28,24 @@ namespace Project_0
                     Utility.RebuildAccountListForDepositableAccounts(ref allAccounts, allCheckingAccounts, allBusinessAccounts);
 
                     // Display header.
-                    workingDisplay?.ClearDisplay();
-                    workingDisplay?.DisplayCustomerInformation(activeCustomer);
+                    CustomerHeader();
 
                     // Display account selection message.
-                    SelectDepositAccount(allAccounts);
+                    bool isGoodTransaction = SelectDepositAccount(allAccounts);
 
                     // Await user to return to main menu.
-                    workingDisplay?.DisplayReturningToMainMenu();
-                    workingDisplay?.WaitForUserConfirmation();
+                    if (isGoodTransaction)
+                    {
+                        ReturningToMainMenu();
+                    }
                 }
             }
         }
 
-        private void SelectDepositAccount(List<Account> allAccounts)
+        private bool SelectDepositAccount(List<Account> allAccounts)
         {
+            bool result = false;
+
             int? accountID = -1;
             workingDisplay?.DisplayDepositAccountOptions(allAccounts.ToArray());
             accountID = workingDisplay?.GetUserOptionNumberSelection();
@@ -65,25 +68,27 @@ namespace Project_0
                 // Check if value was found.
                 if (isValueFound)
                 {
-                    ProcessDepositAmount();
+                    result = ProcessDepositAmount();
                 }
                 else
                 {
-                    workingDisplay?.DisplayInvalidSelection();
+                    InvalidSelection(true);
                 }
             }
+
+            return result;
         }
 
-        private void ProcessDepositAmount()
+        private bool ProcessDepositAmount()
         {
+            bool result = false;
+
             if (activeAccount != null)
             {
                 double? userInput = 0.0;
 
                 // Display header information.
-                workingDisplay?.ClearDisplay();
-                workingDisplay?.DisplayCustomerInformation(activeCustomer);
-                workingDisplay?.DisplayAccountForDepositing(activeAccount as IAccountInfo);
+                FullAccountHeader();
 
                 // Get new deposit value.
                 userInput = workingDisplay?.GetUserValueInput();
@@ -97,20 +102,22 @@ namespace Project_0
                         (activeAccount as IAccountInfo).DepositAmount(userInput.GetValueOrDefault(0.0));
 
                         // Display changed results.
-                        workingDisplay?.ClearDisplay();
-                        workingDisplay?.DisplayCustomerInformation(activeCustomer);
-                        workingDisplay?.DisplayAccountInfo(activeAccount as IAccountInfo);
+                        FullAccountHeader();
+
+                        result = true;
                     }
                     else
                     {
-                        workingDisplay?.DisplayInvalidAmount();
+                        InvalidAmount(true);
                     }
                 }
                 else
                 {
-                    workingDisplay?.DisplayInvalidAmount();
+                    InvalidAmount(true);
                 }
             }
+
+            return result;
         }
     }
 }
