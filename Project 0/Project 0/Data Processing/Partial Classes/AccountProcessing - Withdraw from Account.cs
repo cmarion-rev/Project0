@@ -20,6 +20,7 @@ namespace Project_0
                     List<BusinessAccount> allBusinessAccounts = new List<BusinessAccount>();
                     List<TermDepositAccount> allTermAccounts = new List<TermDepositAccount>();
                     List<LoanAccount> allLoanAccounts = new List<LoanAccount>();
+                    bool isGoodProcess = false;
 
                     // Split appart main account list.
                     Utility.SeperateAccounts(allAccounts, ref allCheckingAccounts, ref allBusinessAccounts, ref allTermAccounts, ref allLoanAccounts);
@@ -28,21 +29,25 @@ namespace Project_0
                     Utility.RebuildAccountListForWithdrawableAccounts(ref allAccounts, allCheckingAccounts, allBusinessAccounts, allTermAccounts);
 
                     // Display header.
-                    workingDisplay?.ClearDisplay();
-                    workingDisplay?.DisplayCustomerInformation(activeCustomer);
+                    CustomerHeader();
 
                     // Display account selection message.
-                    SelectWithdrawAccount(allAccounts);
+                    isGoodProcess = SelectWithdrawAccount(allAccounts);
 
                     // Await user to return to main menu.
-                    workingDisplay?.DisplayReturningToMainMenu();
-                    workingDisplay?.WaitForUserConfirmation();
+                    if (isGoodProcess)
+                    {
+                        workingDisplay?.DisplayReturningToMainMenu();
+                        workingDisplay?.WaitForUserConfirmation();
+                    }
                 }
             }
         }
 
-        private void SelectWithdrawAccount(List<Account> allAccounts)
+        private bool SelectWithdrawAccount(List<Account> allAccounts)
         {
+            bool result = false;
+
             int? accountID = -1;
             workingDisplay?.DisplayWithdrawalAccountOptions(allAccounts.ToArray());
             accountID = workingDisplay?.GetUserOptionNumberSelection();
@@ -65,25 +70,27 @@ namespace Project_0
                 // Check if value was found.
                 if (isValueFound)
                 {
-                    ProcessWithdrawAmount();
+                    result = ProcessWithdrawAmount();
                 }
                 else
                 {
-                    workingDisplay?.DisplayInvalidSelection();
+                    InvalidSelection(true);
                 }
             }
+
+            return result;
         }
 
-        private void ProcessWithdrawAmount()
+        private bool ProcessWithdrawAmount()
         {
+            bool result = false;
+
             if (activeAccount != null)
             {
                 double? userInput = 0.0;
 
                 // Display header information.
-                workingDisplay?.ClearDisplay();
-                workingDisplay?.DisplayCustomerInformation(activeCustomer);
-                workingDisplay?.DisplayAccountForWithdrawing(activeAccount as IAccountInfo);
+                FullAccountHeader();
 
                 // Get new deposit value.
                 userInput = workingDisplay?.GetUserValueInput();
@@ -100,9 +107,8 @@ namespace Project_0
                         if (isGoodTransaction)
                         {
                             // Display changed results.
-                            workingDisplay?.ClearDisplay();
-                            workingDisplay?.DisplayCustomerInformation(activeCustomer);
-                            workingDisplay?.DisplayAccountInfo(activeAccount as IAccountInfo);
+                            FullAccountHeader();
+                            result = true;
                         }
                         else
                         {
@@ -110,7 +116,7 @@ namespace Project_0
                             {
                                 case Utility.TransactionErrorCodes.OVERDRAFT_PROTECTION:
                                     // Report overdraw attempt.
-                                    workingDisplay?.DisplayWithdrawalOverdraftProtection();
+                                    OverdraftProtection(true);
                                     break;
 
                                 case Utility.TransactionErrorCodes.TERM_PROTECTION:
@@ -120,7 +126,7 @@ namespace Project_0
 
                                 case Utility.TransactionErrorCodes.INVALID_AMOUNT:
                                     // Report invalid withdraw error.
-                                    workingDisplay?.DisplayInvalidAmount();
+                                    InvalidAmount(true);
                                     break;
 
                                 default:
@@ -130,14 +136,16 @@ namespace Project_0
                     }
                     else
                     {
-                        workingDisplay?.DisplayInvalidAmount();
+                        InvalidAmount(true);
                     }
                 }
                 else
                 {
-                    workingDisplay?.DisplayInvalidAmount();
+                    InvalidAmount(true);
                 }
             }
+
+            return result;
         }
     }
 }
