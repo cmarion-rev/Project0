@@ -25,8 +25,7 @@ namespace Project_0
                     Utility.SeperateAccounts(allAccounts, ref allCheckingAccounts, ref allBusinessAccounts, ref allTermAccounts, ref allLoanAccounts);
 
                     // Display header.
-                    workingDisplay?.ClearDisplay();
-                    workingDisplay?.DisplayCustomerInformation(activeCustomer);
+                    CustomerHeader();
 
                     // Display all accounts.
                     DisplayAllAccounts(allCheckingAccounts, allBusinessAccounts, allTermAccounts, allLoanAccounts);
@@ -35,8 +34,7 @@ namespace Project_0
                     SelectCloseAccount(allAccounts);
 
                     // Await user to return to main menu.
-                    workingDisplay?.DisplayReturningToMainMenu();
-                    workingDisplay?.WaitForUserConfirmation();
+                    ReturningToMainMenu();
                 }
             }
         }
@@ -70,7 +68,7 @@ namespace Project_0
                 }
                 else
                 {
-                    workingDisplay?.DisplayInvalidSelection();
+                    InvalidSelection();
                 }
             }
         }
@@ -78,9 +76,7 @@ namespace Project_0
         private void ProcessCloseAccountConfirmation(int accountNumber)
         {
             // Display header.
-            workingDisplay?.ClearDisplay();
-            workingDisplay?.DisplayCustomerInformation(activeCustomer);
-            workingDisplay?.DisplayAccountInfo(activeAccount as IAccountInfo);
+            FullAccountHeader();
 
             // Get final account close confirmation.
             workingDisplay?.DisplayAccountCloseConfirmation();
@@ -106,7 +102,6 @@ namespace Project_0
             {
                 workingAccountStorage.RemoveAccount(activeAccount);
                 activeAccount = null;
-
                 workingDisplay?.DisplayAccountCloseCompleted(accountNumber);
             }
         }
