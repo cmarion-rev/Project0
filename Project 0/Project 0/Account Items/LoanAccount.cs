@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Project_0
 {
-    public class LoanAccount : Account, IAccountInfo
+    public class LoanAccount : Account
     {
         public LoanAccount(Customer newCustomer, double InitialValue = 0.0) : base()
         {
@@ -18,28 +18,28 @@ namespace Project_0
 
             // Set initial account balance.
             AccountBalance = InitialValue;
-            totalRecords.Add(new DepositRecord() { TransactionAmount = InitialValue, TransactionCode = Utility.TransactionErrorCodes.SUCCESS });
             LastTransactionState = Utility.TransactionErrorCodes.SUCCESS;
+            totalRecords.Add(new DepositRecord() { TransactionAmount = InitialValue, TransactionCode = Utility.TransactionErrorCodes.SUCCESS });
         }
 
-        public Utility.AccountType AccountType { get; private set; }
+        public override Utility.AccountType AccountType { get; }
 
-        public int AccountNumber { get; }
+        public override int AccountNumber { get; }
 
-        public int CustomerID { get; set; }
+        public override int CustomerID { get; set; }
 
-        public Customer Customer { get; set; }
+        public override Customer Customer { get; set; }
 
-        public double AccountBalance { get; private set; }
+        public override double AccountBalance { get; protected set; }
 
-        public Utility.TransactionErrorCodes LastTransactionState { get; private set; }
+        public override Utility.TransactionErrorCodes LastTransactionState { get; protected set; }
 
         /// <summary>
         /// Deposits funds to account.
         /// </summary>
         /// <param name="newAmount">Installment amount to be paid.</param>
         /// <returns>Returns true if transaction is valid; Otherwise, false.</returns>
-        public bool DepositAmount(double newAmount)
+        public override bool DepositAmount(double newAmount)
         {
             bool result = true;
             LastTransactionState = Utility.TransactionErrorCodes.SUCCESS;
@@ -84,7 +84,7 @@ namespace Project_0
         /// </summary>
         /// <param name="newAmount">Amount to be withdrawn.</param>
         /// <returns>Returns true if transaction is valid; Otherwise, false.</returns>
-        public bool WithdrawAmount(double newAmount)
+        public override bool WithdrawAmount(double newAmount)
         {
             bool result = false;
             LastTransactionState = Utility.TransactionErrorCodes.INVALID_AMOUNT;

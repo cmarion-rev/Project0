@@ -11,7 +11,7 @@ namespace Project_0
             if (activeCustomer != null)
             {
                 // Get all accounts for current selected customer.
-                List<Account> allAccounts = activeCustomer.GetAllAccounts();
+                List<Account> allAccounts = new List<Account>(activeCustomer.GetAllAccounts());
 
                 // Check if any account exists.
                 if (allAccounts.Count > 0)

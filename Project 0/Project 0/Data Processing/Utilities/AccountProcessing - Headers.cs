@@ -18,11 +18,11 @@ namespace Project_0
             ShortAccountHeader();
         }
 
-        private void ShortAccountHeader(IAccountInfo currentAccount = null)
+        private void ShortAccountHeader(Account currentAccount = null)
         {
             if (currentAccount == null)
             {
-                workingDisplay?.DisplayAccountInfo(activeAccount as IAccountInfo);
+                workingDisplay?.DisplayAccountInfo(activeAccount);
             }
             else
             {

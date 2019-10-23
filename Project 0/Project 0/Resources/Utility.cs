@@ -157,7 +157,7 @@ namespace Project_0
             // Check for term accounts for  maturity.
             foreach (TermDepositAccount item in allTermAccounts)
             {
-                if (item.MaturityDate.Subtract(DateTime.Now).TotalDays > 0)
+                if (item.MaturityDate.Subtract(DateTime.Now).TotalDays < 0)
                 {
                     allAccounts.Add(item);
                 }

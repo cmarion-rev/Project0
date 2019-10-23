@@ -15,6 +15,6 @@ namespace Project_0
                                 IDisplayNewAccountOption,
                                 IDisplayAccountClose
     {
-        public void DisplayAccountInfo(IAccountInfo newAccount);
+        public void DisplayAccountInfo(Account newAccount);
     }
 }
