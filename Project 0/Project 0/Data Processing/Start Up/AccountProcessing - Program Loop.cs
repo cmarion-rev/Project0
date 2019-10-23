@@ -58,6 +58,7 @@ namespace Project_0
                         break;
 
                     case Utility.OperationState.PAY_LOAN:
+                        PayLoanInstallment();
                         break;
 
                     case Utility.OperationState.DISPLAY_ACCOUNTS:

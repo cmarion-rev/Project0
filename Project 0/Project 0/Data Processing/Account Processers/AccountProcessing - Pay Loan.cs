@@ -6,6 +6,9 @@ namespace Project_0
 {
     partial class AccountProcessing
     {
+        private void PayLoanInstallment()
+        {
 
+        }
     }
 }
