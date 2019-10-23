@@ -22,6 +22,16 @@ namespace Project_0
             workingDisplay?.WaitForUserConfirmation();
         }
 
+        private void InvalidEntry(bool returnToMainMenu=false)
+        {
+            workingDisplay?.DisplayInvalidEntry();
+            if (returnToMainMenu)
+            {
+                workingDisplay?.DisplayReturningToMainMenu();
+            }
+            workingDisplay?.WaitForUserConfirmation();
+        }
+
         private void InvalidAmount(bool returnToMainMenu = false)
         {
             workingDisplay?.DisplayInvalidAmount();

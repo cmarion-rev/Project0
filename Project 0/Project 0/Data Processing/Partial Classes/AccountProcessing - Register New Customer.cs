@@ -59,8 +59,7 @@ namespace Project_0
                 {
                     // Display error to user and restart loop.
                     firstName = "";
-                    workingDisplay?.DisplayInvalidEntry();
-                    workingDisplay?.WaitForUserConfirmation();
+                    InvalidEntry();
                     result = false;
                 }
                 else
@@ -80,8 +79,7 @@ namespace Project_0
                     {
                         // Display error to user and restart loop.
                         firstName = "";
-                        workingDisplay?.DisplayInvalidEntry();
-                        workingDisplay?.WaitForUserConfirmation();
+                        InvalidEntry();
                         result = false;
                     }
                 }
@@ -106,8 +104,7 @@ namespace Project_0
                 {
                     // Display error to user and restart loop.
                     lastName = "";
-                    workingDisplay?.DisplayInvalidEntry();
-                    workingDisplay?.WaitForUserConfirmation();
+                    InvalidEntry();
                     result = false;
                 }
                 else
@@ -127,8 +124,7 @@ namespace Project_0
                     {
                         // Display error to user and restart loop.
                         lastName = "";
-                        workingDisplay?.DisplayInvalidEntry();
-                        workingDisplay?.WaitForUserConfirmation();
+                        InvalidEntry();
                         result = false;
                     }
                 }
