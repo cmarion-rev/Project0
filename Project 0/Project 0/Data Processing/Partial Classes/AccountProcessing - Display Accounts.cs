@@ -25,15 +25,13 @@ namespace Project_0
                     Utility.SeperateAccounts(allAccounts, ref allCheckingAccounts, ref allBusinessAccounts, ref allTermAccounts, ref allLoanAccounts);
 
                     // Display header.
-                    workingDisplay?.ClearDisplay();
-                    workingDisplay?.DisplayCustomerInformation(activeCustomer);
+                    CustomerHeader();
 
                     // Display all accounts.
                     DisplayAllAccounts(allCheckingAccounts, allBusinessAccounts, allTermAccounts, allLoanAccounts);
 
                     // Await user to return to main menu.
-                    workingDisplay?.DisplayReturningToMainMenu();
-                    workingDisplay?.WaitForUserConfirmation();
+                    ReturningToMainMenu();
                 }
             }
         }
