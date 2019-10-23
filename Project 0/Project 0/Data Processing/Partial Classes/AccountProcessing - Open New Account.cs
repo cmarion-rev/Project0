@@ -15,8 +15,10 @@ namespace Project_0
 
                 do
                 {
-                    workingDisplay?.ClearDisplay();
-                    workingDisplay?.DisplayCustomerInformation(activeCustomer);
+                    // Display header.
+                    CustomerHeader();
+
+                    // Display options.
                     workingDisplay?.DisplayAccountOptions();
                     optionInput = workingDisplay?.GetUserOptionNumberSelection();
 
@@ -44,8 +46,7 @@ namespace Project_0
 
                         default:
                             // Invalid Selection.
-                            workingDisplay?.DisplayInvalidSelection();
-                            workingDisplay?.WaitForUserConfirmation();
+                            InvalidSelection();
                             optionInput = -1;
                             break;
                     }
@@ -62,8 +63,7 @@ namespace Project_0
             do
             {
                 // Display initial information for setting up initial balance.
-                workingDisplay?.ClearDisplay();
-                workingDisplay?.DisplayCustomerInformation(activeCustomer);
+                CustomerHeader();
                 workingDisplay?.DisplayNewCheckingAccountBalance();
                 startingBalance = workingDisplay?.GetUserValueInput();
 
@@ -102,8 +102,7 @@ namespace Project_0
             do
             {
                 // Display initial information for setting up initial balance.
-                workingDisplay?.ClearDisplay();
-                workingDisplay?.DisplayCustomerInformation(activeCustomer);
+                CustomerHeader();
                 workingDisplay?.DisplayNewBusinessAccountBalance();
                 startingBalance = workingDisplay?.GetUserValueInput();
 
@@ -142,8 +141,7 @@ namespace Project_0
             do
             {
                 // Display initial information for setting up initial balance.
-                workingDisplay?.ClearDisplay();
-                workingDisplay?.DisplayCustomerInformation(activeCustomer);
+                CustomerHeader();
                 workingDisplay?.DisplayNewLoanAccountBalance();
                 startingBalance = workingDisplay?.GetUserValueInput();
 
@@ -182,8 +180,7 @@ namespace Project_0
             do
             {
                 // Display initial information for setting up initial balance.
-                workingDisplay?.ClearDisplay();
-                workingDisplay?.DisplayCustomerInformation(activeCustomer);
+                CustomerHeader();
                 workingDisplay?.DisplayNewTermAccountBalance();
                 startingBalance = workingDisplay?.GetUserValueInput();
 
@@ -212,6 +209,5 @@ namespace Project_0
             // Add new checking account to account storage.
             workingAccountStorage?.AddAccount(activeAccount);
         }
-
     }
 }
