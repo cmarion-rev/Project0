@@ -177,6 +177,11 @@ namespace Project_0
                         workingDisplay?.DisplayTransferSuccessful(sourceAccount as IAccountInfo, destinationAccount as IAccountInfo);
                         result = true;
                     }
+                    else
+                    {
+                        // Source account funds exceeded.
+                        OverdraftProtection(true);
+                    }
                 }
                 else
                 {
