@@ -8,6 +8,6 @@ namespace Project_0.AccountInterfaces
     {
         public void DisplayLoanAccountSelection(Account[] allAccounts);
 
-        public void DisplayLoanInstallment(IAccountInfo newAccount);
+        public void DisplayLoanInstallment(Account newAccount);
     }
 }

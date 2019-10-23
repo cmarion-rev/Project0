@@ -88,7 +88,7 @@ namespace Project_0
                 CustomerHeader();
 
                 // Get new deposit value.
-                workingDisplay?.DisplayLoanInstallment(activeAccount as IAccountInfo);
+                workingDisplay?.DisplayLoanInstallment(activeAccount);
                 userInput = workingDisplay?.GetUserValueInput();
 
                 // Check if input value is valid.

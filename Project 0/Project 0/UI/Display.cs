@@ -385,7 +385,7 @@ namespace Project_0
             Console.Write("Please select an option: ");
         }
 
-        public void DisplayAccountInfo(IAccountInfo newAccount)
+        public void DisplayAccountInfo(Account newAccount)
         {
             string accountType = GetAccountType(newAccount);
 
@@ -395,15 +395,12 @@ namespace Project_0
             // Check for business account.
             switch (newAccount.AccountType)
             {
-                case Utility.AccountType.BUSINESS:
-                    Console.WriteLine("Account Balance: {0}", (newAccount.AccountBalance - (newAccount as BusinessAccount).OverdraftBalance).ToString("C2"));
-                    break;
-
                 case Utility.AccountType.TERM:
                     Console.WriteLine("Account Balance: {0}", newAccount.AccountBalance.ToString("C2"));
                     Console.WriteLine("Maturity Date: {0}", (newAccount as TermDepositAccount).MaturityDate.ToShortDateString());
                     break;
 
+                case Utility.AccountType.BUSINESS:
                 case Utility.AccountType.CHECKING:
                 case Utility.AccountType.LOAN:
                     Console.WriteLine("Account Balance: {0}", newAccount.AccountBalance.ToString("C2"));
@@ -446,7 +443,7 @@ namespace Project_0
 
         #region ACCOUNT DEPOSIT OPTIONS
 
-        public void DisplayAccountForDepositing(IAccountInfo newAccount)
+        public void DisplayAccountForDepositing(Account newAccount)
         {
             DisplayAccountInfo(newAccount);
 
@@ -466,7 +463,7 @@ namespace Project_0
 
         #region ACCOUNT WITHDRAWAL OPTIONS
 
-        public void DisplayAccountForWithdrawing(IAccountInfo newAccount)
+        public void DisplayAccountForWithdrawing(Account newAccount)
         {
             DisplayAccountInfo(newAccount);
 
@@ -502,7 +499,7 @@ namespace Project_0
             Console.Write("Please enter account number to transfer to: ");
         }
 
-        public void DisplayAccountTransfer(IAccountInfo sourceAccount, IAccountInfo destinationAccount)
+        public void DisplayAccountTransfer(Account sourceAccount, Account destinationAccount)
         {
             Console.WriteLine("Source Account");
             DisplayAccountInfo(sourceAccount);
@@ -516,7 +513,7 @@ namespace Project_0
             Console.Write("Please enter amount to transfer: ");
         }
 
-        public void DisplayTransferSuccessful(IAccountInfo sourceAccount, IAccountInfo destinationAccount)
+        public void DisplayTransferSuccessful(Account sourceAccount, Account destinationAccount)
         {
             Console.WriteLine();
             Console.WriteLine("Transfer from account #{0} to account #{1} successful.", sourceAccount.AccountNumber, destinationAccount.AccountNumber);
@@ -534,7 +531,7 @@ namespace Project_0
             Console.Write("Please enter account number to deposit to: ");
         }
 
-        public void DisplayLoanInstallment(IAccountInfo newAccount)
+        public void DisplayLoanInstallment(Account newAccount)
         {
             DisplayAccountInfo(newAccount);
 
@@ -620,7 +617,7 @@ namespace Project_0
                         break;
 
                     case Utility.AccountType.BUSINESS:
-                        currentBalance = item.AccountBalance - (item as BusinessAccount).OverdraftBalance;
+                        currentBalance = item.AccountBalance;
                         accountType = "Business";
                         break;
 
@@ -689,7 +686,7 @@ namespace Project_0
                         break;
 
                     case Utility.AccountType.BUSINESS:
-                        currentBalance = item.AccountBalance - (item as BusinessAccount).OverdraftBalance;
+                        currentBalance = item.AccountBalance;
                         break;
 
                     case Utility.AccountType.TERM:

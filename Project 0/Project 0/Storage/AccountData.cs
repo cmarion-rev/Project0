@@ -315,9 +315,15 @@ namespace Project_0
                 Customer currentCustomer = newAccount.Customer;
 
                 // Check if current account has remaining balance.
-                if (newAccount.AccountBalance > 0.0 | newAccount.OverdraftBalance > 0.0)
+                if (newAccount.AccountBalance > 0.0)
                 {
                     // Run account close confirmation.
+
+                }
+                else if(newAccount.AccountBalance < 0.0)
+                {
+                    // Run account close overdraft confirmation.
+
                 }
 
                 // Remove all relation to this account object.

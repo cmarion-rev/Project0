@@ -91,7 +91,7 @@ namespace Project_0
                 CustomerHeader();
 
                 // Get new deposit value.
-                workingDisplay?.DisplayAccountForDepositing(activeAccount as IAccountInfo);
+                workingDisplay?.DisplayAccountForDepositing(activeAccount);
                 userInput = workingDisplay?.GetUserValueInput();
 
                 // Check if input value is valid.

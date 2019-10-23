@@ -106,7 +106,7 @@ namespace Project_0
             {
                 // Display header.
                 CustomerHeader();
-                ShortAccountHeader(sourceAccount as IAccountInfo);
+                ShortAccountHeader(sourceAccount);
 
                 // Get user selection of transfer source.
                 int? accountID = -1;
@@ -157,7 +157,7 @@ namespace Project_0
             // Display header.
             CustomerHeader();
 
-            workingDisplay?.DisplayAccountTransfer(sourceAccount as IAccountInfo, destinationAccount as IAccountInfo);
+            workingDisplay?.DisplayAccountTransfer(sourceAccount, destinationAccount);
             transferAmount = workingDisplay?.GetUserValueInput();
 
             // Check for valid input.
@@ -174,7 +174,7 @@ namespace Project_0
                         TransfertoDestinationAccount(destinationAccount as IAccountInfo, realAmount);
 
                         // Display successful transfer message.
-                        workingDisplay?.DisplayTransferSuccessful(sourceAccount as IAccountInfo, destinationAccount as IAccountInfo);
+                        workingDisplay?.DisplayTransferSuccessful(sourceAccount, destinationAccount);
                         result = true;
                     }
                     else
