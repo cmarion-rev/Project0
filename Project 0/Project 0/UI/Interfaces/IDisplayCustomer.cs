@@ -8,7 +8,8 @@ namespace Project_0
 {
     interface IDisplayCustomer : IDisplayCustomerAccounts,
                                  IDisplayCustomerInformation, 
-                                 IDisplayRegisterCustomer
+                                 IDisplayRegisterCustomer,
+                                 IDisplayCustomerGroup
                                     
     {
     }
