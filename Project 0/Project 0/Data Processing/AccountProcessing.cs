@@ -134,32 +134,6 @@ namespace Project_0
             return isGameLoopActive;
         }
 
-        #region INITIAL SETUP METHODS
-
-        private void LinkToDevices()
-        {
-            // Link to Customer Storage.
-            workingCustomerStorage = CustomerData.Instance;
-
-            // Link to Account Storage.
-            workingAccountStorage = AccountData.Instance;
-
-            // Link to Display.
-            workingDisplay = Display.Instance;
-        }
-
-        private void ResetActiveCustomer()
-        {
-            activeCustomer = null;
-        }
-
-        private void ResetActiveAccount()
-        {
-            activeAccount = null;
-        }
-
-        #endregion 
-
         #region REGISTER NEW CUSTOMER METHODS
 
         private void RegisterNewCustomer()
