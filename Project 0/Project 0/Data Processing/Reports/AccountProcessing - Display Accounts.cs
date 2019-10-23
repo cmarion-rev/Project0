@@ -65,6 +65,5 @@ namespace Project_0
                 workingDisplay?.DisplayAllCustomerAccountsByType(Utility.AccountType.LOAN, allLoanAccounts.ToArray());
             }
         }
-
     }
 }

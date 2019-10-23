@@ -27,6 +27,5 @@ namespace Project_0
         {
             activeAccount = null;
         }
-
     }
 }
