@@ -8,10 +8,15 @@
 
   <ItemGroup>
     <None Remove="Data Processing\AccountProcessing.cs~RF58a5543.TMP" />
+    <None Remove="Data Processing\AccountProcessing.cs~RF81469a.TMP" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Interfaces\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NewtonSoft.Json" Version="12.0.2" />
   </ItemGroup>
 
 </Project>
