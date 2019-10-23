@@ -88,9 +88,10 @@ namespace Project_0
                 double? userInput = 0.0;
 
                 // Display header information.
-                FullAccountHeader();
+                CustomerHeader();
 
                 // Get new deposit value.
+                workingDisplay?.DisplayAccountForDepositing(activeAccount as IAccountInfo);
                 userInput = workingDisplay?.GetUserValueInput();
 
                 // Check if input value is valid.
