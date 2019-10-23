@@ -20,6 +20,7 @@ namespace Project_0
                     List<BusinessAccount> allBusinessAccounts = new List<BusinessAccount>();
                     List<TermDepositAccount> allTermAccounts = new List<TermDepositAccount>();
                     List<LoanAccount> allLoanAccounts = new List<LoanAccount>();
+                    bool isGoodProcess = false;
 
                     // Create reference accounts.
                     List<Account> allDepositableAccounts = new List<Account>();
@@ -33,26 +34,29 @@ namespace Project_0
                     Utility.RebuildAccountListForWithdrawableAccounts(ref allWithdrawableAccounts, allCheckingAccounts, allBusinessAccounts, allTermAccounts);
 
                     // Start account transfer process.
-                    ProcessAccountTransfer(allDepositableAccounts, allWithdrawableAccounts);
+                    isGoodProcess = ProcessAccountTransfer(allDepositableAccounts, allWithdrawableAccounts);
 
                     // Await user to return to main menu.
-                    workingDisplay?.DisplayReturningToMainMenu();
-                    workingDisplay?.WaitForUserConfirmation();
+                    if (isGoodProcess)
+                    {
+                        workingDisplay?.DisplayReturningToMainMenu();
+                        workingDisplay?.WaitForUserConfirmation();
+                    }
                 }
             }
         }
 
-        private void ProcessAccountTransfer(List<Account> allDepositAccounts, List<Account> allWithdrawAccounts)
+        private bool ProcessAccountTransfer(List<Account> allDepositAccounts, List<Account> allWithdrawAccounts)
         {
             Account sourceAccount = null;
             Account destinationAccount = null;
+            bool result = false;
 
             // Run Loop to get source account.
             do
             {
                 // Display header.
-                workingDisplay?.ClearDisplay();
-                workingDisplay?.DisplayCustomerInformation(activeCustomer);
+                CustomerHeader();
 
                 // Get user selection of transfer source.
                 int? accountID = -1;
@@ -91,8 +95,7 @@ namespace Project_0
                     else
                     {
                         // Invalid entry.
-                        workingDisplay?.DisplayInvalidSelection();
-                        workingDisplay?.WaitForUserConfirmation();
+                        InvalidSelection(true);
                         sourceAccount = null;
                     }
                 }
@@ -102,13 +105,8 @@ namespace Project_0
             do
             {
                 // Display header.
-                workingDisplay?.ClearDisplay();
-                workingDisplay?.DisplayCustomerInformation(activeCustomer);
-                workingDisplay?.DisplayAccountInfo(sourceAccount as IAccountInfo);
-
-                // Display header.
-                workingDisplay?.ClearDisplay();
-                workingDisplay?.DisplayCustomerInformation(activeCustomer);
+                CustomerHeader();
+                ShortAccountHeader(sourceAccount as IAccountInfo);
 
                 // Get user selection of transfer source.
                 int? accountID = -1;
@@ -138,8 +136,7 @@ namespace Project_0
                     else
                     {
                         // Invalid entry.
-                        workingDisplay?.DisplayInvalidSelection();
-                        workingDisplay?.WaitForUserConfirmation();
+                        InvalidSelection(true);
                         destinationAccount = null;
                     }
                 }
@@ -147,16 +144,18 @@ namespace Project_0
             } while (destinationAccount == null);
 
             // Process transfer amount.
-            ProcessTransferAmount(sourceAccount, destinationAccount);
+            result = ProcessTransferAmount(sourceAccount, destinationAccount);
+
+            return result;
         }
 
-        private void ProcessTransferAmount(Account sourceAccount, Account destinationAccount)
+        private bool ProcessTransferAmount(Account sourceAccount, Account destinationAccount)
         {
+            bool result = false;
             double? transferAmount = 0.0;
 
             // Display header.
-            workingDisplay?.ClearDisplay();
-            workingDisplay?.DisplayCustomerInformation(activeCustomer);
+            CustomerHeader();
 
             workingDisplay?.DisplayAccountTransfer(sourceAccount as IAccountInfo, destinationAccount as IAccountInfo);
             transferAmount = workingDisplay?.GetUserValueInput();
@@ -176,23 +175,22 @@ namespace Project_0
 
                         // Display successful transfer message.
                         workingDisplay?.DisplayTransferSuccessful(sourceAccount as IAccountInfo, destinationAccount as IAccountInfo);
-                        workingDisplay?.WaitForUserConfirmation();
+                        result = true;
                     }
                 }
                 else
                 {
                     // Invalid entry.
-                    workingDisplay?.DisplayInvalidAmount();
-                    workingDisplay?.WaitForUserConfirmation();
+                    InvalidAmount(true);
                 }
             }
             else
             {
                 // Invalid entry.
-                workingDisplay?.DisplayInvalidEntry();
-                workingDisplay?.WaitForUserConfirmation();
+                InvalidEntry(true);
             }
 
+            return result;
         }
 
         private bool CheckSourceAccountFunds(IAccountInfo sourceAccount, double withdrawAmount)
@@ -206,7 +204,7 @@ namespace Project_0
 
         private void TransfertoDestinationAccount(IAccountInfo destinationAccount, double depositAmount)
         {
-
+            destinationAccount.DepositAmount(depositAmount);
         }
     }
 }
