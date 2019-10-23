@@ -22,7 +22,7 @@ namespace Project_0
                     List<LoanAccount> allLoanAccounts = new List<LoanAccount>();
 
                     // Split appart main account list.
-                    Utility.SeperateAccounts(allAccounts, ref allCheckingAccounts, ref allBusinessAccounts, ref allTermAccounts, ref allLoanAccounts);
+                    Utility.SeperateAccounts(allAccounts, null, null, null, allLoanAccounts);
 
                     // Display header.
                     CustomerHeader();

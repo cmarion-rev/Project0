@@ -27,7 +27,7 @@ namespace Project_0
                     List<Account> allWithdrawableAccounts = new List<Account>();
 
                     // Split appart main account list.
-                    Utility.SeperateAccounts(allAccounts, ref allCheckingAccounts, ref allBusinessAccounts, ref allTermAccounts, ref allLoanAccounts);
+                    Utility.SeperateAccounts(allAccounts, allCheckingAccounts, allBusinessAccounts, allTermAccounts, null);
 
                     // Rebuild accounts list for depositable accounts.
                     Utility.RebuildAccountListForDepositableAccounts(ref allDepositableAccounts, allCheckingAccounts, allBusinessAccounts);

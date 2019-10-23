@@ -99,29 +99,42 @@ namespace Project_0
         }
 
         public static void SeperateAccounts(List<Account> allAccounts,
-                                            ref List<CheckingAccount> allCheckingAccounts,
-                                            ref List<BusinessAccount> allBusinessAccounts,
-                                            ref List<TermDepositAccount> allTermAccounts,
-                                            ref List<LoanAccount> allLoanAccounts)
+                                            List<CheckingAccount> allCheckingAccounts,
+                                            List<BusinessAccount> allBusinessAccounts,
+                                            List<TermDepositAccount> allTermAccounts,
+                                            List<LoanAccount> allLoanAccounts)
         {
+            // Loop through all accounts and seperate to proper sub-list.
             foreach (IAccountInfo item in allAccounts)
             {
                 switch (item.AccountType)
                 {
                     case AccountType.CHECKING:
-                        allCheckingAccounts.Add(item as CheckingAccount);
+                        if (allCheckingAccounts != null)
+                        {
+                            allCheckingAccounts.Add(item as CheckingAccount);
+                        }
                         break;
 
                     case AccountType.BUSINESS:
-                        allBusinessAccounts.Add(item as BusinessAccount);
+                        if (allBusinessAccounts != null)
+                        {
+                            allBusinessAccounts.Add(item as BusinessAccount);
+                        }
                         break;
 
                     case AccountType.TERM:
-                        allTermAccounts.Add(item as TermDepositAccount);
+                        if (allTermAccounts != null)
+                        {
+                            allTermAccounts.Add(item as TermDepositAccount);
+                        }
                         break;
 
                     case AccountType.LOAN:
-                        allLoanAccounts.Add(item as LoanAccount);
+                        if (allLoanAccounts != null)
+                        {
+                            allLoanAccounts.Add(item as LoanAccount);
+                        }
                         break;
 
                     default:

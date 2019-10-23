@@ -23,7 +23,7 @@ namespace Project_0
                     bool isGoodProcess = false;
 
                     // Split appart main account list.
-                    Utility.SeperateAccounts(allAccounts, ref allCheckingAccounts, ref allBusinessAccounts, ref allTermAccounts, ref allLoanAccounts);
+                    Utility.SeperateAccounts(allAccounts, allCheckingAccounts, allBusinessAccounts, allTermAccounts, null);
 
                     // Rebuild accounts list for depositable accounts.
                     Utility.RebuildAccountListForWithdrawableAccounts(ref allAccounts, allCheckingAccounts, allBusinessAccounts, allTermAccounts);
