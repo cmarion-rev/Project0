@@ -35,7 +35,7 @@ namespace Project_0
         /// <summary>
         /// Deposits funds to account.
         /// </summary>
-        /// <param name="newAmount">Amount to be deposited.</param>
+        /// <param name="newAmount">Installment amount to be paid.</param>
         /// <returns>Returns true if transaction is valid; Otherwise, false.</returns>
         public bool DepositAmount(double newAmount)
         {
@@ -45,8 +45,27 @@ namespace Project_0
             // Check if amount selected is a valid number.
             if (newAmount > 0.0f)
             {
-                AccountBalance += newAmount;
-                totalRecords.Add(new DepositRecord() { TransactionAmount = newAmount, TransactionCode = Utility.TransactionErrorCodes.SUCCESS });
+                // Check if new amount exceeds current balance.
+                if (newAmount > AccountBalance)
+                {
+                    // Notify of over payment.
+
+                    // Set account balance to $0.00
+                    totalRecords.Add(new WithdrawalRecord() { TransactionAmount = AccountBalance, TransactionCode = Utility.TransactionErrorCodes.SUCCESS });
+                    AccountBalance = 0.0;
+                }
+                else if (newAmount == AccountBalance)
+                {
+                    // Final payment.
+                    totalRecords.Add(new WithdrawalRecord() { TransactionAmount = newAmount, TransactionCode = Utility.TransactionErrorCodes.SUCCESS });
+                    AccountBalance = 0.0;
+                }
+                else
+                {
+                    // Reduce current account balance.
+                    totalRecords.Add(new WithdrawalRecord() { TransactionAmount = newAmount, TransactionCode = Utility.TransactionErrorCodes.SUCCESS });
+                    AccountBalance -= newAmount;
+                }
             }
             else
             {
@@ -65,45 +84,12 @@ namespace Project_0
         /// <returns>Returns true if transaction is valid; Otherwise, false.</returns>
         public bool WithdrawAmount(double newAmount)
         {
-            bool result = true;
-            LastTransactionState = Utility.TransactionErrorCodes.SUCCESS;
+            bool result = false;
+            LastTransactionState = Utility.TransactionErrorCodes.INVALID_AMOUNT;
 
-            // Check if amount selected is a valid number.
-            if (newAmount > 0.0)
-            {
-                // Check if withdraw amount does not exceed current account amount.
-                CheckOverdrafting(newAmount);
-            }
-            else
-            {
-                // Invalid amount selected.
-                result = false;
-                LastTransactionState = Utility.TransactionErrorCodes.INVALID_AMOUNT;
-            }
-
-            return result;
-        }
-
-        /// <summary>
-        /// Checks account for avaliable funds to be withdrawn.
-        /// </summary>
-        /// <param name="newAmount">Amount to be withdrawn.</param>
-        /// <returns>Returns true if transaction is valid; Otherwise, false.</returns>
-        private bool CheckOverdrafting(double newAmount)
-        {
-            bool result = true;
-
-            if (newAmount <= AccountBalance)
-            {
-                AccountBalance -= newAmount;
-                totalRecords.Add(new WithdrawalRecord() { TransactionAmount = newAmount, TransactionCode = Utility.TransactionErrorCodes.SUCCESS });
-            }
-            else
-            {
-                // Over Draft error.
-                result = false;
-                LastTransactionState = Utility.TransactionErrorCodes.OVERDRAFT_PROTECTION;
-            }
+            /* 
+             * DO NOT ALLOW WITHDRAWAL ON LOAN ACCOUNT.
+             */
 
             return result;
         }
