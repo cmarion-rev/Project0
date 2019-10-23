@@ -516,6 +516,12 @@ namespace Project_0
             Console.Write("Please enter amount to transfer: ");
         }
 
+        public void DisplayTransferSuccessful(IAccountInfo sourceAccount, IAccountInfo destinationAccount)
+        {
+            Console.WriteLine();
+            Console.WriteLine("Transfer from account #{0} to account #{1} successful.", sourceAccount.AccountNumber, destinationAccount.AccountNumber);
+        }
+
         #endregion
 
         #region LOAN ACCOUNT OPTIONS
@@ -587,11 +593,11 @@ namespace Project_0
         {
             Console.WriteLine("Account #{0} has been closed.", accountNumber);
         }
+
+        #endregion
+
+        #endregion
         
-        #endregion
-
-        #endregion
-
         #region CUSTOMER OPTIONS
 
         public void DisplayAllCustomerAccounts(Account[] allAccounts)
