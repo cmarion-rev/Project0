@@ -120,15 +120,13 @@ namespace Project_0
 
                     case Utility.OperationState.INVALID_OPTION:
                     default:
-                        workingDisplay?.DisplayInvalidSelection();
-                        workingDisplay?.WaitForUserConfirmation();
+                        InvalidSelection();
                         break;
                 }
             }
             else
             {
-                workingDisplay?.DisplayInvalidSelection();
-                workingDisplay?.WaitForUserConfirmation();
+                InvalidSelection();
             }
 
             return isGameLoopActive;
