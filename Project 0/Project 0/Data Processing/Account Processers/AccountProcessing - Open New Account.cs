@@ -164,8 +164,7 @@ namespace Project_0
             } while (!isGoodResult);
 
             // Initialize new account.
-            activeAccount = new LoanAccount(activeCustomer);
-            (activeAccount as LoanAccount).DepositAmount(startingBalance.GetValueOrDefault(0.0));
+            activeAccount = new LoanAccount(activeCustomer, startingBalance.GetValueOrDefault(0.0));
 
             // Add new checking account to account storage.
             workingAccountStorage?.AddAccount(activeAccount);

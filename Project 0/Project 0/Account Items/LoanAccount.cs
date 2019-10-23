@@ -6,7 +6,7 @@ namespace Project_0
 {
     public class LoanAccount : Account, IAccountInfo
     {
-        public LoanAccount(Customer newCustomer) : base()
+        public LoanAccount(Customer newCustomer, double InitialValue = 0.0) : base()
         {
             AccountNumber = IAccountInfo.GetNewAccountNumber();
             AccountType = Utility.AccountType.LOAN;
@@ -17,7 +17,9 @@ namespace Project_0
             Customer.AddAccount(this);
 
             // Set initial account balance.
-            AccountBalance = 0.0;
+            AccountBalance = InitialValue;
+            totalRecords.Add(new DepositRecord() { TransactionAmount = InitialValue, TransactionCode = Utility.TransactionErrorCodes.SUCCESS });
+            LastTransactionState = Utility.TransactionErrorCodes.SUCCESS;
         }
 
         public Utility.AccountType AccountType { get; private set; }
