@@ -22,8 +22,10 @@ namespace Project_0
         public abstract Customer Customer { get; set; }
         
         public abstract double AccountBalance { get; protected set; }
-        
+
         public abstract Utility.TransactionErrorCodes LastTransactionState { get; protected set; }
+
+        public virtual DateTime MaturityDate { get; set; }
 
         public ITransactionRecord[] GetTransactionRecords()
         {
