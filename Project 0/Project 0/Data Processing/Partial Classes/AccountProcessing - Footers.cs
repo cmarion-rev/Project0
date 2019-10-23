@@ -22,6 +22,16 @@ namespace Project_0
             workingDisplay?.WaitForUserConfirmation();
         }
 
+        private void OverdraftProtection(bool returnToMainMenu=false)
+        {
+            workingDisplay?.DisplayWithdrawalOverdraftProtection();
+            if (returnToMainMenu)
+            {
+                workingDisplay?.DisplayReturningToMainMenu();
+            }
+            workingDisplay?.WaitForUserConfirmation();
+        }
+
         private void InvalidEntry(bool returnToMainMenu=false)
         {
             workingDisplay?.DisplayInvalidEntry();
