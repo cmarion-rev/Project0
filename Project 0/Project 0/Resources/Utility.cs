@@ -23,6 +23,7 @@ namespace Project_0
             INVALID_OPTION = -1,
 
             REGISTER,
+            CHANGE_USER,
             OPEN_ACCOUNT,
             CLOSE_ACCOUNT,
             WITHDRAW,
@@ -52,14 +53,15 @@ namespace Project_0
         public enum MainMenuOptions
         {
             REGISTER_NEW_CUSTOMER = 1 << 0,
-            OPEN_NEW_ACCOUNT = 1 << 1,
-            CLOSE_ACCOUNT = 1 << 2,
-            WITHDRAW_AMOUNT = 1 << 3,
-            DEPOSIT_AMOUNT = 1 << 4,
-            TRANSFER_AMOUNT = 1 << 5,
-            PAY_LOAN_INSTALLMENT = 1 << 6,
-            DISPLAY_ALL_ACCOUNTS = 1 << 7,
-            DISPLAY_ALL_TRANSACTIONS = 1 << 8,
+            CHANGE_CUSTOMER = 1 << 1,
+            OPEN_NEW_ACCOUNT = 1 << 2,
+            CLOSE_ACCOUNT = 1 << 3,
+            WITHDRAW_AMOUNT = 1 << 4,
+            DEPOSIT_AMOUNT = 1 << 5,
+            TRANSFER_AMOUNT = 1 << 6,
+            PAY_LOAN_INSTALLMENT = 1 << 7,
+            DISPLAY_ALL_ACCOUNTS = 1 << 8,
+            DISPLAY_ALL_TRANSACTIONS = 1 << 9,
             //
 
             //

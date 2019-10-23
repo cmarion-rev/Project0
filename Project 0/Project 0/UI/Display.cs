@@ -67,29 +67,32 @@ namespace Project_0
             // Check if Register New Customer option is set.
             Console.WriteLine((newOptions & Utility.MainMenuOptions.REGISTER_NEW_CUSTOMER) == Utility.MainMenuOptions.REGISTER_NEW_CUSTOMER ? "(1) Register new customer." : "");
 
+            // Check if Change Customer option is set.
+            Console.WriteLine((newOptions & Utility.MainMenuOptions.CHANGE_CUSTOMER) == Utility.MainMenuOptions.CHANGE_CUSTOMER ? "(2) Change customer." : "");
+
             // Check if Open New Account option is set.
-            Console.WriteLine((newOptions & Utility.MainMenuOptions.OPEN_NEW_ACCOUNT) == Utility.MainMenuOptions.OPEN_NEW_ACCOUNT ? "(2) Open new account." : "");
+            Console.WriteLine((newOptions & Utility.MainMenuOptions.OPEN_NEW_ACCOUNT) == Utility.MainMenuOptions.OPEN_NEW_ACCOUNT ? "(3) Open new account." : "");
 
             // Check if Close Account option is set.
-            Console.WriteLine((newOptions & Utility.MainMenuOptions.CLOSE_ACCOUNT) == Utility.MainMenuOptions.CLOSE_ACCOUNT ? "(3) Close account." : "");
+            Console.WriteLine((newOptions & Utility.MainMenuOptions.CLOSE_ACCOUNT) == Utility.MainMenuOptions.CLOSE_ACCOUNT ? "(4) Close account." : "");
 
             // Check if Deposit Amount option is set.
-            Console.WriteLine((newOptions & Utility.MainMenuOptions.DEPOSIT_AMOUNT) == Utility.MainMenuOptions.DEPOSIT_AMOUNT ? "(4) Deposit to account." : "");
+            Console.WriteLine((newOptions & Utility.MainMenuOptions.DEPOSIT_AMOUNT) == Utility.MainMenuOptions.DEPOSIT_AMOUNT ? "(5) Deposit to account." : "");
 
             // Check if Withdraw Amount option is set.
-            Console.WriteLine((newOptions & Utility.MainMenuOptions.WITHDRAW_AMOUNT) == Utility.MainMenuOptions.WITHDRAW_AMOUNT ? "(5) Withdraw from account." : "");
+            Console.WriteLine((newOptions & Utility.MainMenuOptions.WITHDRAW_AMOUNT) == Utility.MainMenuOptions.WITHDRAW_AMOUNT ? "(6) Withdraw from account." : "");
 
             // Check if Transfer Amount option is set.
-            Console.WriteLine((newOptions & Utility.MainMenuOptions.TRANSFER_AMOUNT) == Utility.MainMenuOptions.TRANSFER_AMOUNT ? "(6) Transfer between accounts." : "");
+            Console.WriteLine((newOptions & Utility.MainMenuOptions.TRANSFER_AMOUNT) == Utility.MainMenuOptions.TRANSFER_AMOUNT ? "(7) Transfer between accounts." : "");
 
             // Check if Pay Loan Installment option is set.
-            Console.WriteLine((newOptions & Utility.MainMenuOptions.PAY_LOAN_INSTALLMENT) == Utility.MainMenuOptions.PAY_LOAN_INSTALLMENT ? "(7) Pay loan installment." : "");
+            Console.WriteLine((newOptions & Utility.MainMenuOptions.PAY_LOAN_INSTALLMENT) == Utility.MainMenuOptions.PAY_LOAN_INSTALLMENT ? "(8) Pay loan installment." : "");
 
             // Check if Display Accounts option is set.
-            Console.WriteLine((newOptions & Utility.MainMenuOptions.DISPLAY_ALL_ACCOUNTS) == Utility.MainMenuOptions.DISPLAY_ALL_ACCOUNTS ? "(8) Display all accounts." : "");
+            Console.WriteLine((newOptions & Utility.MainMenuOptions.DISPLAY_ALL_ACCOUNTS) == Utility.MainMenuOptions.DISPLAY_ALL_ACCOUNTS ? "(9) Display all accounts." : "");
 
             // Check if Display Transactions option is set.
-            Console.WriteLine((newOptions & Utility.MainMenuOptions.DISPLAY_ALL_TRANSACTIONS) == Utility.MainMenuOptions.DISPLAY_ALL_TRANSACTIONS ? "(9) Display all transactions for an account." : "");
+            Console.WriteLine((newOptions & Utility.MainMenuOptions.DISPLAY_ALL_TRANSACTIONS) == Utility.MainMenuOptions.DISPLAY_ALL_TRANSACTIONS ? "(0) Display all transactions for an account." : "");
 
             // Display exit program option.
             Console.WriteLine();
@@ -163,6 +166,14 @@ namespace Project_0
                             break;
 
                         case 2:
+                            // Register new account.
+                            if ((menuOptions & Utility.MainMenuOptions.CHANGE_CUSTOMER) == Utility.MainMenuOptions.CHANGE_CUSTOMER)
+                            {
+                                result = Utility.OperationState.CHANGE_USER;
+                            }
+                            break;
+
+                        case 3:
                             // Open new account.
                             if ((menuOptions & Utility.MainMenuOptions.OPEN_NEW_ACCOUNT) == Utility.MainMenuOptions.OPEN_NEW_ACCOUNT)
                             {
@@ -170,7 +181,7 @@ namespace Project_0
                             }
                             break;
 
-                        case 3:
+                        case 4:
                             // Close account.
                             if ((menuOptions & Utility.MainMenuOptions.CLOSE_ACCOUNT) == Utility.MainMenuOptions.CLOSE_ACCOUNT)
                             {
@@ -178,7 +189,7 @@ namespace Project_0
                             }
                             break;
 
-                        case 4:
+                        case 5:
                             // Deposit.
                             if ((menuOptions & Utility.MainMenuOptions.DEPOSIT_AMOUNT) == Utility.MainMenuOptions.DEPOSIT_AMOUNT)
                             {
@@ -186,7 +197,7 @@ namespace Project_0
                             }
                             break;
 
-                        case 5:
+                        case 6:
                             // Withdraw.
                             if ((menuOptions & Utility.MainMenuOptions.WITHDRAW_AMOUNT) == Utility.MainMenuOptions.WITHDRAW_AMOUNT)
                             {
@@ -194,7 +205,7 @@ namespace Project_0
                             }
                             break;
 
-                        case 6:
+                        case 7:
                             // Transfer.
                             if ((menuOptions & Utility.MainMenuOptions.TRANSFER_AMOUNT) == Utility.MainMenuOptions.TRANSFER_AMOUNT)
                             {
@@ -202,7 +213,7 @@ namespace Project_0
                             }
                             break;
 
-                        case 7:
+                        case 8:
                             // Pay loan.
                             if ((menuOptions & Utility.MainMenuOptions.PAY_LOAN_INSTALLMENT) == Utility.MainMenuOptions.PAY_LOAN_INSTALLMENT)
                             {
@@ -210,7 +221,7 @@ namespace Project_0
                             }
                             break;
 
-                        case 8:
+                        case 9:
                             // Display accounts.
                             if ((menuOptions & Utility.MainMenuOptions.DISPLAY_ALL_ACCOUNTS) == Utility.MainMenuOptions.DISPLAY_ALL_ACCOUNTS)
                             {
@@ -218,7 +229,7 @@ namespace Project_0
                             }
                             break;
 
-                        case 9:
+                        case 0:
                             // Display transactions.
                             if ((menuOptions & Utility.MainMenuOptions.DISPLAY_ALL_TRANSACTIONS) == Utility.MainMenuOptions.DISPLAY_ALL_TRANSACTIONS)
                             {

@@ -14,6 +14,11 @@ namespace Project_0
             if (workingCustomerStorage != null)
             {
                 result |= Utility.MainMenuOptions.REGISTER_NEW_CUSTOMER;
+
+                if (workingCustomerStorage.GetAllCustomers().Length > 1)
+                {
+                    result |= Utility.MainMenuOptions.CHANGE_CUSTOMER;
+                }
             }
 
             // Check if current customer exists.

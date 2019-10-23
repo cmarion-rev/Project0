@@ -37,6 +37,10 @@ namespace Project_0
                         RegisterNewCustomer();
                         break;
 
+                    case Utility.OperationState.CHANGE_USER:
+
+                        break;
+
                     case Utility.OperationState.OPEN_ACCOUNT:
                         OpenNewAccount();
                         break;
