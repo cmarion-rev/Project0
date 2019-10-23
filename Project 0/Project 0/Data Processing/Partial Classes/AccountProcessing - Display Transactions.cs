@@ -20,30 +20,34 @@ namespace Project_0
                     List<BusinessAccount> allBusinessAccounts = new List<BusinessAccount>();
                     List<TermDepositAccount> allTermAccounts = new List<TermDepositAccount>();
                     List<LoanAccount> allLoanAccounts = new List<LoanAccount>();
+                    bool isGoodProcess = false;
 
                     // Split appart main account list.
                     Utility.SeperateAccounts(allAccounts, ref allCheckingAccounts, ref allBusinessAccounts, ref allTermAccounts, ref allLoanAccounts);
 
                     // Display header.
-                    workingDisplay?.ClearDisplay();
-                    workingDisplay?.DisplayCustomerInformation(activeCustomer);
+                    CustomerHeader();
 
                     // Process user input selection.
-                    ProcessAccountForTransactionDisplay(allAccounts, allCheckingAccounts, allBusinessAccounts, allTermAccounts, allLoanAccounts);
+                    isGoodProcess = ProcessAccountForTransactionDisplay(allAccounts, allCheckingAccounts, allBusinessAccounts, allTermAccounts, allLoanAccounts);
 
                     // Await user to return to main menu.
-                    workingDisplay?.DisplayReturningToMainMenu();
-                    workingDisplay?.WaitForUserConfirmation();
+                    if (isGoodProcess)
+                    {
+                        ReturningToMainMenu();
+                    }
                 }
             }
         }
 
-        private void ProcessAccountForTransactionDisplay(List<Account> allAccounts,
+        private bool ProcessAccountForTransactionDisplay(List<Account> allAccounts,
                                                          List<CheckingAccount> allCheckingAccounts,
                                                          List<BusinessAccount> allBusinessAccounts,
                                                          List<TermDepositAccount> allTermAccounts,
                                                          List<LoanAccount> allLoanAccounts)
         {
+            bool result = false;
+
             int? accountID = -1;
             DisplayAllAccounts(allCheckingAccounts, allBusinessAccounts, allTermAccounts, allLoanAccounts);
             workingDisplay?.DisplayAccountTransactionSelection();
@@ -61,15 +65,19 @@ namespace Project_0
                         activeAccount = (currentAccount as Account);
                         DisplayAccountTransactions();
                         isFound = true;
+                        result = true;
                         break;
                     }
                 }
 
+                // Check if account selected was not found.
                 if (!isFound)
                 {
-                    workingDisplay?.DisplayInvalidSelection();
+                    InvalidSelection(true);
                 }
             }
+
+            return result;
         }
 
         private void DisplayAccountTransactions()
@@ -77,13 +85,12 @@ namespace Project_0
             if (activeAccount != null)
             {
                 // Display header
-                workingDisplay?.ClearDisplay();
-                workingDisplay?.DisplayCustomerInformation(activeCustomer);
-                workingDisplay?.DisplayAccountInfo(activeAccount as IAccountInfo);
+                FullAccountHeader();
 
                 // Display records.
                 workingDisplay.DisplayAllAccountTransactions(activeAccount.GetTransactionRecords());
 
+                // Reset current active account.
                 activeAccount = null;
             }
         }
