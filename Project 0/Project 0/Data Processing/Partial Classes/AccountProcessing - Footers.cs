@@ -6,15 +6,29 @@ namespace Project_0
 {
     partial class AccountProcessing
     {
-        private void InvalidSelection()
+        private void InvalidSelection(bool returnToMainMenu = false)
         {
             workingDisplay?.DisplayInvalidSelection();
+            if (returnToMainMenu)
+            {
+                workingDisplay?.DisplayReturningToMainMenu();
+            }
             workingDisplay?.WaitForUserConfirmation();
         }
 
         private void ReturningToMainMenu()
         {
             workingDisplay?.DisplayReturningToMainMenu();
+            workingDisplay?.WaitForUserConfirmation();
+        }
+
+        private void InvalidAmount(bool returnToMainMenu = false)
+        {
+            workingDisplay?.DisplayInvalidAmount();
+            if (returnToMainMenu)
+            {
+                workingDisplay?.DisplayReturningToMainMenu();
+            }
             workingDisplay?.WaitForUserConfirmation();
         }
     }
