@@ -11,5 +11,11 @@ namespace Project_0
             workingDisplay?.DisplayInvalidSelection();
             workingDisplay?.WaitForUserConfirmation();
         }
+
+        private void ReturningToMainMenu()
+        {
+            workingDisplay?.DisplayReturningToMainMenu();
+            workingDisplay?.WaitForUserConfirmation();
+        }
     }
 }
