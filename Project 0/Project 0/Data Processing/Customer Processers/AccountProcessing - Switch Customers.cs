@@ -18,7 +18,7 @@ namespace Project_0
                     CustomerHeader();
 
                     // Process Customer Selection.
-                    ProcessCustomerSelection();
+                    isGoodProcess = ProcessCustomerSelection();
 
                     // Return to Main Menu.
                     if (isGoodProcess)
@@ -61,6 +61,11 @@ namespace Project_0
                             CustomerHeader();
                             break;
                         }
+                    }
+
+                    if (!result)
+                    {
+                        InvalidSelection(true);
                     }
                 }
             }
