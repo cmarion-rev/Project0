@@ -38,7 +38,7 @@ namespace Project_0
                         break;
 
                     case Utility.OperationState.CHANGE_USER:
-
+                        SwitchCustomers();
                         break;
 
                     case Utility.OperationState.OPEN_ACCOUNT:
