@@ -34,6 +34,9 @@ namespace Project_0
         CustomerData workingCustomerStorage;
         AccountData workingAccountStorage;
 
+        /// <summary>
+        /// Starts main program process.
+        /// </summary>
         public void Start()
         {
             bool isGameLoopActive = true;

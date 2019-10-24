@@ -6,6 +6,9 @@ namespace Project_0
 {
     partial class AccountProcessing
     {
+        /// <summary>
+        /// Displays all accounts for current customer.
+        /// </summary>
         private void DisplayCustomerAccounts()
         {
             if (activeCustomer != null)
@@ -36,6 +39,13 @@ namespace Project_0
             }
         }
 
+        /// <summary>
+        /// Displays all accounts, by type, for current customer.
+        /// </summary>
+        /// <param name="allCheckingAccounts">List of all checking accounts.</param>
+        /// <param name="allBusinessAccounts">List of all business accounts.</param>
+        /// <param name="allTermAccounts">List of all term accounts.</param>
+        /// <param name="allLoanAccounts">List of all loan accounts.</param>
         private void DisplayAllAccounts(List<CheckingAccount> allCheckingAccounts,
                                         List<BusinessAccount> allBusinessAccounts,
                                         List<TermDepositAccount> allTermAccounts,

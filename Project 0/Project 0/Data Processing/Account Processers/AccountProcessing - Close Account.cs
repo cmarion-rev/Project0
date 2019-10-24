@@ -113,7 +113,7 @@ namespace Project_0
             if (workingAccountStorage != null)
             {
                 workingAccountStorage.RemoveAccount(activeAccount);
-                activeAccount = null;
+                ResetActiveAccount();
                 workingDisplay?.DisplayAccountCloseCompleted(accountNumber);
             }
         }

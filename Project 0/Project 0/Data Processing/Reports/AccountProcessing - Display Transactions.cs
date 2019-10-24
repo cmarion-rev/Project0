@@ -6,6 +6,9 @@ namespace Project_0
 {
     partial class AccountProcessing
     {
+        /// <summary>
+        /// Display all transactions for a specific account.
+        /// </summary>
         private void DisplayTransactionsForAccount()
         {
             if (activeCustomer != null)
@@ -40,6 +43,15 @@ namespace Project_0
             }
         }
 
+        /// <summary>
+        /// Displays all accounts for user selection.
+        /// </summary>
+        /// <param name="allAccounts">List of all accounts.</param>
+        /// <param name="allCheckingAccounts">Reference list for all checking accounts.</param>
+        /// <param name="allBusinessAccounts">Reference list for all business accounts.</param>
+        /// <param name="allTermAccounts">Reference list for all term accounts.</param>
+        /// <param name="allLoanAccounts">Reference list for all loan accounts.</param>
+        /// <returns>Returns, True if user select a valid account number. Otherwise, False.</returns>
         private bool ProcessAccountForTransactionDisplay(List<Account> allAccounts,
                                                          List<CheckingAccount> allCheckingAccounts,
                                                          List<BusinessAccount> allBusinessAccounts,
@@ -58,6 +70,8 @@ namespace Project_0
             {
                 bool isFound = false;
                 int actualID = accountID.GetValueOrDefault(-1);
+
+                // Check all accounts for user selection.
                 foreach (IAccountInfo currentAccount in allAccounts)
                 {
                     if (currentAccount.AccountNumber == actualID)
@@ -80,6 +94,9 @@ namespace Project_0
             return result;
         }
 
+        /// <summary>
+        /// Displays all transaction records for user selected account.
+        /// </summary>
         private void DisplayAccountTransactions()
         {
             if (activeAccount != null)
@@ -91,7 +108,7 @@ namespace Project_0
                 workingDisplay.DisplayAllAccountTransactions(activeAccount.GetTransactionRecords());
 
                 // Reset current active account.
-                activeAccount = null;
+                ResetActiveAccount();
             }
         }
     }

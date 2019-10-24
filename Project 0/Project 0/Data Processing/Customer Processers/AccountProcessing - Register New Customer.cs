@@ -6,6 +6,9 @@ namespace Project_0
 {
     partial class AccountProcessing
     {
+        /// <summary>
+        /// Create new customer data object.
+        /// </summary>
         private void RegisterNewCustomer()
         {
             string firstName = "";
@@ -43,13 +46,19 @@ namespace Project_0
             workingCustomerStorage?.AddCustomer(activeCustomer);
         }
 
+        /// <summary>
+        /// Generate new first name from user input.
+        /// </summary>
+        /// <param name="firstName">Reference string of customer first name.</param>
+        /// <returns>Returns, True if user entered name was valid. Otherwise, False.</returns>
         private bool ProcessFirstName(ref string firstName)
         {
-            bool result = true;
+            bool result = false;
 
             if (firstName.Length > 0)
             {
                 workingDisplay?.DisplayCustomerFirstNameRequest(firstName);
+                result = true;
             }
             else
             {
@@ -60,7 +69,6 @@ namespace Project_0
                     // Display error to user and restart loop.
                     firstName = "";
                     InvalidEntry();
-                    result = false;
                 }
                 else
                 {
@@ -74,13 +82,13 @@ namespace Project_0
                     if (Utility.ValidateName(firstName))
                     {
                         firstName = Utility.CaptializeName(firstName);
+                        result = true;
                     }
                     else
                     {
                         // Display error to user and restart loop.
                         firstName = "";
                         InvalidEntry();
-                        result = false;
                     }
                 }
             }
@@ -88,13 +96,19 @@ namespace Project_0
             return result;
         }
 
+        /// <summary>
+        /// Generate new last name from user input.
+        /// </summary>
+        /// <param name="lastName">Reference string of customer last name.</param>
+        /// <returns>Returns, True if user entered name was valid. Otherwise, False.</returns>
         private bool ProcessLastName(ref string lastName)
         {
-            bool result = true;
+            bool result = false;
 
             if (lastName.Length > 0)
             {
                 workingDisplay?.DisplayCustomerLastNameRequest(lastName);
+                result = true;
             }
             else
             {
@@ -105,7 +119,6 @@ namespace Project_0
                     // Display error to user and restart loop.
                     lastName = "";
                     InvalidEntry();
-                    result = false;
                 }
                 else
                 {
@@ -119,13 +132,13 @@ namespace Project_0
                     if (Utility.ValidateName(lastName))
                     {
                         lastName = Utility.CaptializeName(lastName);
+                        result = true;
                     }
                     else
                     {
                         // Display error to user and restart loop.
                         lastName = "";
                         InvalidEntry();
-                        result = false;
                     }
                 }
             }

@@ -6,6 +6,9 @@ namespace Project_0
 {
     partial class AccountProcessing
     {
+        /// <summary>
+        /// Switch current active customer.
+        /// </summary>
         private void SwitchCustomers()
         {
             if (workingCustomerStorage != null)
@@ -29,11 +32,16 @@ namespace Project_0
             }
         }
 
+        /// <summary>
+        /// Process user selection of customer switching.
+        /// </summary>
+        /// <returns>Returns, True if valid customer was selected. Otherwise, False.</returns>
         private bool ProcessCustomerSelection()
         {
             bool result = false;
-
             int? userInput = -1;
+            
+            // Get all customers from storage data.
             List<Customer> allCustomer = new List<Customer>(workingCustomerStorage.GetAllCustomers());
 
             // Display Customer List.
@@ -49,6 +57,8 @@ namespace Project_0
                 if (userInput > 0)
                 {
                     int realID = userInput.GetValueOrDefault(-1);
+
+                    // Check all customers for user selected id.
                     foreach (Customer nextCustomer in allCustomer)
                     {
                         if (nextCustomer.CustomerID == realID)
@@ -63,6 +73,7 @@ namespace Project_0
                         }
                     }
 
+                    // If valid result was not found, display error.
                     if (!result)
                     {
                         InvalidSelection(true);

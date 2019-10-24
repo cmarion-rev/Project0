@@ -6,6 +6,10 @@ namespace Project_0
 {
     partial class AccountProcessing
     {
+        /// <summary>
+        /// Gets the current selection option for Main Menu.
+        /// </summary>
+        /// <returns>Returns bit-flag set enumerator representing all avaliable menu options.</returns>
         private Utility.MainMenuOptions GetCurrentMainMenuOptions()
         {
             Utility.MainMenuOptions result = 0;
@@ -74,13 +78,19 @@ namespace Project_0
             return result;
         }
 
+        /// <summary>
+        /// Checks all available accounts for a depositable account.
+        /// </summary>
+        /// <param name="allAccounts">List of all accounts.</param>
+        /// <returns>Returns, True if a valid depositable account was found. Otherwise, False.</returns>
         private bool CheckCustomerAccountsForDepositable(List<Account> allAccounts)
         {
             bool result = false;
 
             if (allAccounts != null)
             {
-                foreach (IAccountInfo currentAccount in allAccounts)
+                // Check all accounts for being either Checking or Business.
+                foreach (Account currentAccount in allAccounts)
                 {
                     switch (currentAccount.AccountType)
                     {
@@ -93,7 +103,7 @@ namespace Project_0
                             break;
                     }
 
-                    // Exit loop on valid account find.
+                    // Exit loop on a valid account find.
                     if (result)
                     {
                         break;
@@ -104,28 +114,48 @@ namespace Project_0
             return result;
         }
 
+        /// <summary>
+        /// Checks all avaliable accounts for two transferable accounts.
+        /// </summary>
+        /// <param name="allAccounts">List of all accounts.</param>
+        /// <returns>Returns, True if two valid withdrawable accounts were found. Otherwise, False.</returns>
         private bool CheckCustomerAccountsForTransferable(List<Account> allAccounts)
         {
             bool result = false;
-            int count = 0;
+            int termCount = 0;
+            int normalCount = 0;
 
             if (allAccounts != null)
             {
-                foreach (IAccountInfo currentAccount in allAccounts)
+                // Check all accounts for atleast two valid accounts.
+                foreach (Account currentAccount in allAccounts)
                 {
                     switch (currentAccount.AccountType)
                     {
                         case Utility.AccountType.CHECKING:
                         case Utility.AccountType.BUSINESS:
-                            ++count;
+                            ++normalCount;
+                            break;
+
+                        case Utility.AccountType.TERM:
+                            // Check if term account has reached maturity.
+                            if ((currentAccount as TermDepositAccount).MaturityDate.Subtract(DateTime.Now).TotalDays < 0)
+                            {
+                                ++termCount;
+                            }
                             break;
 
                         default:
                             break;
                     }
 
-                    // Exit loop on valid account find.
-                    if (count > 1)
+                    // Exit loop on valid accounts found.
+                    if (normalCount > 1)
+                    {
+                        result = true;
+                        break;
+                    }
+                    else if (normalCount > 0 && termCount > 0)
                     {
                         result = true;
                         break;
@@ -136,12 +166,18 @@ namespace Project_0
             return result;
         }
 
+        /// <summary>
+        /// Checks all avaliable accounts for a withdrawable account.
+        /// </summary>
+        /// <param name="allAccounts">List of all accounts.</param>
+        /// <returns>Returns, True if a valid withdrawabl account was found. Otherwise, False.</returns>
         private bool CheckCustomerAccountsForWithdrawable(List<Account> allAccounts)
         {
             bool result = false;
 
             if (allAccounts != null)
             {
+                // Check all accounts for a valid account.
                 foreach (IAccountInfo currentAccount in allAccounts)
                 {
                     switch (currentAccount.AccountType)
@@ -170,12 +206,18 @@ namespace Project_0
             return result;
         }
 
+        /// <summary>
+        /// Checks all avaliable accounts for a loan account.
+        /// </summary>
+        /// <param name="allAccounts">List of all accounts.</param>
+        /// <returns>Returns, True if a valid loan account was found. Otherwise, False.</returns>
         private bool CheckCustomerAccountsForLoanPayable(List<Account> allAccounts)
         {
             bool result = false;
 
             if (allAccounts != null)
             {
+                // Check all accounts for a valid account.
                 foreach (IAccountInfo currentAccount in allAccounts)
                 {
                     switch (currentAccount.AccountType)

@@ -6,8 +6,14 @@ namespace Project_0
 {
     partial class AccountProcessing
     {
+        /// <summary>
+        /// Main Program Running Loop.
+        /// </summary>
+        /// <param name="isGameLoopActive">Last loop run state.</param>
+        /// <returns>Returns, True if the main loop is going to run again. Otherwise, False.</returns>
         private bool MainProgramLoop(bool isGameLoopActive)
         {
+            // Define cleared flag sets.
             Utility.MainMenuOptions menuOption = 0;
             Utility.OperationState? userReturn = 0;
 
