@@ -6,8 +6,10 @@ namespace Project_0
     {
         static void Main(string[] args)
         {
+            // Get singleton instance of main AccountProcessing program.
             AccountProcessing mainProgram = AccountProcessing.Instance;
 
+            // Start main program.
             mainProgram.Start();
         }
     }
