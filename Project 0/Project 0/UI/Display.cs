@@ -28,31 +28,9 @@ namespace Project_0
 
         #region ACCOUNT OPTIONS
 
-      
-
-        #region ACCOUNT DEPOSIT OPTIONS
-        
-        
-
-        #endregion
-
         #region ACCOUNT WITHDRAWAL OPTIONS
 
-        public void DisplayAccountForWithdrawing(Account newAccount)
-        {
-            DisplayAccountInfo(newAccount);
-
-            Console.WriteLine();
-            Console.Write("Please enter amount to withdraw: ");
-        }
-
-        public void DisplayWithdrawalAccountOptions(Account[] allAccounts)
-        {
-            DisplayAllCustomerAccounts(allAccounts);
-
-            Console.WriteLine();
-            Console.Write("Please enter account number to withdraw from: ");
-        }
+       
 
         #endregion
 
