@@ -5,7 +5,7 @@ using System.Threading;
 
 namespace Project_0
 {
-    class Display : IDisplayGeneral, IDisplayAccount, IDisplayCustomer
+    partial class Display : IDisplayGeneral, IDisplayAccount, IDisplayCustomer
     {
         private static Display workingInstance = null;
 
@@ -28,35 +28,7 @@ namespace Project_0
 
         #region ERROR MESSAGES
 
-        public void DisplayInvalidAmount()
-        {
-            Console.WriteLine("ERROR!");
-            Console.WriteLine("INVALID AMOUNT ENTERED!");
-        }
-
-        public void DisplayInvalidIndexOption()
-        {
-            Console.WriteLine("ERROR!");
-            Console.WriteLine("INVALID SELECTION NUMBER!");
-        }
-
-        public void DisplayInvalidSelection()
-        {
-            Console.WriteLine("ERROR!");
-            Console.WriteLine("INVALID SELECTION ENTERED!");
-        }
-
-        public void DisplayWithdrawalOverdraftProtection()
-        {
-            Console.WriteLine("WARNING!");
-            Console.WriteLine("AMOUNT SELECTED EXCEEDS ACCOUNT BALANCE!");
-        }
-
-        public void DisplayInvalidEntry()
-        {
-            Console.WriteLine("ERROR!");
-            Console.WriteLine("INVALID ENTRY INPUTTED!");
-        }
+     
 
         #endregion
 
@@ -585,7 +557,7 @@ namespace Project_0
         #endregion
 
         #region ACCOUNT CLOSE OPTIONS
-        
+
         public void DisplayAccountCloseSelection()
         {
             Console.Write("Please select account number to close: ");
@@ -605,7 +577,7 @@ namespace Project_0
         #endregion
 
         #endregion
-        
+
         #region CUSTOMER OPTIONS
 
         public void DisplayAllCustomerAccounts(Account[] allAccounts)
@@ -770,7 +742,7 @@ namespace Project_0
             // Display list of other customers.
             foreach (Customer otherCustomer in allCustomers)
             {
-                Console.WriteLine("{0,12}\t \t{1} {2}", otherCustomer.CustomerID,otherCustomer.FirstName,otherCustomer.LastName);
+                Console.WriteLine("{0,12}\t \t{1} {2}", otherCustomer.CustomerID, otherCustomer.FirstName, otherCustomer.LastName);
             }
 
             Console.WriteLine();
