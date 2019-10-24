@@ -9,6 +9,7 @@ namespace Project_0
         private bool MainProgramLoop(bool isGameLoopActive)
         {
             Utility.MainMenuOptions menuOption = 0;
+            Utility.OperationState? userReturn = 0;
 
             // Clear display for next menu draw.
             workingDisplay?.ClearDisplay();
@@ -19,14 +20,14 @@ namespace Project_0
             // If customer is selected, display customer.
             if (activeCustomer != null)
             {
-                workingDisplay?.DisplayCustomerInformation(activeCustomer);
+                CustomerHeader();
             }
 
             // Display Main Menu.
             workingDisplay?.DisplayMainMenu(menuOption);
 
             // Get user menu selection.
-            Utility.OperationState? userReturn = workingDisplay?.GetUserSelection(menuOption);
+            userReturn = workingDisplay?.GetUserSelection(menuOption);
 
             // Process user input value.
             if (userReturn != null)
