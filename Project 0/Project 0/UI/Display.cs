@@ -28,28 +28,8 @@ namespace Project_0
 
         #region ACCOUNT OPTIONS
 
-        #region ACCOUNT TRANSFER OPTIONS
-       
-        #endregion
-
         #region LOAN ACCOUNT OPTIONS
-
-        public void DisplayLoanAccountSelection(Account[] allAccounts)
-        {
-            DisplayAllCustomerAccounts(allAccounts);
-
-            Console.WriteLine();
-            Console.Write("Please enter account number to deposit to: ");
-        }
-
-        public void DisplayLoanInstallment(Account newAccount)
-        {
-            DisplayAccountInfo(newAccount);
-
-            Console.WriteLine();
-            Console.Write("Please enter amount of installment: ");
-        }
-
+      
         #endregion
 
         #region NEW ACCOUNT OPTIONS
