@@ -31,22 +31,8 @@ namespace Project_0
       
 
         #region ACCOUNT DEPOSIT OPTIONS
-
-        public void DisplayAccountForDepositing(Account newAccount)
-        {
-            DisplayAccountInfo(newAccount);
-
-            Console.WriteLine();
-            Console.Write("Please enter amount to deposit: ");
-        }
-
-        public void DisplayDepositAccountOptions(Account[] allAccounts)
-        {
-            DisplayAllCustomerAccounts(allAccounts);
-
-            Console.WriteLine();
-            Console.Write("Please enter account number to deposit to: ");
-        }
+        
+        
 
         #endregion
 
