@@ -8,12 +8,12 @@ namespace Project_0
     {
         protected List<ITransactionRecord> totalRecords = new List<ITransactionRecord>();
 
-        public abstract Utility.AccountType AccountType { get; }
-
         public Account()
         {
             totalRecords = new List<ITransactionRecord>();
         }
+
+        public abstract Utility.AccountType AccountType { get; }
 
         public abstract int AccountNumber { get; }
 
