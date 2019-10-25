@@ -6,7 +6,7 @@ namespace Project_0
 {
     public abstract class Account : IAccountTransaction, IAccountInfo
     {
-        protected List<ITransactionRecord> totalRecords = new List<ITransactionRecord>();
+        protected readonly List<ITransactionRecord> totalRecords = new List<ITransactionRecord>();
 
         public Account(AccountData newAccount)
         {
