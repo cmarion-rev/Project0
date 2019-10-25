@@ -17,5 +17,11 @@ namespace Project_0.GeneralInterfaces
         public void DisplayReturningToMainMenu();
 
         public void DisplayInvalidEntry();
+
+        public void DisplayAccountBalanceRemaining(int accountID, double amount);
+
+        public void DisplayAccountLoanBalanceRemaining(int accountID, double amount);
+
+        public void DisplayAccountOverdraftRemaining(int accountID, double amount);
     }
 }

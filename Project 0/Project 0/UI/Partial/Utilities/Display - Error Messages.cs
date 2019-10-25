@@ -35,5 +35,20 @@ namespace Project_0
             Console.WriteLine("ERROR!");
             Console.WriteLine("INVALID ENTRY INPUTTED!");
         }
+
+        public void DisplayAccountBalanceRemaining(int accountID, double amount)
+        {
+            Console.WriteLine("Account #{0} cannot be closed! Balance still remains. {1}", accountID, amount.ToString("C2"));
+        }
+
+        public void DisplayAccountLoanBalanceRemaining(int accountID, double amount)
+        {
+            Console.WriteLine("Account #{0} cannot be closed! Loan balance still remains. {1}", accountID, amount.ToString("C2"));
+        }
+
+        public void DisplayAccountOverdraftRemaining(int accountID, double amount)
+        {
+            Console.WriteLine("Account #{0} cannot be closed! Overdraft balance still remains. {1}", accountID, amount.ToString("C2"));
+        }
     }
 }
