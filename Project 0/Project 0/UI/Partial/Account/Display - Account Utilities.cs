@@ -102,27 +102,30 @@ namespace Project_0
 
         public void DisplayAccountInfo(Account newAccount)
         {
-            string accountType = GetAccountType(newAccount);
-
-            Console.WriteLine("Account # {0}", newAccount.AccountNumber);
-            Console.WriteLine("Account Type: {0}", accountType);
-
-            // Check for business account.
-            switch (newAccount.AccountType)
+            if (newAccount != null)
             {
-                case Utility.AccountType.TERM:
-                    Console.WriteLine("Account Balance: {0}", newAccount.AccountBalance.ToString("C2"));
-                    Console.WriteLine("Maturity Date: {0}", (newAccount as TermDepositAccount).MaturityDate.ToShortDateString());
-                    break;
+                string accountType = GetAccountType(newAccount);
 
-                case Utility.AccountType.BUSINESS:
-                case Utility.AccountType.CHECKING:
-                case Utility.AccountType.LOAN:
-                    Console.WriteLine("Account Balance: {0}", newAccount.AccountBalance.ToString("C2"));
-                    break;
+                Console.WriteLine("Account # {0}", newAccount.AccountNumber);
+                Console.WriteLine("Account Type: {0}", accountType);
 
-                default:
-                    break;
+                // Check for business account.
+                switch (newAccount.AccountType)
+                {
+                    case Utility.AccountType.TERM:
+                        Console.WriteLine("Account Balance: {0}", newAccount.AccountBalance.ToString("C2"));
+                        Console.WriteLine("Maturity Date: {0}", (newAccount as TermDepositAccount).MaturityDate.ToShortDateString());
+                        break;
+
+                    case Utility.AccountType.BUSINESS:
+                    case Utility.AccountType.CHECKING:
+                    case Utility.AccountType.LOAN:
+                        Console.WriteLine("Account Balance: {0}", newAccount.AccountBalance.ToString("C2"));
+                        break;
+
+                    default:
+                        break;
+                }
             }
         }
 
