@@ -6,26 +6,73 @@ namespace Project_0
 {
     public abstract class Account : IAccountTransaction, IAccountInfo
     {
-        protected List<ITransactionRecord> totalRecords = new List<ITransactionRecord>();
+        protected readonly List<ITransactionRecord> totalRecords = new List<ITransactionRecord>();
 
-        public Account()
+        public Account(AccountData newAccount)
         {
+            if (myAccount != newAccount)
+            {
+                myAccount = newAccount;
+            }
             totalRecords = new List<ITransactionRecord>();
         }
 
-        public abstract Utility.AccountType AccountType { get; }
+        protected AccountData myAccount;
 
-        public abstract int AccountNumber { get; }
+        public virtual Utility.AccountType AccountType
+        {
+            get
+            {
+                return myAccount?.AccountType ?? (Utility.AccountType)(-1);
+            }
+            set
+            {
+                if (myAccount != null)
+                {
+                    myAccount.AccountType = value;
+                }
+            }
+        }
 
-        public abstract int CustomerID { get; set; }
+        public int AccountNumber
+        {
+            get
+            {
+                return myAccount?.AccountNumber ?? -1;
+            }
+        }
 
-        public abstract Customer Customer { get; set; }
+        public int CustomerID
+        {
+            get
+            {
+                return myAccount?.CustomerID ?? -1;
+            }
+        }
 
-        public abstract double AccountBalance { get; protected set; }
+        public Customer Customer
+        {
+            get
+            {
+                return myAccount?.Customer ?? null;
+            }
+        }
 
-        public abstract Utility.TransactionErrorCodes LastTransactionState { get; protected set; }
+        public double AccountBalance
+        {
+            get
+            {
+                return myAccount?.AccountBalance ?? 0.0;
+            }
+        }
 
-        public virtual DateTime MaturityDate { get; set; }
+        public Utility.TransactionErrorCodes LastTransactionState
+        {
+            get
+            {
+                return myAccount?.LastTransactionState ?? (Utility.TransactionErrorCodes)(-1);
+            }
+        }
 
         public ITransactionRecord[] GetTransactionRecords()
         {

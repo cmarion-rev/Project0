@@ -6,14 +6,14 @@ namespace Project_0
 {
     interface IAccountDataAddAccounts
     {
-        public bool AddAccount(Account newAccount);
+        public Account GenerateNewAccount(Utility.AccountType newType, Customer currentCustomer, double newBalace = 0.0);
 
-        public bool AddCheckingAccount(CheckingAccount newAccount);
-        
-        public bool AddBusinessAccount(BusinessAccount newAccount);
-        
-        public bool AddTermAccount(TermDepositAccount newAccount);
-        
-        public bool AddLoanAccount(LoanAccount newAccount);
+        public Account GenerateNewCheckingAccount(Customer currentCustomer, double newBalace = 0.0);
+
+        public Account GenerateNewBusinessAccount(Customer currentCustomer, double newBalace = 0.0);
+
+        public Account GenerateNewTermAccount(Customer currentCustomer, double newBalace = 0.0);
+
+        public Account GenerateNewLoanAccount(Customer currentCustomer, double newBalace = 0.0);
     }
 }

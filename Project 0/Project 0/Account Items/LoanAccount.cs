@@ -6,33 +6,30 @@ namespace Project_0
 {
     public class LoanAccount : Account
     {
-        public LoanAccount(Customer newCustomer, double InitialValue = 0.0) : base()
+        public LoanAccount(Customer newCustomer, AccountData newAccount, double newBalance = 0.0) : base(newAccount)
         {
-            AccountNumber = IAccountInfo.GetNewAccountNumber();
-            AccountType = Utility.AccountType.LOAN;
+            if (newAccount != null)
+            {
+                // Set initial account balance.
+                newAccount.AccountNumber = IAccountInfo.GetNewAccountNumber();
+                newAccount.AccountType = Utility.AccountType.LOAN;
+                newAccount.LastTransactionState = Utility.TransactionErrorCodes.SUCCESS;
+                if (newBalance > 0.0)
+                {
+                    newAccount.AccountBalance = newBalance;
+                    totalRecords.Add(new DepositRecord() { TransactionAmount = newBalance, TransactionCode = Utility.TransactionErrorCodes.SUCCESS });
+                }
+                else
+                {
+                    newAccount.AccountBalance = 0.0;
+                }
 
-            // Set customer references.
-            Customer = newCustomer;
-            CustomerID = newCustomer.CustomerID;
+                // Set customer references.
+                newAccount.Customer = newCustomer;
+                newAccount.CustomerID = newCustomer?.CustomerID ?? -1;
+            }
             Customer.AddAccount(this);
-
-            // Set initial account balance.
-            AccountBalance = InitialValue;
-            LastTransactionState = Utility.TransactionErrorCodes.SUCCESS;
-            totalRecords.Add(new DepositRecord() { TransactionAmount = InitialValue, TransactionCode = Utility.TransactionErrorCodes.SUCCESS });
         }
-
-        public override Utility.AccountType AccountType { get; }
-
-        public override int AccountNumber { get; }
-
-        public override int CustomerID { get; set; }
-
-        public override Customer Customer { get; set; }
-
-        public override double AccountBalance { get; protected set; }
-
-        public override Utility.TransactionErrorCodes LastTransactionState { get; protected set; }
 
         /// <summary>
         /// Deposits funds to account.
@@ -41,41 +38,44 @@ namespace Project_0
         /// <returns>Returns true if transaction is valid; Otherwise, false.</returns>
         public override bool DepositAmount(double newAmount)
         {
-            bool result = true;
-            LastTransactionState = Utility.TransactionErrorCodes.SUCCESS;
+            bool result = false;
 
-            // Check if amount selected is a valid number.
-            if (newAmount > 0.0f)
+            if (myAccount != null)
             {
-                // Check if new amount exceeds current balance.
-                if (newAmount > AccountBalance)
-                {
-                    // Notify of over payment.
+                myAccount.LastTransactionState = Utility.TransactionErrorCodes.SUCCESS;
 
-                    // Set account balance to $0.00
-                    totalRecords.Add(new WithdrawalRecord() { TransactionAmount = AccountBalance, TransactionCode = Utility.TransactionErrorCodes.SUCCESS });
-                    AccountBalance = 0.0;
-                }
-                else if (newAmount == AccountBalance)
+                // Check if amount selected is a valid number.
+                if (newAmount > 0.0f)
                 {
-                    // Final payment.
-                    totalRecords.Add(new WithdrawalRecord() { TransactionAmount = newAmount, TransactionCode = Utility.TransactionErrorCodes.SUCCESS });
-                    AccountBalance = 0.0;
+                    // Check if new amount exceeds current balance.
+                    if (newAmount > AccountBalance)
+                    {
+                        // Notify of over payment.
+
+                        // Set account balance to $0.00
+                        totalRecords.Add(new WithdrawalRecord() { TransactionAmount = AccountBalance, TransactionCode = Utility.TransactionErrorCodes.SUCCESS });
+                        myAccount.AccountBalance = 0.0;
+                    }
+                    else if (newAmount == AccountBalance)
+                    {
+                        // Final payment.
+                        totalRecords.Add(new WithdrawalRecord() { TransactionAmount = newAmount, TransactionCode = Utility.TransactionErrorCodes.SUCCESS });
+                        myAccount.AccountBalance = 0.0;
+                    }
+                    else
+                    {
+                        // Reduce current account balance.
+                        totalRecords.Add(new WithdrawalRecord() { TransactionAmount = newAmount, TransactionCode = Utility.TransactionErrorCodes.SUCCESS });
+                        myAccount.AccountBalance -= newAmount;
+                    }
+                    result = true;
                 }
                 else
                 {
-                    // Reduce current account balance.
-                    totalRecords.Add(new WithdrawalRecord() { TransactionAmount = newAmount, TransactionCode = Utility.TransactionErrorCodes.SUCCESS });
-                    AccountBalance -= newAmount;
+                    // Invalid amount selected.
+                    myAccount.LastTransactionState = Utility.TransactionErrorCodes.INVALID_AMOUNT;
                 }
             }
-            else
-            {
-                // Invalid amount selected.
-                result = false;
-                LastTransactionState = Utility.TransactionErrorCodes.INVALID_AMOUNT;
-            }
-
             return result;
         }
 
@@ -87,7 +87,11 @@ namespace Project_0
         public override bool WithdrawAmount(double newAmount)
         {
             bool result = false;
-            LastTransactionState = Utility.TransactionErrorCodes.INVALID_AMOUNT;
+
+            if (myAccount != null)
+            {
+                myAccount.LastTransactionState = Utility.TransactionErrorCodes.INVALID_AMOUNT;
+            }
 
             /* 
              * DO NOT ALLOW WITHDRAWAL ON LOAN ACCOUNT.

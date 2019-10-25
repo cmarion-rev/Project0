@@ -6,36 +6,41 @@ namespace Project_0
 {
     public class TermDepositAccount : Account
     {
-        public TermDepositAccount(Customer newCustomer) : base()
+        public TermDepositAccount(Customer newCustomer, AccountData newAccount, double newBalance = 0.0) : base(newAccount)
         {
-            AccountNumber = IAccountInfo.GetNewAccountNumber();
-            AccountType = Utility.AccountType.TERM;
+            if (newAccount != null)
+            {
+                // Set initial account.
+                newAccount.AccountNumber = IAccountInfo.GetNewAccountNumber();
+                newAccount.AccountType = Utility.AccountType.TERM;
+                newAccount.LastTransactionState = Utility.TransactionErrorCodes.SUCCESS;
+                if (newBalance > 0.0)
+                {
+                    newAccount.AccountBalance = newBalance;
+                    totalRecords.Add(new DepositRecord() { TransactionAmount = newBalance, TransactionCode = Utility.TransactionErrorCodes.SUCCESS });
+                }
+                else
+                {
+                    newAccount.AccountBalance = 0.0;
+                }
 
-            // Set customer references.
-            Customer = newCustomer;
-            CustomerID = newCustomer.CustomerID;
+                // Set customer references.
+                newAccount.Customer = newCustomer;
+                newAccount.CustomerID = newCustomer.CustomerID;
+
+                // Default 1 Year term.
+                newAccount.MaturityDate = DateTime.Now.AddYears(1);
+            }
             Customer.AddAccount(this);
-
-            // Set initial account balance.
-            AccountBalance = 0.0;
-
-            // Default 1 Year term.
-            MaturityDate = DateTime.Now.AddYears(1);
         }
 
-        public override Utility.AccountType AccountType { get; }
-
-        public override int AccountNumber { get; }
-
-        public override DateTime MaturityDate { get; set; }
-
-        public override int CustomerID { get; set; }
-
-        public override Customer Customer { get; set; }
-
-        public override double AccountBalance { get; protected set; }
-
-        public override Utility.TransactionErrorCodes LastTransactionState { get; protected set; }
+        public DateTime MaturityDate
+        {
+            get
+            {
+                return myAccount?.MaturityDate ?? DateTime.Now;
+            }
+        }
 
         /// <summary>
         /// Deposits funds to account.
@@ -44,20 +49,24 @@ namespace Project_0
         /// <returns>Returns true if transaction is valid; Otherwise, false.</returns>
         public override bool DepositAmount(double newAmount)
         {
-            bool result = true;
-            LastTransactionState = Utility.TransactionErrorCodes.SUCCESS;
+            bool result = false;
 
-            // Check if amount selected is a valid number.
-            if (newAmount > 0.0f)
+            if (myAccount != null)
             {
-                AccountBalance += newAmount;
-                totalRecords.Add(new DepositRecord() { TransactionAmount = newAmount, TransactionCode = Utility.TransactionErrorCodes.SUCCESS });
-            }
-            else
-            {
-                // Invalid amount selected.
-                result = false;
-                LastTransactionState = Utility.TransactionErrorCodes.INVALID_AMOUNT;
+                myAccount.LastTransactionState = Utility.TransactionErrorCodes.SUCCESS;
+
+                // Check if amount selected is a valid number.
+                if (newAmount > 0.0f)
+                {
+                    myAccount.AccountBalance += newAmount;
+                    totalRecords.Add(new DepositRecord() { TransactionAmount = newAmount, TransactionCode = Utility.TransactionErrorCodes.SUCCESS });
+                    result = true;
+                }
+                else
+                {
+                    // Invalid amount selected.
+                    myAccount.LastTransactionState = Utility.TransactionErrorCodes.INVALID_AMOUNT;
+                }
             }
 
             return result;
@@ -70,20 +79,23 @@ namespace Project_0
         /// <returns>Returns true if transaction is valid; Otherwise, false.</returns>
         public override bool WithdrawAmount(double newAmount)
         {
-            bool result = true;
-            LastTransactionState = Utility.TransactionErrorCodes.SUCCESS;
+            bool result = false;
 
-            // Check if amount selected is a valid number.
-            if (newAmount > 0.0)
+            if (myAccount != null)
             {
-                // Check if maturity date has passed.
-                result = CheckMaturity(newAmount);
-            }
-            else
-            {
-                // Invalid amount selected.
-                result = false;
-                LastTransactionState = Utility.TransactionErrorCodes.INVALID_AMOUNT;
+                myAccount.LastTransactionState = Utility.TransactionErrorCodes.SUCCESS;
+
+                // Check if amount selected is a valid number.
+                if (newAmount > 0.0)
+                {
+                    // Check if maturity date has passed.
+                    result = CheckMaturity(newAmount);
+                }
+                else
+                {
+                    // Invalid amount selected.
+                    myAccount.LastTransactionState = Utility.TransactionErrorCodes.INVALID_AMOUNT;
+                }
             }
 
             return result;
@@ -96,18 +108,20 @@ namespace Project_0
         /// <returns>Returns true if transaction is valid; Otherwise, false.</returns>
         private bool CheckMaturity(double newAmount)
         {
-            bool result = true;
-            
-            if (MaturityDate.Date.Subtract(DateTime.Now).Days > -1)
+            bool result = false;
+
+            if (myAccount != null)
             {
-                // Check if withdraw amount does not exceed current account amount.
-                result = CheckOverdrafting(newAmount);
-            }
-            else
-            {
-                // Maturity not reached.
-                result = false;
-                LastTransactionState = Utility.TransactionErrorCodes.TERM_PROTECTION;
+                if (myAccount.MaturityDate.Date.Subtract(DateTime.Now).Days < 0)
+                {
+                    // Check if withdraw amount does not exceed current account amount.
+                    result = CheckOverdrafting(newAmount);
+                }
+                else
+                {
+                    // Maturity not reached.
+                    myAccount.LastTransactionState = Utility.TransactionErrorCodes.TERM_PROTECTION;
+                }
             }
 
             return result;
@@ -120,18 +134,21 @@ namespace Project_0
         /// <returns>Returns true if transaction is valid; Otherwise, false.</returns>
         private bool CheckOverdrafting(double newAmount)
         {
-            bool result = true;
-            
-            if (newAmount <= AccountBalance)
+            bool result = false;
+
+            if (myAccount != null)
             {
-                AccountBalance -= newAmount;
-                totalRecords.Add(new WithdrawalRecord() { TransactionAmount = newAmount, TransactionCode = Utility.TransactionErrorCodes.SUCCESS });
-            }
-            else
-            {
-                // Over Draft error.
-                result = false;
-                LastTransactionState = Utility.TransactionErrorCodes.OVERDRAFT_PROTECTION;
+                if (newAmount <= AccountBalance)
+                {
+                    myAccount.AccountBalance -= newAmount;
+                    totalRecords.Add(new WithdrawalRecord() { TransactionAmount = newAmount, TransactionCode = Utility.TransactionErrorCodes.SUCCESS });
+                    result = true;
+                }
+                else
+                {
+                    // Over Draft error.
+                    myAccount.LastTransactionState = Utility.TransactionErrorCodes.OVERDRAFT_PROTECTION;
+                }
             }
 
             return result;

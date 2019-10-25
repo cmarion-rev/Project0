@@ -16,9 +16,9 @@ namespace Project_0
 
         public int AccountNumber { get; }
 
-        public int CustomerID { get; set; }
+        public int CustomerID { get; }
 
-        public Customer Customer { get; set; }
+        public Customer Customer { get; }
 
         public double AccountBalance { get; }
     }

@@ -7,32 +7,32 @@ namespace Project_0
     public class CheckingAccount : Account
     {
         public static double InterestRate { get; set; }
-        
-        public CheckingAccount(Customer newCustomer) : base()
-        {
-            AccountNumber = IAccountInfo.GetNewAccountNumber();
-            AccountType = Utility.AccountType.CHECKING;
 
-            // Set customer references.
-            Customer = newCustomer;
-            CustomerID = newCustomer.CustomerID;
+        public CheckingAccount(Customer newCustomer, AccountData newAccount, double newBalance = 0.0) : base(newAccount)
+        {
+            if (newAccount != null)
+            {
+                // Set new account info.
+                newAccount.AccountNumber = IAccountInfo.GetNewAccountNumber();
+                newAccount.AccountType = Utility.AccountType.CHECKING;
+                if (newBalance > 0.0)
+                {
+                    newAccount.AccountBalance = newBalance;
+                    totalRecords.Add(new DepositRecord() { TransactionAmount = newBalance, TransactionCode = Utility.TransactionErrorCodes.SUCCESS });
+                }
+                else
+                {
+                    newAccount.AccountBalance = 0.0;
+                }
+
+                // Set customer references.
+                newAccount.Customer = newCustomer;
+                newAccount.CustomerID = newCustomer.CustomerID;
+            }
             Customer.AddAccount(this);
 
             // Set initial account balance.
-            AccountBalance = 0.0;
         }
-
-        public override Utility.AccountType AccountType { get; }
-
-        public override int AccountNumber { get; }
-
-        public override int CustomerID { get; set; }
-
-        public override Customer Customer { get; set; }
-
-        public override double AccountBalance { get; protected set; }
-
-        public override Utility.TransactionErrorCodes LastTransactionState { get; protected set; }
 
         /// <summary>
         /// Deposits funds to account.
@@ -41,20 +41,24 @@ namespace Project_0
         /// <returns>Returns true if transaction is valid; Otherwise, false.</returns>
         public override bool DepositAmount(double newAmount)
         {
-            bool result = true;
-            LastTransactionState = Utility.TransactionErrorCodes.SUCCESS;
+            bool result = false;
 
-            // Check if amount selected is a valid number.
-            if (newAmount > 0.0f)
+            if (myAccount != null)
             {
-                AccountBalance += newAmount;
-                totalRecords.Add(new DepositRecord() { TransactionAmount = newAmount, TransactionCode = Utility.TransactionErrorCodes.SUCCESS });
-            }
-            else
-            {
-                // Invalid amount selected.
-                result = false;
-                LastTransactionState = Utility.TransactionErrorCodes.INVALID_AMOUNT;
+                myAccount.LastTransactionState = Utility.TransactionErrorCodes.SUCCESS;
+
+                // Check if amount selected is a valid number.
+                if (newAmount > 0.0f)
+                {
+                    myAccount.AccountBalance += newAmount;
+                    totalRecords.Add(new DepositRecord() { TransactionAmount = newAmount, TransactionCode = Utility.TransactionErrorCodes.SUCCESS });
+                    result = true;
+                }
+                else
+                {
+                    // Invalid amount selected.
+                    myAccount.LastTransactionState = Utility.TransactionErrorCodes.INVALID_AMOUNT;
+                }
             }
 
             return result;
@@ -67,20 +71,23 @@ namespace Project_0
         /// <returns>Returns true if transaction is valid; Otherwise, false.</returns>
         public override bool WithdrawAmount(double newAmount)
         {
-            bool result = true;
-            LastTransactionState = Utility.TransactionErrorCodes.SUCCESS;
+            bool result = false;
 
-            // Check if amount selected is a valid number.
-            if (newAmount > 0.0)
+            if (myAccount != null)
             {
-                // Check if withdraw amount does not exceed current account amount.
-                result = CheckOverdrafting(newAmount);
-            }
-            else
-            {
-                // Invalid amount selected.
-                result = false;
-                LastTransactionState = Utility.TransactionErrorCodes.INVALID_AMOUNT;
+                myAccount.LastTransactionState = Utility.TransactionErrorCodes.SUCCESS;
+
+                // Check if amount selected is a valid number.
+                if (newAmount > 0.0)
+                {
+                    // Check if withdraw amount does not exceed current account amount.
+                    result = CheckOverdrafting(newAmount);
+                }
+                else
+                {
+                    // Invalid amount selected.
+                    myAccount.LastTransactionState = Utility.TransactionErrorCodes.INVALID_AMOUNT;
+                }
             }
 
             return result;
@@ -93,18 +100,21 @@ namespace Project_0
         /// <returns>Returns true if transaction is valid; Otherwise, false.</returns>
         private bool CheckOverdrafting(double newAmount)
         {
-            bool result = true;
+            bool result = false;
 
-            if (newAmount <= AccountBalance)
+            if (myAccount != null)
             {
-                AccountBalance -= newAmount;
-                totalRecords.Add(new WithdrawalRecord() { TransactionAmount = newAmount, TransactionCode = Utility.TransactionErrorCodes.SUCCESS });
-            }
-            else
-            {
-                // Over Draft error.
-                result = false;
-                LastTransactionState = Utility.TransactionErrorCodes.OVERDRAFT_PROTECTION;
+                if (newAmount <= AccountBalance)
+                {
+                    myAccount.AccountBalance -= newAmount;
+                    totalRecords.Add(new WithdrawalRecord() { TransactionAmount = newAmount, TransactionCode = Utility.TransactionErrorCodes.SUCCESS });
+                    result = true;
+                }
+                else
+                {
+                    // Over Draft error.
+                    myAccount.LastTransactionState = Utility.TransactionErrorCodes.OVERDRAFT_PROTECTION;
+                }
             }
 
             return result;
