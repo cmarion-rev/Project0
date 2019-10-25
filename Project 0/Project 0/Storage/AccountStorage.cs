@@ -35,129 +35,142 @@ namespace Project_0
 
         #region ADD ACCOUNTS
 
-        public bool AddAccount(Account newAccount)
+        public Account GenerateNewAccount(Utility.AccountType newType, Customer currentCustomer, double newBalance = 0.0)
         {
-            bool result = true;
+            Account newAccount = null;
 
-            if (newAccount is CheckingAccount)
+            switch (newType)
             {
-                result = AddNewCheckingAccount(newAccount);
-            }
-            else if (newAccount is BusinessAccount)
-            {
-                result = AddNewBusinessAccount(newAccount);
-            }
-            else if (newAccount is TermDepositAccount)
-            {
-                result = AddNewTermAccount(newAccount);
-            }
-            else if (newAccount is LoanAccount)
-            {
-                result = AddNewLoanAccount(newAccount);
+                case Utility.AccountType.CHECKING:
+                    newAccount = AddNewCheckingAccount(currentCustomer,newBalance);
+                    break;
+
+                case Utility.AccountType.BUSINESS:
+                    newAccount = AddNewBusinessAccount(currentCustomer, newBalance);
+                    break;
+
+                case Utility.AccountType.TERM:
+                    newAccount = AddNewTermAccount(currentCustomer, newBalance);
+                    break;
+
+                case Utility.AccountType.LOAN:
+                    newAccount = AddNewLoanAccount(currentCustomer, newBalance);
+                    break;
+
+                default:
+                    break;
             }
 
-            return result;
+            return newAccount;
         }
 
-        public bool AddBusinessAccount(BusinessAccount newAccount)
+        public Account GenerateNewBusinessAccount(Customer currentCustomer, double newBalance = 0.0)
         {
-            bool result = true;
+            Account newAccount = null;
 
-            result = AddNewBusinessAccount(newAccount);
+            newAccount = AddNewBusinessAccount(currentCustomer, newBalance);
 
-            return result;
+            return newAccount;
         }
 
-        public bool AddCheckingAccount(CheckingAccount newAccount)
+        public Account GenerateNewCheckingAccount(Customer currentCustomer, double newBalance = 0.0)
         {
-            bool result = true;
+            Account newAccount = null;
 
-            result = AddNewCheckingAccount(newAccount);
+            newAccount = AddNewCheckingAccount(currentCustomer, newBalance);
 
-            return result;
+            return newAccount;
         }
 
-        public bool AddLoanAccount(LoanAccount newAccount)
+        public Account GenerateNewLoanAccount(Customer currentCustomer, double newBalance = 0.0)
         {
-            bool result = true;
+            Account newAccount = null;
 
-            result = AddNewLoanAccount(newAccount);
+            newAccount = AddNewLoanAccount(currentCustomer, newBalance);
 
-            return result;
+            return newAccount;
         }
 
-        public bool AddTermAccount(TermDepositAccount newAccount)
+        public Account GenerateNewTermAccount(Customer currentCustomer, double newBalance = 0.0)
         {
-            bool result = true;
+            Account newAccount = null;
 
-            result = AddNewTermAccount(newAccount);
+            newAccount = AddNewTermAccount(currentCustomer, newBalance);
 
-            return result;
+            return newAccount;
+        }
+
+        private Account AddNewCheckingAccount(Customer currentCustomer, double newBalance = 0.0)
+        {
+            Account newAccount = null;
+
+            // Generate new account data.
+            AccountData newData = GenerateNewAccountData();
+
+            // Create new checking account.
+            newAccount = new CheckingAccount(currentCustomer, newData, newBalance);
+
+            // Add new checking account to master list inside dictionary.
+            allAccounts[Utility.AccountType.CHECKING].Add(newAccount);
+
+            return newAccount;
+        }
+
+        private Account AddNewBusinessAccount(Customer currentCustomer, double newBalance = 0.0)
+        {
+            Account newAccount = null;
+
+            // Generate new account data.
+            AccountData newData = GenerateNewAccountData();
+
+            // Create new checking account.
+            newAccount = new BusinessAccount(currentCustomer, newData, newBalance);
+
+            // Add new checking account to master list inside dictionary.
+            allAccounts[Utility.AccountType.BUSINESS].Add(newAccount);
+
+            return newAccount;
+        }
+
+        private Account AddNewTermAccount(Customer currentCustomer, double newBalance = 0.0)
+        {
+            Account newAccount = null;
+
+            // Generate new account data.
+            AccountData newData = GenerateNewAccountData();
+
+            // Create new checking account.
+            newAccount = new TermDepositAccount(currentCustomer, newData, newBalance);
+
+            // Add new checking account to master list inside dictionary.
+            allAccounts[Utility.AccountType.TERM].Add(newAccount);
+
+            return newAccount;
+        }
+
+        private Account AddNewLoanAccount(Customer currentCustomer, double newBalance = 0.0)
+        {
+            Account newAccount = null;
+
+            // Generate new account data.
+            AccountData newData = GenerateNewAccountData();
+
+            // Create new checking account.
+            newAccount = new LoanAccount(currentCustomer, newData, newBalance);
+
+            // Add new checking account to master list inside dictionary.
+            allAccounts[Utility.AccountType.LOAN].Add(newAccount);
+
+            return newAccount;
         }
 
 
-        private bool AddNewCheckingAccount(Account newAccount)
+        private AccountData GenerateNewAccountData()
         {
-            bool result = true;
+            // Create new accountdata.
+            AccountData newData = new AccountData();
 
-            if (allAccounts[Utility.AccountType.CHECKING].Contains(newAccount))
-            {
-                result = false;
-            }
-            else
-            {
-                allAccounts[Utility.AccountType.CHECKING].Add(newAccount);
-            }
-
-            return result;
-        }
-
-        private bool AddNewBusinessAccount(Account newAccount)
-        {
-            bool result = true;
-
-            if (allAccounts[Utility.AccountType.BUSINESS].Contains(newAccount))
-            {
-                result = false;
-            }
-            else
-            {
-                allAccounts[Utility.AccountType.BUSINESS].Add(newAccount);
-            }
-
-            return result;
-        }
-
-        private bool AddNewTermAccount(Account newAccount)
-        {
-            bool result = true;
-
-            if (allAccounts[Utility.AccountType.TERM].Contains(newAccount))
-            {
-                result = false;
-            }
-            else
-            {
-                allAccounts[Utility.AccountType.TERM].Add(newAccount);
-            }
-
-            return result;
-        }
-
-        private bool AddNewLoanAccount(Account newAccount)
-        {
-            bool result = true;
-
-            if (allAccounts[Utility.AccountType.LOAN].Contains(newAccount))
-            {
-                result = false;
-            }
-            else
-            {
-                allAccounts[Utility.AccountType.LOAN].Add(newAccount);
-            }
-
-            return result;
+            return newData;
         }
 
         #endregion
@@ -320,7 +333,7 @@ namespace Project_0
                     // Run account close confirmation.
 
                 }
-                else if(newAccount.AccountBalance < 0.0)
+                else if (newAccount.AccountBalance < 0.0)
                 {
                     // Run account close overdraft confirmation.
 
