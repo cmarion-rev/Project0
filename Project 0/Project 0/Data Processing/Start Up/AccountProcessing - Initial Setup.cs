@@ -12,7 +12,7 @@ namespace Project_0
         private void LinkToDevices()
         {
             // Link to Customer Storage.
-            workingCustomerStorage = CustomerData.Instance;
+            workingCustomerStorage = CustomerStorage.Instance;
 
             // Link to Account Storage.
             workingAccountStorage = AccountStorage.Instance;

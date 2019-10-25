@@ -4,44 +4,49 @@ using System.Text;
 
 namespace Project_0
 {
-    class CustomerData : ICustomerDataAddCustomer, ICustomerDataGetCustomer, ICustomerDataRemoveCustomer
+    class CustomerStorage : ICustomerDataAddCustomer, ICustomerDataGetCustomer, ICustomerDataRemoveCustomer
     {
         private readonly List<Customer> allCustomer = new List<Customer>();
 
-        private static CustomerData workingInstance = null;
+        private static CustomerStorage workingInstance = null;
 
-        public static CustomerData Instance
+        public static CustomerStorage Instance
         {
             get
             {
                 if (workingInstance == null)
                 {
-                    workingInstance = new CustomerData();
+                    workingInstance = new CustomerStorage();
                 }
                 return workingInstance;
             }
         }
 
-        CustomerData()
+        CustomerStorage()
         {
             allCustomer = new List<Customer>();
         }
 
-        public bool AddCustomer(Customer newCustomer)
+        public Customer AddCustomer(string firstName, string lastName)
         {
-            bool result = true;
+            Customer newCustomer = null;
 
-            int customerIndex = allCustomer.IndexOf(newCustomer);
-            if (customerIndex < 0)
+            // Generate new customer data.
+
+            CustomerData newData = GenerateNewCustomerData();
+            newCustomer = new Customer(newData)
+            {
+                FirstName = firstName,
+                LastName = lastName
+            };
+
+            // Add new customer to master list.
+            if (allCustomer != null)
             {
                 allCustomer.Add(newCustomer);
             }
-            else
-            {
-                result = false;
-            }
             
-            return result;
+            return newCustomer;
         }
 
         public Customer GetCustomer(int customerID)
@@ -116,5 +121,15 @@ namespace Project_0
 
             return result;
         }
+
+        private CustomerData GenerateNewCustomerData()
+        {
+            CustomerData newData = null;
+
+            newData = new CustomerData();
+
+            return newData;
+        }
+
     }
 }

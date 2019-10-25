@@ -36,14 +36,7 @@ namespace Project_0
             } while (firstName.Length < 1 || lastName.Length < 1);
 
             // Create new customer object.
-            activeCustomer = new Customer()
-            {
-                FirstName = firstName,
-                LastName = lastName,
-            };
-
-            // Add customer object to storage space.
-            workingCustomerStorage?.AddCustomer(activeCustomer);
+            activeCustomer = workingCustomerStorage?.AddCustomer(firstName, lastName);
         }
 
         /// <summary>

@@ -7,25 +7,63 @@ namespace Project_0
 {
     public class Customer : ICustomerAccounts, ICustomerInformation
     {
-        public int CustomerID { get; }
+        public int CustomerID
+        {
+            get
+            {
+                return myCustomer?.ID ?? -1;
+            }
+        }
 
-        public string FirstName { get; set; }
+        public string FirstName
+        {
+            get
+            {
+                return myCustomer?.FirstName;
+            }
+            set
+            {
+                if (myCustomer != null)
+                {
+                    myCustomer.FirstName = value;
+                }
+            }
+        }
 
-        public string LastName { get; set ; }
+        public string LastName
+        {
+            get
+            {
+                return myCustomer?.LastName;
+            }
+            set
+            {
+                if (myCustomer != null)
+                {
+                    myCustomer.LastName = value;
+                }
+            }
+        }
 
         public string FullName
         {
-            get 
-            { 
-                return string.Format("{0} {1}", FirstName, LastName); 
+            get
+            {
+                return string.Format("{0} {1}", myCustomer?.FirstName ?? "", myCustomer?.LastName ?? "");
             }
         }
 
         private readonly List<Account> customerAccounts = new List<Account>();
 
-        public Customer()
+        private CustomerData myCustomer = null;
+
+        public Customer(CustomerData newCustomer)
         {
-            CustomerID = ICustomerInformation.GetNewCustomerNumber();
+            if (newCustomer != null)
+            {
+                newCustomer.ID = ICustomerInformation.GetNewCustomerNumber();
+            }
+            myCustomer = newCustomer;
             customerAccounts = new List<Account>();
         }
 
@@ -73,7 +111,7 @@ namespace Project_0
         public Account GetAccount(int index)
         {
             Account result = null;
-
+            
             if (index > -1)
             {
                 if (index < customerAccounts.Count)

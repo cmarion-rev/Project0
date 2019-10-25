@@ -31,7 +31,7 @@ namespace Project_0
         Account activeAccount;
 
         Display workingDisplay;
-        CustomerData workingCustomerStorage;
+        CustomerStorage workingCustomerStorage;
         AccountStorage workingAccountStorage;
 
         /// <summary>
