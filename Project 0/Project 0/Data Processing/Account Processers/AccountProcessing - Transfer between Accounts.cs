@@ -60,7 +60,7 @@ namespace Project_0
 
                 // Get user selection of transfer source.
                 int? accountID = -1;
-                workingDisplay?.DisplayTransferSourceAccount(allDepositAccounts.ToArray());
+                workingDisplay?.DisplayTransferSourceAccount(allWithdrawAccounts.ToArray());
                 accountID = workingDisplay?.GetUserOptionNumberSelection();
 
                 // Check if good source account decided.
@@ -68,7 +68,7 @@ namespace Project_0
                 {
                     bool isGoodValue = false;
                     int sourceAccountNumber = accountID.GetValueOrDefault(-1);
-                    foreach (IAccountInfo currentAccount in allDepositAccounts)
+                    foreach (IAccountInfo currentAccount in allWithdrawAccounts)
                     {
                         if (currentAccount.AccountNumber == sourceAccountNumber)
                         {
@@ -82,12 +82,12 @@ namespace Project_0
                     if (isGoodValue)
                     {
                         // Remove this account from withdraw accounts.
-                        for (int index = 0; index < allWithdrawAccounts.Count; ++index)
+                        for (int index = 0; index < allDepositAccounts.Count; ++index)
                         {
                             // Check if current accout is selected number.
-                            if ((allWithdrawAccounts[index] as IAccountInfo).AccountNumber == sourceAccountNumber)
+                            if ((allDepositAccounts[index] as IAccountInfo).AccountNumber == sourceAccountNumber)
                             {
-                                allWithdrawAccounts.RemoveAt(index);
+                                allDepositAccounts.RemoveAt(index);
                                 break;
                             }
                         }
@@ -110,7 +110,7 @@ namespace Project_0
 
                 // Get user selection of transfer source.
                 int? accountID = -1;
-                workingDisplay?.DisplayTransferDestinationAccount(allWithdrawAccounts.ToArray());
+                workingDisplay?.DisplayTransferDestinationAccount(allDepositAccounts.ToArray());
                 accountID = workingDisplay?.GetUserOptionNumberSelection();
 
                 // Check if good source account decided.
@@ -118,7 +118,7 @@ namespace Project_0
                 {
                     bool isGoodValue = false;
                     int sourceAccountNumber = accountID.GetValueOrDefault(-1);
-                    foreach (IAccountInfo currentAccount in allWithdrawAccounts)
+                    foreach (IAccountInfo currentAccount in allDepositAccounts)
                     {
                         if (currentAccount.AccountNumber == sourceAccountNumber)
                         {

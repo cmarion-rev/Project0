@@ -168,14 +168,28 @@ namespace Project_0
 
         public static void RebuildAccountListForWithdrawableAccounts(List<Account> allAccounts, List<CheckingAccount> allCheckingAccounts, List<BusinessAccount> allBusinessAccounts, List<TermDepositAccount> allTermAccounts)
         {
-            RebuildAccountListForDepositableAccounts(allAccounts, allCheckingAccounts, allBusinessAccounts);
+
+            // Check all Checking accounts for withdrawable balance.
+            foreach (CheckingAccount currentAccount in allCheckingAccounts)
+            {
+                if (currentAccount.AccountBalance > 0.0)
+                {
+                    allAccounts.Add(currentAccount);
+                }
+            }
+
+            // Check all Business accounts for withdrawable balance.
+            allAccounts.AddRange(allBusinessAccounts);
 
             // Check for term accounts for  maturity.
-            foreach (TermDepositAccount item in allTermAccounts)
+            foreach (TermDepositAccount currentAccount in allTermAccounts)
             {
-                if (item.MaturityDate.Subtract(DateTime.Now).TotalDays < 0)
+                if (currentAccount.MaturityDate.Subtract(DateTime.Now).TotalDays < 0)
                 {
-                    allAccounts.Add(item);
+                    if (currentAccount.AccountBalance > 0.0)
+                    {
+                        allAccounts.Add(currentAccount);
+                    }
                 }
             }
         }
