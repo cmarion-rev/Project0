@@ -4,25 +4,25 @@ using System.Text;
 
 namespace Project_0
 {
-    class CustomerData : ICustomerDataAddCustomer, ICustomerDataGetCustomer, ICustomerDataRemoveCustomer
+    class CustomerStorage : ICustomerDataAddCustomer, ICustomerDataGetCustomer, ICustomerDataRemoveCustomer
     {
         private readonly List<Customer> allCustomer = new List<Customer>();
 
-        private static CustomerData workingInstance = null;
+        private static CustomerStorage workingInstance = null;
 
-        public static CustomerData Instance
+        public static CustomerStorage Instance
         {
             get
             {
                 if (workingInstance == null)
                 {
-                    workingInstance = new CustomerData();
+                    workingInstance = new CustomerStorage();
                 }
                 return workingInstance;
             }
         }
 
-        CustomerData()
+        CustomerStorage()
         {
             allCustomer = new List<Customer>();
         }
