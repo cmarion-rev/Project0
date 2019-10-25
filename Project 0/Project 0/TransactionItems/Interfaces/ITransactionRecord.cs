@@ -32,5 +32,7 @@ namespace Project_0
         public int SourceAccount { get; set; }
        
         public int DestinationAccount { get; set; }
+
+        public Utility.TransactionType TransactionType { get; }
     }
 }

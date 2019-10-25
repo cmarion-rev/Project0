@@ -17,6 +17,7 @@ namespace Project_0
                 myTransaction.ID = ITransactionRecord.GenerateNewID();
                 myTransaction.TimeStamp = DateTime.Now;
                 myTransaction.TransactionType = (int)transactionType;
+                myTransaction.TransactionCode = (int)Utility.TransactionErrorCodes.SUCCESS;
             }
         }
 

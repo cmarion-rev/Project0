@@ -32,20 +32,29 @@ namespace Project_0
                     transactionAmount = item.TransactionAmount;
                     timeStamp = item.TransactionDateTime;
 
-                    // Check if transaction is deposit or withdrawal.
-                    if (item is DepositRecord)
+
+                    // Check transaction type.
+                    switch (item.TransactionType)
                     {
-                        isDeposit = true;
-                    }
-                    else if (item is WithdrawalRecord)
-                    {
-                        isDeposit = false;
-                    }
-                    else
-                    {
-                        // Error condition! 
-                        // Skip this record!
-                        continue;
+                        case Utility.TransactionType.INVALID_DATA:
+                            break;
+
+                        case Utility.TransactionType.OPEN_ACCOUNT:
+                            break;
+
+                        case Utility.TransactionType.DEPOSIT:
+                            isDeposit = true;
+                            break;
+
+                        case Utility.TransactionType.WITHDRAWAL:
+                            isDeposit = false;
+                            break;
+
+                        case Utility.TransactionType.CLOSE_ACCOUNT:
+                            break;
+
+                        default:
+                            break;
                     }
 
                     // Output record.
@@ -56,7 +65,6 @@ namespace Project_0
                                         $"{timeStamp.ToShortDateString()} - {timeStamp.ToShortTimeString()}");
                 }
             }
-
         }
 
         public void DisplayAccountOptions()
