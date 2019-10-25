@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Project_0.TransactionItems
+namespace Project_0
 {
-    class TransactionData
+    public class TransactionData
     {
         public int ID { get; set; }
+
+        public int TransactionType { get; set; }
 
         public int SourceAccountID { get; set; }
 

@@ -19,5 +19,9 @@ namespace Project_0
         public Utility.TransactionErrorCodes TransactionCode { get; set; }
 
         public DateTime TransactionDateTime { get; }
+
+        public int SourceAccount { get; set; }
+       
+        public int DestinationAccount { get; set; }
     }
 }
