@@ -13,8 +13,16 @@ namespace Project_0
             {
                 newAccount.AccountNumber = IAccountInfo.GetNewAccountNumber();
                 newAccount.AccountType = Utility.AccountType.BUSINESS;
-                newAccount.AccountBalance = newBalance;
                 newAccount.LastTransactionState = Utility.TransactionErrorCodes.SUCCESS;
+                if (newBalance > 0.0)
+                {
+                    newAccount.AccountBalance = newBalance;
+                    totalRecords.Add(new DepositRecord() { TransactionAmount = newBalance, TransactionCode = Utility.TransactionErrorCodes.SUCCESS });
+                }
+                else
+                {
+                    newAccount.AccountBalance = 0.0;
+                }
 
                 // Set customer references.
                 newAccount.Customer = newCustomer;

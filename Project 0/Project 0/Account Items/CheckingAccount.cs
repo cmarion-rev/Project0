@@ -12,9 +12,18 @@ namespace Project_0
         {
             if (newAccount != null)
             {
+                // Set new account info.
                 newAccount.AccountNumber = IAccountInfo.GetNewAccountNumber();
                 newAccount.AccountType = Utility.AccountType.CHECKING;
-                newAccount.AccountBalance = newBalance;
+                if (newBalance > 0.0)
+                {
+                    newAccount.AccountBalance = newBalance;
+                    totalRecords.Add(new DepositRecord() { TransactionAmount = newBalance, TransactionCode = Utility.TransactionErrorCodes.SUCCESS });
+                }
+                else
+                {
+                    newAccount.AccountBalance = 0.0;
+                }
 
                 // Set customer references.
                 newAccount.Customer = newCustomer;
