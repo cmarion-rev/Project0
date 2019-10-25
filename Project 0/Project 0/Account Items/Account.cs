@@ -8,6 +8,8 @@ namespace Project_0
     {
         protected readonly List<ITransactionRecord> totalRecords = new List<ITransactionRecord>();
 
+        protected readonly AccountData myAccount;
+
         public Account(AccountData newAccount)
         {
             if (myAccount != newAccount)
@@ -16,8 +18,6 @@ namespace Project_0
             }
             totalRecords = new List<ITransactionRecord>();
         }
-
-        protected AccountData myAccount;
 
         public virtual Utility.AccountType AccountType
         {
