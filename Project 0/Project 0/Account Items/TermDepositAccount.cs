@@ -34,6 +34,14 @@ namespace Project_0
             Customer.AddAccount(this);
         }
 
+        public DateTime MaturityDate
+        {
+            get
+            {
+                return myAccount?.MaturityDate ?? DateTime.Now;
+            }
+        }
+
         /// <summary>
         /// Deposits funds to account.
         /// </summary>
