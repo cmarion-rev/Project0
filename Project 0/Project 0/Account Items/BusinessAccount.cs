@@ -17,7 +17,7 @@ namespace Project_0
                 if (newBalance > 0.0)
                 {
                     newAccount.AccountBalance = newBalance;
-                    totalRecords.Add(new DepositRecord() { TransactionAmount = newBalance, TransactionCode = Utility.TransactionErrorCodes.SUCCESS });
+                    totalRecords.Add(new TransactionRecord(Utility.TransactionType.OPEN_ACCOUNT) { TransactionAmount = newBalance });
                 }
                 else
                 {
@@ -47,7 +47,7 @@ namespace Project_0
                 if (newAmount > 0.0f)
                 {
                     myAccount.AccountBalance += newAmount;
-                    totalRecords.Add(new DepositRecord() { TransactionAmount = newAmount, TransactionCode = Utility.TransactionErrorCodes.SUCCESS });
+                    totalRecords.Add(new TransactionRecord( Utility.TransactionType.DEPOSIT) { TransactionAmount = newAmount,  DestinationAccount= myAccount.AccountNumber});
                     result = true;
                 }
                 else
@@ -78,7 +78,7 @@ namespace Project_0
                 {
                     // Check if withdraw amount does not exceed current account amount.
                     myAccount.AccountBalance -= newAmount;
-                    totalRecords.Add(new WithdrawalRecord() { TransactionAmount = newAmount, TransactionCode = Utility.TransactionErrorCodes.SUCCESS });
+                    totalRecords.Add(new TransactionRecord( Utility.TransactionType.WITHDRAWAL) { TransactionAmount = newAmount,  SourceAccount = myAccount.AccountNumber });
                     result = true;
                 }
                 else

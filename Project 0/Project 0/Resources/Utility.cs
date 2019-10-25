@@ -37,8 +37,22 @@ namespace Project_0
             EXIT_PROGRAM,
         }
 
+        public enum TransactionType
+        {
+            INVALID_DATA = -1,
+
+            OPEN_ACCOUNT,
+
+            DEPOSIT,
+            WITHDRAWAL,
+
+            CLOSE_ACCOUNT = 16,
+        }
+
         public enum TransactionErrorCodes
         {
+            INVALID_DATA = -1,
+
             SUCCESS,
 
             // Withdrawal Errors.

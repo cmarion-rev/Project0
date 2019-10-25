@@ -17,7 +17,7 @@ namespace Project_0
                 if (newBalance > 0.0)
                 {
                     newAccount.AccountBalance = newBalance;
-                    totalRecords.Add(new DepositRecord() { TransactionAmount = newBalance, TransactionCode = Utility.TransactionErrorCodes.SUCCESS });
+                    totalRecords.Add(new TransactionRecord(Utility.TransactionType.OPEN_ACCOUNT) { TransactionAmount = newBalance, DestinationAccount = myAccount.AccountNumber });
                 }
                 else
                 {
@@ -53,19 +53,19 @@ namespace Project_0
                         // Notify of over payment.
 
                         // Set account balance to $0.00
-                        totalRecords.Add(new WithdrawalRecord() { TransactionAmount = AccountBalance, TransactionCode = Utility.TransactionErrorCodes.SUCCESS });
+                        totalRecords.Add(new TransactionRecord(Utility.TransactionType.WITHDRAWAL) { TransactionAmount = AccountBalance, SourceAccount = myAccount.AccountNumber });
                         myAccount.AccountBalance = 0.0;
                     }
                     else if (newAmount == AccountBalance)
                     {
                         // Final payment.
-                        totalRecords.Add(new WithdrawalRecord() { TransactionAmount = newAmount, TransactionCode = Utility.TransactionErrorCodes.SUCCESS });
+                        totalRecords.Add(new TransactionRecord(Utility.TransactionType.WITHDRAWAL) { TransactionAmount = newAmount, SourceAccount = myAccount.AccountNumber });
                         myAccount.AccountBalance = 0.0;
                     }
                     else
                     {
                         // Reduce current account balance.
-                        totalRecords.Add(new WithdrawalRecord() { TransactionAmount = newAmount, TransactionCode = Utility.TransactionErrorCodes.SUCCESS });
+                        totalRecords.Add(new TransactionRecord(Utility.TransactionType.WITHDRAWAL) { TransactionAmount = newAmount, SourceAccount = myAccount.AccountNumber });
                         myAccount.AccountBalance -= newAmount;
                     }
                     result = true;

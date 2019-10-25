@@ -12,6 +12,15 @@ namespace Project_0
             return ++TransactionNumber;
         }
 
+        public static TransactionData GenerateNewTransactionData()
+        {
+            TransactionData newData = null;
+
+            newData = new TransactionData();
+
+            return newData;
+        }
+
         public int TransactionID { get; }
 
         public double TransactionAmount { get; set; }
@@ -19,5 +28,11 @@ namespace Project_0
         public Utility.TransactionErrorCodes TransactionCode { get; set; }
 
         public DateTime TransactionDateTime { get; }
+
+        public int SourceAccount { get; set; }
+       
+        public int DestinationAccount { get; set; }
+
+        public Utility.TransactionType TransactionType { get; }
     }
 }
