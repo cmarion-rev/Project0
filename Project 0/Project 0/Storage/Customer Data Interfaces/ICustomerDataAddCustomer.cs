@@ -6,6 +6,6 @@ namespace Project_0
 {
     interface ICustomerDataAddCustomer
     {
-        public bool AddCustomer(Customer newCustomer);
+        public Customer AddCustomer(string firstName, string lastName);
     }
 }
