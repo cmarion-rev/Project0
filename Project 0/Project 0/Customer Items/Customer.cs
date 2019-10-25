@@ -55,7 +55,7 @@ namespace Project_0
 
         private readonly List<Account> customerAccounts = new List<Account>();
 
-        private CustomerData myCustomer = null;
+        private readonly CustomerData myCustomer = null;
 
         public Customer(CustomerData newCustomer)
         {
