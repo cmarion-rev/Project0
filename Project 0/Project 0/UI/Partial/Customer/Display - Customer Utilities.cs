@@ -32,12 +32,12 @@ namespace Project_0
 
                     case Utility.AccountType.TERM:
                         currentBalance = item.AccountBalance;
-                        accountType = "Loan";
+                        accountType = "CD";
                         break;
 
                     case Utility.AccountType.LOAN:
                         currentBalance = item.AccountBalance;
-                        accountType = "CD";
+                        accountType = "Loan";
                         break;
 
                     default:
