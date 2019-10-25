@@ -12,6 +12,15 @@ namespace Project_0
             return ++TransactionNumber;
         }
 
+        public static TransactionData GenerateNewTransactionData()
+        {
+            TransactionData newData = null;
+
+            newData = new TransactionData();
+
+            return newData;
+        }
+
         public int TransactionID { get; }
 
         public double TransactionAmount { get; set; }

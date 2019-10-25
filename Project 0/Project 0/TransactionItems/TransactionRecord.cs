@@ -8,9 +8,9 @@ namespace Project_0
     {
         private TransactionData myTransaction = null;
 
-        public TransactionRecord(TransactionData newTransaction, Utility.TransactionType transactionType)
+        public TransactionRecord(Utility.TransactionType transactionType)
         {
-            myTransaction = newTransaction;
+            myTransaction = ITransactionRecord.GenerateNewTransactionData();
 
             if (myTransaction != null)
             {
