@@ -32,7 +32,7 @@ namespace Project_0
 
         Display workingDisplay;
         CustomerData workingCustomerStorage;
-        AccountData workingAccountStorage;
+        AccountStorage workingAccountStorage;
 
         /// <summary>
         /// Starts main program process.

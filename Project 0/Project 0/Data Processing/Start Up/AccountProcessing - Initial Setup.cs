@@ -15,7 +15,7 @@ namespace Project_0
             workingCustomerStorage = CustomerData.Instance;
 
             // Link to Account Storage.
-            workingAccountStorage = AccountData.Instance;
+            workingAccountStorage = AccountStorage.Instance;
 
             // Link to Display.
             workingDisplay = Display.Instance;

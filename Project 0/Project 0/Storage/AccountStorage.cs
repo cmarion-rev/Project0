@@ -4,25 +4,25 @@ using System.Text;
 
 namespace Project_0
 {
-    class AccountData : IAccountDataAddAccounts, IAccountDataGetAccounts, IAccountDataRemoveAccounts
+    class AccountStorage : IAccountDataAddAccounts, IAccountDataGetAccounts, IAccountDataRemoveAccounts
     {
         private readonly Dictionary<Utility.AccountType, List<Account>> allAccounts = new Dictionary<Utility.AccountType, List<Account>>();
 
-        private static AccountData workingInstance = null;
+        private static AccountStorage workingInstance = null;
 
-        public static AccountData Instance
+        public static AccountStorage Instance
         {
             get
             {
                 if (workingInstance == null)
                 {
-                    workingInstance = new AccountData();
+                    workingInstance = new AccountStorage();
                 }
                 return workingInstance;
             }
         }
 
-        AccountData()
+        AccountStorage()
         {
             allAccounts = new Dictionary<Utility.AccountType, List<Account>>();
 

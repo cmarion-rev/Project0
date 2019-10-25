@@ -75,7 +75,7 @@ namespace Project_0
                 List<Account> allCustomerAccounts = newCustomer.GetAllAccounts();
                 if (allCustomerAccounts.Count > 0)
                 {
-                    AccountData activeAccounts = AccountData.Instance;
+                    AccountStorage activeAccounts = AccountStorage.Instance;
                     foreach (Account item in allCustomerAccounts)
                     {
                         activeAccounts.RemoveAccount(item);
