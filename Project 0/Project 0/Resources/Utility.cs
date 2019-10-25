@@ -168,6 +168,8 @@ namespace Project_0
 
         public static void RebuildAccountListForWithdrawableAccounts(List<Account> allAccounts, List<CheckingAccount> allCheckingAccounts, List<BusinessAccount> allBusinessAccounts, List<TermDepositAccount> allTermAccounts)
         {
+            // Clear out all accounts.
+            allAccounts.Clear();
 
             // Check all Checking accounts for withdrawable balance.
             foreach (CheckingAccount currentAccount in allCheckingAccounts)
