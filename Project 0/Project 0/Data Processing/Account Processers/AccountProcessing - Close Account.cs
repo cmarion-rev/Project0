@@ -117,6 +117,7 @@ namespace Project_0
                     else
                     {
                         result = false;
+                        workingDisplay?.WaitForUserConfirmation();
                     }
                 }
                 else
