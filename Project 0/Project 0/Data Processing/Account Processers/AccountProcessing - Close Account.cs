@@ -70,7 +70,54 @@ namespace Project_0
 
                 if (isAccountFound)
                 {
-                    result = ProcessCloseAccountConfirmation(actualValue);
+                    bool canClose = true;
+
+                    // Check if account has remaining balance.
+                    switch (activeAccount.AccountType)
+                    {
+                        case Utility.AccountType.CHECKING:
+                        case Utility.AccountType.TERM:
+                            if (activeAccount.AccountBalance > 0.0)
+                            {
+                                workingDisplay?.DisplayAccountBalanceRemaining(activeAccount.AccountNumber, activeAccount.AccountBalance);
+                                canClose = false;
+                            }
+                            break;
+
+                        case Utility.AccountType.BUSINESS:
+                            if (activeAccount.AccountBalance > 0.0)
+                            {
+                                workingDisplay?.DisplayAccountBalanceRemaining(activeAccount.AccountNumber, activeAccount.AccountBalance);
+                                canClose = false;
+                            }
+                            else if (activeAccount.AccountBalance < 0.0)
+                            {
+                                workingDisplay?.DisplayAccountOverdraftRemaining(activeAccount.AccountNumber, activeAccount.AccountBalance);
+                                canClose = false;
+                            }
+                            break;
+
+                        case Utility.AccountType.LOAN:
+                            if (activeAccount.AccountBalance > 0.0)
+                            {
+                                workingDisplay?.DisplayAccountLoanBalanceRemaining(activeAccount.AccountNumber, activeAccount.AccountBalance);
+                                canClose = false;
+                            }
+                            break;
+
+                        default:
+                            break;
+                    }
+
+                    // Check if account was validated to be closed.
+                    if (canClose)
+                    {
+                        result = ProcessCloseAccountConfirmation(actualValue);
+                    }
+                    else
+                    {
+                        result = false;
+                    }
                 }
                 else
                 {
