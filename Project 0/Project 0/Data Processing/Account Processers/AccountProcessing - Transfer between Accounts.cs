@@ -97,54 +97,62 @@ namespace Project_0
                         // Invalid entry.
                         InvalidSelection(true);
                         sourceAccount = null;
+                        break;
                     }
                 }
             } while (sourceAccount == null);
 
-            // Run Loop to get destination acount.
-            do
+            if (sourceAccount != null)
             {
-                // Display header.
-                CustomerHeader();
-                ShortAccountHeader(sourceAccount);
-
-                // Get user selection of transfer source.
-                int? accountID = -1;
-                workingDisplay?.DisplayTransferDestinationAccount(allDepositAccounts.ToArray());
-                accountID = workingDisplay?.GetUserOptionNumberSelection();
-
-                // Check if good source account decided.
-                if (accountID != null)
+                // Run Loop to get destination acount.
+                do
                 {
-                    bool isGoodValue = false;
-                    int sourceAccountNumber = accountID.GetValueOrDefault(-1);
-                    foreach (IAccountInfo currentAccount in allDepositAccounts)
+                    // Display header.
+                    CustomerHeader();
+                    ShortAccountHeader(sourceAccount);
+
+                    // Get user selection of transfer source.
+                    int? accountID = -1;
+                    workingDisplay?.DisplayTransferDestinationAccount(allDepositAccounts.ToArray());
+                    accountID = workingDisplay?.GetUserOptionNumberSelection();
+
+                    // Check if good source account decided.
+                    if (accountID != null)
                     {
-                        if (currentAccount.AccountNumber == sourceAccountNumber)
+                        bool isGoodValue = false;
+                        int sourceAccountNumber = accountID.GetValueOrDefault(-1);
+                        foreach (IAccountInfo currentAccount in allDepositAccounts)
                         {
-                            isGoodValue = true;
-                            destinationAccount = (currentAccount as Account);
+                            if (currentAccount.AccountNumber == sourceAccountNumber)
+                            {
+                                isGoodValue = true;
+                                destinationAccount = (currentAccount as Account);
+                                break;
+                            }
+                        }
+
+                        // Check if good value was found.
+                        if (isGoodValue)
+                        {
+
+                        }
+                        else
+                        {
+                            // Invalid entry.
+                            InvalidSelection(true);
+                            destinationAccount = null;
                             break;
                         }
                     }
 
-                    // Check if good value was found.
-                    if (isGoodValue)
-                    {
-
-                    }
-                    else
-                    {
-                        // Invalid entry.
-                        InvalidSelection(true);
-                        destinationAccount = null;
-                    }
-                }
-
-            } while (destinationAccount == null);
+                } while (destinationAccount == null);
+            }
 
             // Process transfer amount.
-            result = ProcessTransferAmount(sourceAccount, destinationAccount);
+            if (sourceAccount != null && destinationAccount != null)
+            {
+                result = ProcessTransferAmount(sourceAccount, destinationAccount);
+            }
 
             return result;
         }

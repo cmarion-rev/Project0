@@ -122,10 +122,79 @@ namespace Project_0
         private bool CheckCustomerAccountsForTransferable(List<Account> allAccounts)
         {
             bool result = false;
-            int termCount = 0;
-            int normalCount = 0;
 
             if (allAccounts != null)
+            {
+                result = CheckAllAccountsforTransferability(allAccounts);
+            }
+
+            return result;
+        }
+
+        private bool CheckAllAccountsforTransferability(List<Account> allAccounts)
+        {
+            bool result = false;
+            Account aWithdrawAccount = null;
+            Account aSecondAccount = null;
+
+            // Check all term accounts first for potential withdrawal account.
+            foreach (Account currentAccount in allAccounts)
+            {
+                switch (currentAccount.AccountType)
+                {
+                    case Utility.AccountType.TERM:
+                        // Check if term account has reached maturity.
+                        if ((currentAccount as TermDepositAccount).MaturityDate.Subtract(DateTime.Now).TotalDays < 0)
+                        {
+                            // Check if account has a balance to withdraw from.
+                            if (currentAccount.AccountBalance > 0.0)
+                            {
+                                aWithdrawAccount = currentAccount;
+                            }
+                        }
+                        break;
+
+                    default:
+                        break;
+                }
+
+                // Check if valid withdrawal account was found.
+                if (aWithdrawAccount != null)
+                {
+                    break;
+                }
+            }
+
+            // If a good withdrawal account was not found in term accounts, check all other accounts for valid account.
+            if (aWithdrawAccount == null)
+            {
+                foreach (Account currentAccount in allAccounts)
+                {
+                    switch (currentAccount.AccountType)
+                    {
+                        case Utility.AccountType.CHECKING:
+                        case Utility.AccountType.BUSINESS:
+                            // Check if account has a balance to withdraw from.
+                            if (currentAccount.AccountBalance > 0.0)
+                            {
+                                aWithdrawAccount = currentAccount;
+                            }
+                            break;
+
+                        default:
+                            break;
+                    }
+
+                    // Check if valid withdrawal account was found.
+                    if (aWithdrawAccount != null)
+                    {
+                        break;
+                    }
+                }
+            }
+
+            // If a good withdrawal account was found, check for a second account to deposit to.
+            if (aWithdrawAccount != null)
             {
                 // Check all accounts for atleast two valid accounts.
                 foreach (Account currentAccount in allAccounts)
@@ -134,14 +203,9 @@ namespace Project_0
                     {
                         case Utility.AccountType.CHECKING:
                         case Utility.AccountType.BUSINESS:
-                            ++normalCount;
-                            break;
-
-                        case Utility.AccountType.TERM:
-                            // Check if term account has reached maturity.
-                            if ((currentAccount as TermDepositAccount).MaturityDate.Subtract(DateTime.Now).TotalDays < 0)
+                            if (currentAccount != aWithdrawAccount)
                             {
-                                ++termCount;
+                                aSecondAccount = currentAccount;
                             }
                             break;
 
@@ -150,12 +214,7 @@ namespace Project_0
                     }
 
                     // Exit loop on valid accounts found.
-                    if (normalCount > 1)
-                    {
-                        result = true;
-                        break;
-                    }
-                    else if (normalCount > 0 && termCount > 0)
+                    if (aSecondAccount != null)
                     {
                         result = true;
                         break;
