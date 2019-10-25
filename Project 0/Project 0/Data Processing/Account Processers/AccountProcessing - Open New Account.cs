@@ -77,13 +77,13 @@ namespace Project_0
                     else
                     {
                         isGoodResult = false;
+                        InvalidAmount();
                     }
                 }
                 else
                 {
                     isGoodResult = false;
                     InvalidAmount();
-                    workingDisplay?.WaitForUserConfirmation();
                 }
             } while (!isGoodResult);
 
@@ -114,13 +114,13 @@ namespace Project_0
                     else
                     {
                         isGoodResult = false;
+                        InvalidAmount();
                     }
                 }
                 else
                 {
                     isGoodResult = false;
                     InvalidAmount();
-                    workingDisplay?.WaitForUserConfirmation();
                 }
             } while (!isGoodResult);
 
@@ -151,13 +151,13 @@ namespace Project_0
                     else
                     {
                         isGoodResult = false;
+                        InvalidAmount();
                     }
                 }
                 else
                 {
                     isGoodResult = false;
                     InvalidAmount();
-                    workingDisplay?.WaitForUserConfirmation();
                 }
             } while (!isGoodResult);
 
@@ -188,13 +188,13 @@ namespace Project_0
                     else
                     {
                         isGoodResult = false;
+                        InvalidAmount();
                     }
                 }
                 else
                 {
                     isGoodResult = false;
                     InvalidAmount();
-                    workingDisplay?.WaitForUserConfirmation();
                 }
             } while (!isGoodResult);
 
