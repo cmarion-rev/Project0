@@ -86,11 +86,7 @@ namespace Project_0
             } while (!isGoodResult);
 
             // Initialize new account.
-            activeAccount = new CheckingAccount(activeCustomer);
-            (activeAccount as CheckingAccount).DepositAmount(startingBalance.GetValueOrDefault(0.0));
-
-            // Add new checking account to account storage.
-            workingAccountStorage?.AddAccount(activeAccount);
+            activeAccount = workingAccountStorage?.GenerateNewCheckingAccount(activeCustomer, startingBalance.GetValueOrDefault(0.0));
         }
 
         private void CreateNewBusinessAccount()
@@ -125,11 +121,7 @@ namespace Project_0
             } while (!isGoodResult);
 
             // Initialize new account.
-            activeAccount = new BusinessAccount(activeCustomer);
-            (activeAccount as BusinessAccount).DepositAmount(startingBalance.GetValueOrDefault(0.0));
-
-            // Add new checking account to account storage.
-            workingAccountStorage?.AddAccount(activeAccount);
+            activeAccount = workingAccountStorage?.GenerateNewBusinessAccount(activeCustomer, startingBalance.GetValueOrDefault(0.0));
         }
 
         private void CreateNewLoanAccount()
@@ -164,10 +156,7 @@ namespace Project_0
             } while (!isGoodResult);
 
             // Initialize new account.
-            activeAccount = new LoanAccount(activeCustomer, startingBalance.GetValueOrDefault(0.0));
-
-            // Add new checking account to account storage.
-            workingAccountStorage?.AddAccount(activeAccount);
+            activeAccount = workingAccountStorage?.GenerateNewLoanAccount(activeCustomer, startingBalance.GetValueOrDefault(0.0));
         }
 
         private void CreateNewTermAccount()
@@ -202,11 +191,7 @@ namespace Project_0
             } while (!isGoodResult);
 
             // Initialize new account.
-            activeAccount = new TermDepositAccount(activeCustomer);
-            (activeAccount as TermDepositAccount).DepositAmount(startingBalance.GetValueOrDefault(0.0));
-
-            // Add new checking account to account storage.
-            workingAccountStorage?.AddAccount(activeAccount);
+            activeAccount = workingAccountStorage?.GenerateNewTermAccount(activeCustomer, startingBalance.GetValueOrDefault(0.0));
         }
     }
 }
