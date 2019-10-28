@@ -6,6 +6,6 @@ namespace Project_0
 {
     public interface IAccountError
     {
-        public Utility.TransactionErrorCodes LastTransactionState { get; }
+        public Utility.TransactionCodes LastTransactionState { get; }
     }
 }

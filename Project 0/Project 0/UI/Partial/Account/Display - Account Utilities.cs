@@ -26,7 +26,7 @@ namespace Project_0
             foreach (ITransactionRecord item in allTransactions)
             {
                 // Check if transaction was marked as valid.
-                if (item.TransactionCode == Utility.TransactionErrorCodes.SUCCESS)
+                if (item.TransactionCode == Utility.TransactionCodes.SUCCESS)
                 {
                     transactionID = item.TransactionID;
                     transactionAmount = item.TransactionAmount;

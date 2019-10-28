@@ -16,7 +16,7 @@ namespace Project_0
 
         public double AccountBalance { get; set; }
 
-        public Utility.TransactionErrorCodes LastTransactionState { get; set; }
+        public Utility.TransactionCodes LastTransactionState { get; set; }
 
         public DateTime MaturityDate { get; set; }
     }

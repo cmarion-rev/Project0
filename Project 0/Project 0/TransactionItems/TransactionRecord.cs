@@ -17,7 +17,7 @@ namespace Project_0
                 myTransaction.ID = ITransactionRecord.GenerateNewID();
                 myTransaction.TimeStamp = DateTime.Now;
                 myTransaction.TransactionType = (int)transactionType;
-                myTransaction.TransactionCode = (int)Utility.TransactionErrorCodes.SUCCESS;
+                myTransaction.TransactionCode = (int)Utility.TransactionCodes.SUCCESS;
             }
         }
 
@@ -47,11 +47,11 @@ namespace Project_0
             }
         }
 
-        public Utility.TransactionErrorCodes TransactionCode
+        public Utility.TransactionCodes TransactionCode
         {
             get
             {
-                return (Utility.TransactionErrorCodes)(myTransaction?.TransactionCode ?? -1);
+                return (Utility.TransactionCodes)(myTransaction?.TransactionCode ?? -1);
             }
             set
             {

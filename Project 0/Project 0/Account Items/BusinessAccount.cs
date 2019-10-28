@@ -13,7 +13,7 @@ namespace Project_0
             {
                 newAccount.AccountNumber = IAccountInfo.GetNewAccountNumber();
                 newAccount.AccountType = Utility.AccountType.BUSINESS;
-                newAccount.LastTransactionState = Utility.TransactionErrorCodes.SUCCESS;
+                newAccount.LastTransactionState = Utility.TransactionCodes.SUCCESS;
                 if (newBalance > 0.0)
                 {
                     newAccount.AccountBalance = newBalance;
@@ -41,7 +41,7 @@ namespace Project_0
             bool result = false;
             if (myAccount != null)
             {
-                myAccount.LastTransactionState = Utility.TransactionErrorCodes.SUCCESS;
+                myAccount.LastTransactionState = Utility.TransactionCodes.SUCCESS;
 
                 // Check if amount selected is a valid number.
                 if (newAmount > 0.0f)
@@ -53,7 +53,7 @@ namespace Project_0
                 else
                 {
                     // Invalid amount selected.
-                    myAccount.LastTransactionState = Utility.TransactionErrorCodes.INVALID_AMOUNT;
+                    myAccount.LastTransactionState = Utility.TransactionCodes.INVALID_AMOUNT;
                 }
             }
 
@@ -71,7 +71,7 @@ namespace Project_0
 
             if (myAccount != null)
             {
-                myAccount.LastTransactionState = Utility.TransactionErrorCodes.SUCCESS;
+                myAccount.LastTransactionState = Utility.TransactionCodes.SUCCESS;
 
                 // Check if amount selected is a valid number.
                 if (newAmount > 0.0)
@@ -93,7 +93,7 @@ namespace Project_0
                 else
                 {
                     // Invalid amount selected.
-                    myAccount.LastTransactionState = Utility.TransactionErrorCodes.INVALID_AMOUNT;
+                    myAccount.LastTransactionState = Utility.TransactionCodes.INVALID_AMOUNT;
                 }
             }
 

@@ -66,11 +66,11 @@ namespace Project_0
             }
         }
 
-        public Utility.TransactionErrorCodes LastTransactionState
+        public Utility.TransactionCodes LastTransactionState
         {
             get
             {
-                return myAccount?.LastTransactionState ?? (Utility.TransactionErrorCodes)(-1);
+                return myAccount?.LastTransactionState ?? (Utility.TransactionCodes)(-1);
             }
         }
 

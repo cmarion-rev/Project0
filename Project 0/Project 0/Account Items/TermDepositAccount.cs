@@ -13,7 +13,7 @@ namespace Project_0
                 // Set initial account.
                 newAccount.AccountNumber = IAccountInfo.GetNewAccountNumber();
                 newAccount.AccountType = Utility.AccountType.TERM;
-                newAccount.LastTransactionState = Utility.TransactionErrorCodes.SUCCESS;
+                newAccount.LastTransactionState = Utility.TransactionCodes.SUCCESS;
                 if (newBalance > 0.0)
                 {
                     newAccount.AccountBalance = newBalance;
@@ -53,7 +53,7 @@ namespace Project_0
 
             if (myAccount != null)
             {
-                myAccount.LastTransactionState = Utility.TransactionErrorCodes.SUCCESS;
+                myAccount.LastTransactionState = Utility.TransactionCodes.SUCCESS;
 
                 // Check if amount selected is a valid number.
                 if (newAmount > 0.0f)
@@ -65,7 +65,7 @@ namespace Project_0
                 else
                 {
                     // Invalid amount selected.
-                    myAccount.LastTransactionState = Utility.TransactionErrorCodes.INVALID_AMOUNT;
+                    myAccount.LastTransactionState = Utility.TransactionCodes.INVALID_AMOUNT;
                 }
             }
 
@@ -83,7 +83,7 @@ namespace Project_0
 
             if (myAccount != null)
             {
-                myAccount.LastTransactionState = Utility.TransactionErrorCodes.SUCCESS;
+                myAccount.LastTransactionState = Utility.TransactionCodes.SUCCESS;
 
                 // Check if amount selected is a valid number.
                 if (newAmount > 0.0)
@@ -94,7 +94,7 @@ namespace Project_0
                 else
                 {
                     // Invalid amount selected.
-                    myAccount.LastTransactionState = Utility.TransactionErrorCodes.INVALID_AMOUNT;
+                    myAccount.LastTransactionState = Utility.TransactionCodes.INVALID_AMOUNT;
                 }
             }
 
@@ -120,7 +120,7 @@ namespace Project_0
                 else
                 {
                     // Maturity not reached.
-                    myAccount.LastTransactionState = Utility.TransactionErrorCodes.TERM_PROTECTION;
+                    myAccount.LastTransactionState = Utility.TransactionCodes.TERM_PROTECTION;
                 }
             }
 
@@ -147,7 +147,7 @@ namespace Project_0
                 else
                 {
                     // Over Draft error.
-                    myAccount.LastTransactionState = Utility.TransactionErrorCodes.OVERDRAFT_PROTECTION;
+                    myAccount.LastTransactionState = Utility.TransactionCodes.OVERDRAFT_PROTECTION;
                 }
             }
 

@@ -111,17 +111,17 @@ namespace Project_0
                         {
                             switch ((activeAccount as IAccountInfo).LastTransactionState)
                             {
-                                case Utility.TransactionErrorCodes.OVERDRAFT_PROTECTION:
+                                case Utility.TransactionCodes.OVERDRAFT_PROTECTION:
                                     // Report overdraw attempt.
                                     OverdraftProtection(true);
                                     break;
 
-                                case Utility.TransactionErrorCodes.TERM_PROTECTION:
+                                case Utility.TransactionCodes.TERM_PROTECTION:
                                     // Report term account non-maturity.
                                     // workingDisplay?.
                                     break;
 
-                                case Utility.TransactionErrorCodes.INVALID_AMOUNT:
+                                case Utility.TransactionCodes.INVALID_AMOUNT:
                                     // Report invalid withdraw error.
                                     InvalidAmount(true);
                                     break;

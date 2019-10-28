@@ -49,7 +49,7 @@ namespace Project_0
             CLOSE_ACCOUNT = 16,
         }
 
-        public enum TransactionErrorCodes
+        public enum TransactionCodes
         {
             INVALID_DATA = -1,
 

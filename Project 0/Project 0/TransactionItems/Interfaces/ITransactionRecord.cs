@@ -25,7 +25,7 @@ namespace Project_0
 
         public double TransactionAmount { get; set; }
 
-        public Utility.TransactionErrorCodes TransactionCode { get; set; }
+        public Utility.TransactionCodes TransactionCode { get; set; }
 
         public DateTime TransactionDateTime { get; }
 
