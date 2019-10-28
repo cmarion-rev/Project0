@@ -38,7 +38,7 @@ namespace Project_0
             // Process user input value.
             if (userReturn != null)
             {
-                switch (userReturn.GetValueOrDefault())
+                switch (userReturn.GetValueOrDefault(Utility.OperationState.INVALID_OPTION))
                 {
                     case Utility.OperationState.REGISTER:
                         RegisterNewCustomer();

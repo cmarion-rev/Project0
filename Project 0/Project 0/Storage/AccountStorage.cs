@@ -163,8 +163,7 @@ namespace Project_0
 
             return newAccount;
         }
-
-
+        
         private AccountData GenerateNewAccountData()
         {
             // Create new accountdata.

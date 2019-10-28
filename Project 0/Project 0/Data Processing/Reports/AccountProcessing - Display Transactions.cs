@@ -72,11 +72,11 @@ namespace Project_0
                 int actualID = accountID.GetValueOrDefault(-1);
 
                 // Check all accounts for user selection.
-                foreach (IAccountInfo currentAccount in allAccounts)
+                foreach (Account currentAccount in allAccounts)
                 {
                     if (currentAccount.AccountNumber == actualID)
                     {
-                        activeAccount = (currentAccount as Account);
+                        activeAccount = currentAccount;
                         DisplayAccountTransactions();
                         isFound = true;
                         result = true;
