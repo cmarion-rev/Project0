@@ -32,7 +32,6 @@ namespace Project_0
             Customer newCustomer = null;
 
             // Generate new customer data.
-
             CustomerData newData = GenerateNewCustomerData();
             newCustomer = new Customer(newData)
             {
