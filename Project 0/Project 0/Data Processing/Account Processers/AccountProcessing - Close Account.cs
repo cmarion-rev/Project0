@@ -16,14 +16,11 @@ namespace Project_0
                 // Check if any account exists.
                 if (allAccounts.Count > 0)
                 {
-                    List<CheckingAccount> allCheckingAccounts = new List<CheckingAccount>();
-                    List<BusinessAccount> allBusinessAccounts = new List<BusinessAccount>();
-                    List<TermDepositAccount> allTermAccounts = new List<TermDepositAccount>();
-                    List<LoanAccount> allLoanAccounts = new List<LoanAccount>();
+                    List<CheckingAccount> allCheckingAccounts = activeCustomer.GetCheckingAccounts();
+                    List<BusinessAccount> allBusinessAccounts = activeCustomer.GetBusinessAccounts();
+                    List<TermDepositAccount> allTermAccounts = activeCustomer.GetTermDepositAccounts();
+                    List<LoanAccount> allLoanAccounts = activeCustomer.GetLoanAccounts();
                     bool isGoodProcess = false;
-
-                    // Split appart main account list.
-                    Utility.SeperateAccounts(allAccounts, allCheckingAccounts, allBusinessAccounts, allTermAccounts, allLoanAccounts);
 
                     // Display header.
                     CustomerHeader();

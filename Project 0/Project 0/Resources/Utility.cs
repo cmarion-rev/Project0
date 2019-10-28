@@ -121,7 +121,7 @@ namespace Project_0
                                             List<LoanAccount> allLoanAccounts)
         {
             // Loop through all accounts and seperate to proper sub-list.
-            foreach (IAccountInfo item in allAccounts)
+            foreach (Account item in allAccounts)
             {
                 switch (item.AccountType)
                 {
