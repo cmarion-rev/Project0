@@ -81,7 +81,7 @@ namespace Project_0
                     // Check if withdrawal amount exceeds current balance.
                     if (newAmount > myAccount.AccountBalance)
                     {
-                        overdraftInterest = (myAccount.AccountBalance - newAmount) * interestRate;
+                        overdraftInterest = Math.Abs(myAccount.AccountBalance - newAmount) * interestRate;
                     }
 
                     // Check if withdraw amount does not exceed current account amount.
