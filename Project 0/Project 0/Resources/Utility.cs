@@ -79,7 +79,7 @@ namespace Project_0
             //
 
             //
-            EXIT_PROGRAM = 1 << 16,
+            EXIT_PROGRAM = 1 << 15,
         }
 
         #endregion
