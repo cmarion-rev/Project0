@@ -10,6 +10,8 @@ namespace Project_0
 
         protected readonly AccountData myAccount;
 
+        protected Customer myCustomer;
+
         public Account(AccountData newAccount)
         {
             if (myAccount != newAccount)
@@ -38,7 +40,7 @@ namespace Project_0
         {
             get
             {
-                return myAccount?.AccountNumber ?? -1;
+                return myAccount?.ID ?? -1;
             }
         }
 
@@ -54,7 +56,7 @@ namespace Project_0
         {
             get
             {
-                return myAccount?.Customer ?? null;
+                return myCustomer;
             }
         }
 

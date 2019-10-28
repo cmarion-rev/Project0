@@ -11,7 +11,7 @@ namespace Project_0
             if (newAccount != null)
             {
                 // Set initial account.
-                newAccount.AccountNumber = IAccountInfo.GetNewAccountNumber();
+                newAccount.ID = IAccountInfo.GetNewAccountNumber();
                 newAccount.AccountType = Utility.AccountType.TERM;
                 newAccount.LastTransactionState = Utility.TransactionCodes.SUCCESS;
                 if (newBalance > 0.0)
@@ -25,13 +25,13 @@ namespace Project_0
                 }
 
                 // Set customer references.
-                newAccount.Customer = newCustomer;
+                myCustomer = newCustomer;
                 newAccount.CustomerID = newCustomer.CustomerID;
 
                 // Default 1 Year term.
                 newAccount.MaturityDate = DateTime.Now.AddYears(1);
+                myCustomer.AddAccount(this);
             }
-            Customer.AddAccount(this);
         }
 
         public DateTime MaturityDate

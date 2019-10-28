@@ -13,14 +13,14 @@ namespace Project_0
             if (newAccount != null)
             {
                 // Set new account info.
-                newAccount.AccountNumber = IAccountInfo.GetNewAccountNumber();
+                newAccount.ID = IAccountInfo.GetNewAccountNumber();
                 newAccount.AccountType = Utility.AccountType.CHECKING;
 
                 // Set initial account balance.
                 if (newBalance > 0.0)
                 {
                     newAccount.AccountBalance = newBalance;
-                    totalRecords.Add(new TransactionRecord(Utility.TransactionType.OPEN_ACCOUNT) { TransactionAmount = newBalance});
+                    totalRecords.Add(new TransactionRecord(Utility.TransactionType.OPEN_ACCOUNT) { TransactionAmount = newBalance });
                 }
                 else
                 {
@@ -28,10 +28,10 @@ namespace Project_0
                 }
 
                 // Set customer references.
-                newAccount.Customer = newCustomer;
+                myCustomer = newCustomer;
                 newAccount.CustomerID = newCustomer.CustomerID;
+                myCustomer.AddAccount(this);
             }
-            Customer.AddAccount(this);
         }
 
         /// <summary>
