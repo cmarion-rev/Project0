@@ -15,6 +15,8 @@ namespace Project_0
                 // Set new account info.
                 newAccount.AccountNumber = IAccountInfo.GetNewAccountNumber();
                 newAccount.AccountType = Utility.AccountType.CHECKING;
+
+                // Set initial account balance.
                 if (newBalance > 0.0)
                 {
                     newAccount.AccountBalance = newBalance;
@@ -30,8 +32,6 @@ namespace Project_0
                 newAccount.CustomerID = newCustomer.CustomerID;
             }
             Customer.AddAccount(this);
-
-            // Set initial account balance.
         }
 
         /// <summary>

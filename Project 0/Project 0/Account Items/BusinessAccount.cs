@@ -76,8 +76,17 @@ namespace Project_0
                 // Check if amount selected is a valid number.
                 if (newAmount > 0.0)
                 {
+                    double interestRate = 0.0;
+                    double overdraftInterest = 0.0;
+                    // Check if withdrawal amount exceeds current balance.
+                    if (newAmount > myAccount.AccountBalance)
+                    {
+                        overdraftInterest = (myAccount.AccountBalance - newAmount) * interestRate;
+                    }
+
                     // Check if withdraw amount does not exceed current account amount.
                     myAccount.AccountBalance -= newAmount;
+                    myAccount.AccountBalance -= overdraftInterest;
                     totalRecords.Add(new TransactionRecord( Utility.TransactionType.WITHDRAWAL) { TransactionAmount = newAmount,  SourceAccount = myAccount.AccountNumber });
                     result = true;
                 }
