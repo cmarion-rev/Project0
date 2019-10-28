@@ -95,7 +95,7 @@ namespace Project_0
                     if (userInput >= 0.0)
                     {
                         // Process deposit.
-                        (activeAccount as IAccountInfo).DepositAmount(userInput.GetValueOrDefault(0.0));
+                        activeAccount.DepositAmount(Math.Round((userInput.GetValueOrDefault(0.0)), 2));
 
                         // Display changed results.
                         FullAccountHeader();

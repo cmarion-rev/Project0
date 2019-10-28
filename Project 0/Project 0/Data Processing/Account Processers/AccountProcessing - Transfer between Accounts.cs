@@ -199,14 +199,14 @@ namespace Project_0
         {
             bool result = false;
 
-            result = sourceAccount.WithdrawAmount(withdrawAmount);
+            result = sourceAccount.WithdrawAmount(Math.Round(withdrawAmount, 2));
 
             return result;
         }
 
         private void TransfertoDestinationAccount(IAccountInfo destinationAccount, double depositAmount)
         {
-            destinationAccount.DepositAmount(depositAmount);
+            destinationAccount.DepositAmount(Math.Round(depositAmount,2));
         }
     }
 }

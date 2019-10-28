@@ -53,12 +53,12 @@ namespace Project_0
             {
                 bool isValueFound = false;
                 int actualID = accountID.GetValueOrDefault(-1);
-                foreach (IAccountInfo currentAccount in allAccounts)
+                foreach (Account currentAccount in allAccounts)
                 {
                     if (currentAccount.AccountNumber == actualID)
                     {
                         isValueFound = true;
-                        activeAccount = (currentAccount as Account);
+                        activeAccount = currentAccount;
                         break;
                     }
                 }
@@ -98,7 +98,7 @@ namespace Project_0
                     if (userInput >= 0.0)
                     {
                         // Process withdrawal.
-                        bool isGoodTransaction = (activeAccount as IAccountInfo).WithdrawAmount(userInput.GetValueOrDefault(0.0));
+                        bool isGoodTransaction = activeAccount.WithdrawAmount(Math.Round(userInput.GetValueOrDefault(0.0), 2));
 
                         // Check if withdrawal was successful.
                         if (isGoodTransaction)
