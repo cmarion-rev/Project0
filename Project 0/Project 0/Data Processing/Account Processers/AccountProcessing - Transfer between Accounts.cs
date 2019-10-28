@@ -10,38 +10,27 @@ namespace Project_0
         {
             if (activeCustomer != null)
             {
-                // Get all accounts for current selected customer.
-                List<Account> allAccounts = new List<Account>(activeCustomer.GetAllAccounts());
+                List<CheckingAccount> allCheckingAccounts = activeCustomer.GetCheckingAccounts();
+                List<BusinessAccount> allBusinessAccounts = activeCustomer.GetBusinessAccounts();
+                List<TermDepositAccount> allTermAccounts = activeCustomer.GetTermDepositAccounts();
+                bool isGoodProcess = false;
 
-                // Check if any account exists.
-                if (allAccounts.Count > 0)
+                // Create reference accounts.
+                List<Account> allDepositableAccounts = new List<Account>();
+                List<Account> allWithdrawableAccounts = new List<Account>();
+
+                // Rebuild accounts list for depositable accounts.
+                Utility.RebuildAccountListForDepositableAccounts(allDepositableAccounts, allCheckingAccounts, allBusinessAccounts);
+                Utility.RebuildAccountListForWithdrawableAccounts(allWithdrawableAccounts, allCheckingAccounts, allBusinessAccounts, allTermAccounts);
+
+                // Start account transfer process.
+                isGoodProcess = ProcessAccountTransfer(allDepositableAccounts, allWithdrawableAccounts);
+
+                // Await user to return to main menu.
+                if (isGoodProcess)
                 {
-                    List<CheckingAccount> allCheckingAccounts = new List<CheckingAccount>();
-                    List<BusinessAccount> allBusinessAccounts = new List<BusinessAccount>();
-                    List<TermDepositAccount> allTermAccounts = new List<TermDepositAccount>();
-                    List<LoanAccount> allLoanAccounts = new List<LoanAccount>();
-                    bool isGoodProcess = false;
-
-                    // Create reference accounts.
-                    List<Account> allDepositableAccounts = new List<Account>();
-                    List<Account> allWithdrawableAccounts = new List<Account>();
-
-                    // Split appart main account list.
-                    Utility.SeperateAccounts(allAccounts, allCheckingAccounts, allBusinessAccounts, allTermAccounts, null);
-
-                    // Rebuild accounts list for depositable accounts.
-                    Utility.RebuildAccountListForDepositableAccounts(allDepositableAccounts, allCheckingAccounts, allBusinessAccounts);
-                    Utility.RebuildAccountListForWithdrawableAccounts(allWithdrawableAccounts, allCheckingAccounts, allBusinessAccounts, allTermAccounts);
-
-                    // Start account transfer process.
-                    isGoodProcess = ProcessAccountTransfer(allDepositableAccounts, allWithdrawableAccounts);
-
-                    // Await user to return to main menu.
-                    if (isGoodProcess)
-                    {
-                        workingDisplay?.DisplayReturningToMainMenu();
-                        workingDisplay?.WaitForUserConfirmation();
-                    }
+                    workingDisplay?.DisplayReturningToMainMenu();
+                    workingDisplay?.WaitForUserConfirmation();
                 }
             }
         }
