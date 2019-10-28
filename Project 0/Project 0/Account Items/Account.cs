@@ -82,5 +82,10 @@ namespace Project_0
         public abstract bool DepositAmount(double newAmount);
 
         public abstract bool WithdrawAmount(double newAmount);
+
+        public virtual void CloseAccount()
+        {
+            totalRecords?.Add(new TransactionRecord(Utility.TransactionType.CLOSE_ACCOUNT) { TransactionAmount = 0.0 });
+        }
     }
 }
