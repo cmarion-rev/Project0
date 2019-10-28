@@ -58,12 +58,12 @@ namespace Project_0
                 int actualValue = accountID.GetValueOrDefault(-1);
                 bool isAccountFound = false;
                 // Search list for valid accout number.
-                foreach (IAccountInfo currentAccount in allAccounts)
+                foreach (Account currentAccount in allAccounts)
                 {
                     if (currentAccount.AccountNumber == actualValue)
                     {
                         isAccountFound = true;
-                        activeAccount = (currentAccount as Account);
+                        activeAccount = currentAccount;
                         break;
                     }
                 }
@@ -160,7 +160,8 @@ namespace Project_0
         {
             if (workingAccountStorage != null)
             {
-                workingAccountStorage.RemoveAccount(activeAccount);
+                activeAccount?.CloseAccount();
+                workingAccountStorage?.RemoveAccount(activeAccount);
                 ResetActiveAccount();
                 workingDisplay?.DisplayAccountCloseCompleted(accountNumber);
             }
