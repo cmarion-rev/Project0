@@ -61,7 +61,7 @@ namespace Project_0
         {
             if (newCustomer != null)
             {
-                newCustomer.ID = ICustomerInformation.GetNewCustomerNumber();
+                newCustomer.ID = ICustomerInformation.GenerateNewCustomerNumber();
             }
             myCustomer = newCustomer;
             customerAccounts = new List<Account>();

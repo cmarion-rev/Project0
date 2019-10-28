@@ -8,7 +8,7 @@ namespace Project_0
     {
         private static int totalCustomers = 0;
 
-        protected static int GetNewCustomerNumber()
+        protected static int GenerateNewCustomerNumber()
         {
             return ++totalCustomers;
         }

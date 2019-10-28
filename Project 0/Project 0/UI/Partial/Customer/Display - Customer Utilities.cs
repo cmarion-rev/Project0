@@ -13,7 +13,7 @@ namespace Project_0
             double currentBalance = 0.0;
 
             Console.WriteLine("Account #\t:\tAccount Type\t:\tAccount Balance");
-            foreach (IAccountInfo item in allAccounts)
+            foreach (Account item in allAccounts)
             {
                 accountNumber = item.AccountNumber;
 
