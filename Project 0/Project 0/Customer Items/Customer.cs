@@ -69,7 +69,7 @@ namespace Project_0
 
         public List<Account> GetAllAccounts()
         {
-            return customerAccounts;
+            return customerAccounts.ToList();
         }
 
         public List<CheckingAccount> GetCheckingAccounts()
@@ -165,11 +165,11 @@ namespace Project_0
         {
             Account result = null;
 
-            foreach (IAccountInfo currentAccount in customerAccounts)
+            foreach (Account currentAccount in customerAccounts)
             {
                 if (currentAccount.AccountNumber == accountNumber)
                 {
-                    result = (currentAccount as Account);
+                    result = currentAccount;
                     break;
                 }
             }
