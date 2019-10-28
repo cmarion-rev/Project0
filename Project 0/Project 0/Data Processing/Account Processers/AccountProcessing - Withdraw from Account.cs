@@ -109,7 +109,7 @@ namespace Project_0
                         }
                         else
                         {
-                            switch ((activeAccount as IAccountInfo).LastTransactionState)
+                            switch (activeAccount.LastTransactionState)
                             {
                                 case Utility.TransactionCodes.OVERDRAFT_PROTECTION:
                                     // Report overdraw attempt.

@@ -57,12 +57,12 @@ namespace Project_0
                 {
                     bool isGoodValue = false;
                     int sourceAccountNumber = accountID.GetValueOrDefault(-1);
-                    foreach (IAccountInfo currentAccount in allWithdrawAccounts)
+                    foreach (Account currentAccount in allWithdrawAccounts)
                     {
                         if (currentAccount.AccountNumber == sourceAccountNumber)
                         {
                             isGoodValue = true;
-                            sourceAccount = (currentAccount as Account);
+                            sourceAccount = currentAccount;
                             break;
                         }
                     }
@@ -110,12 +110,12 @@ namespace Project_0
                     {
                         bool isGoodValue = false;
                         int sourceAccountNumber = accountID.GetValueOrDefault(-1);
-                        foreach (IAccountInfo currentAccount in allDepositAccounts)
+                        foreach (Account currentAccount in allDepositAccounts)
                         {
                             if (currentAccount.AccountNumber == sourceAccountNumber)
                             {
                                 isGoodValue = true;
-                                destinationAccount = (currentAccount as Account);
+                                destinationAccount = currentAccount;
                                 break;
                             }
                         }
@@ -153,7 +153,6 @@ namespace Project_0
 
             // Display header.
             CustomerHeader();
-
             workingDisplay?.DisplayAccountTransfer(sourceAccount, destinationAccount);
             transferAmount = workingDisplay?.GetUserValueInput();
 
@@ -206,7 +205,7 @@ namespace Project_0
 
         private void TransfertoDestinationAccount(IAccountInfo destinationAccount, double depositAmount)
         {
-            destinationAccount.DepositAmount(Math.Round(depositAmount,2));
+            destinationAccount.DepositAmount(Math.Round(depositAmount, 2));
         }
     }
 }
