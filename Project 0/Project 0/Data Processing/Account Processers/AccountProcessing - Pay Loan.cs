@@ -10,31 +10,18 @@ namespace Project_0
         {
             if (activeCustomer != null)
             {
-                // Get all accounts for current selected customer.
-                List<Account> allAccounts = new List<Account>(activeCustomer.GetAllAccounts());
+                List<LoanAccount> allLoanAccounts = activeCustomer.GetLoanAccounts();
 
-                // Check if any account exists.
-                if (allAccounts.Count > 0)
+                // Display header.
+                CustomerHeader();
+
+                // Display account selection message.
+                bool isGoodTransaction = SelectLoanAccount(allLoanAccounts);
+
+                // Await user to return to main menu.
+                if (isGoodTransaction)
                 {
-                    List<CheckingAccount> allCheckingAccounts = new List<CheckingAccount>();
-                    List<BusinessAccount> allBusinessAccounts = new List<BusinessAccount>();
-                    List<TermDepositAccount> allTermAccounts = new List<TermDepositAccount>();
-                    List<LoanAccount> allLoanAccounts = new List<LoanAccount>();
-
-                    // Split appart main account list.
-                    Utility.SeperateAccounts(allAccounts, null, null, null, allLoanAccounts);
-
-                    // Display header.
-                    CustomerHeader();
-
-                    // Display account selection message.
-                    bool isGoodTransaction = SelectLoanAccount(allLoanAccounts);
-
-                    // Await user to return to main menu.
-                    if (isGoodTransaction)
-                    {
-                        ReturningToMainMenu();
-                    }
+                    ReturningToMainMenu();
                 }
             }
         }
