@@ -47,7 +47,7 @@ namespace Project_0
                 if (newAmount > 0.0f)
                 {
                     myAccount.AccountBalance += newAmount;
-                    totalRecords.Add(new TransactionRecord( Utility.TransactionType.DEPOSIT) { TransactionAmount = newAmount,  DestinationAccount= myAccount.AccountNumber});
+                    totalRecords.Add(new TransactionRecord( Utility.TransactionType.DEPOSIT) { TransactionAmount = newAmount});
                     result = true;
                 }
                 else
@@ -87,7 +87,7 @@ namespace Project_0
                     // Check if withdraw amount does not exceed current account amount.
                     myAccount.AccountBalance -= newAmount;
                     myAccount.AccountBalance -= overdraftInterest;
-                    totalRecords.Add(new TransactionRecord( Utility.TransactionType.WITHDRAWAL) { TransactionAmount = newAmount,  SourceAccount = myAccount.AccountNumber });
+                    totalRecords.Add(new TransactionRecord(Utility.TransactionType.WITHDRAWAL) { TransactionAmount = newAmount });
                     result = true;
                 }
                 else

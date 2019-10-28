@@ -10,10 +10,6 @@ namespace Project_0
 
         public int TransactionType { get; set; }
 
-        public int SourceAccountID { get; set; }
-
-        public int DestinationAccountID { get; set; }
-
         public double Amount { get; set; }
 
         public int TransactionCode { get; set; }

@@ -20,7 +20,7 @@ namespace Project_0
                 if (newBalance > 0.0)
                 {
                     newAccount.AccountBalance = newBalance;
-                    totalRecords.Add(new TransactionRecord(Utility.TransactionType.OPEN_ACCOUNT) { TransactionAmount = newBalance, DestinationAccount = myAccount.AccountNumber });
+                    totalRecords.Add(new TransactionRecord(Utility.TransactionType.OPEN_ACCOUNT) { TransactionAmount = newBalance});
                 }
                 else
                 {
@@ -51,7 +51,7 @@ namespace Project_0
                 if (newAmount > 0.0f)
                 {
                     myAccount.AccountBalance += newAmount;
-                    totalRecords.Add(new TransactionRecord( Utility.TransactionType.DEPOSIT) { TransactionAmount = newAmount, DestinationAccount = myAccount.AccountNumber});
+                    totalRecords.Add(new TransactionRecord( Utility.TransactionType.DEPOSIT) { TransactionAmount = newAmount});
                     result = true;
                 }
                 else
@@ -107,7 +107,7 @@ namespace Project_0
                 if (newAmount <= AccountBalance)
                 {
                     myAccount.AccountBalance -= newAmount;
-                    totalRecords.Add(new TransactionRecord(Utility.TransactionType.WITHDRAWAL) { TransactionAmount = newAmount, SourceAccount = myAccount.AccountNumber });
+                    totalRecords.Add(new TransactionRecord(Utility.TransactionType.WITHDRAWAL) { TransactionAmount = newAmount });
                     result = true;
                 }
                 else

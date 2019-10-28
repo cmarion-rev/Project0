@@ -29,10 +29,6 @@ namespace Project_0
 
         public DateTime TransactionDateTime { get; }
 
-        public int SourceAccount { get; set; }
-       
-        public int DestinationAccount { get; set; }
-
         public Utility.TransactionType TransactionType { get; }
     }
 }

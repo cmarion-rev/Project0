@@ -70,42 +70,6 @@ namespace Project_0
             }
         }
 
-        public int SourceAccount
-        {
-            get
-            {
-                return myTransaction?.SourceAccountID ?? -1;
-            }
-            set
-            {
-                if (myTransaction!=null)
-                {
-                    if (value > -1)
-                    {
-                        myTransaction.SourceAccountID = value;
-                    }
-                }
-            }
-        }
-
-        public int DestinationAccount
-        {
-            get
-            {
-                return myTransaction?.DestinationAccountID ?? -1;
-            }
-            set
-            {
-                if (myTransaction != null)
-                {
-                    if (value > -1)
-                    {
-                        myTransaction.DestinationAccountID = value;
-                    }
-                }
-            }
-        }
-
         public Utility.TransactionType TransactionType
         {
             get
