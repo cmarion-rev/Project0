@@ -6,8 +6,12 @@ namespace Project_0
 {
     partial class AccountProcessing
     {
+        /// <summary>
+        /// Withdraw user specified amount from account.
+        /// </summary>
         private void WithdrawFromAccount()
         {
+            // Check if there is an active customer reference before proceeding.
             if (activeCustomer != null)
             {
                 // Get all accounts for current selected customer.
@@ -40,12 +44,21 @@ namespace Project_0
             }
         }
 
+        /// <summary>
+        /// Get user to select account to withdraw from.
+        /// </summary>
+        /// <param name="allAccounts">Master list of accounts.</param>
+        /// <returns>Returns, True if process succeeded. Otherwise, False.</returns>
         private bool SelectWithdrawAccount(List<Account> allAccounts)
         {
             bool result = false;
 
             int? accountID = -1;
+
+            // Display all active accounts.
             workingDisplay?.DisplayWithdrawalAccountOptions(allAccounts.ToArray());
+
+            // Get user account selection.
             accountID = workingDisplay?.GetUserOptionNumberSelection();
 
             // Check if account selected is in current list.
@@ -53,6 +66,8 @@ namespace Project_0
             {
                 bool isValueFound = false;
                 int actualID = accountID.GetValueOrDefault(-1);
+
+                // Loop through master account list for proper Account object reference.
                 foreach (Account currentAccount in allAccounts)
                 {
                     if (currentAccount.AccountNumber == actualID)
@@ -77,10 +92,15 @@ namespace Project_0
             return result;
         }
 
+        /// <summary>
+        /// Process user withdrawal amount input.
+        /// </summary>
+        /// <returns>Returns, True if process succeeded. Otherwise, False.</returns>
         private bool ProcessWithdrawAmount()
         {
             bool result = false;
 
+            // Check if activeAccount has a reference to a valid Account object.
             if (activeAccount != null)
             {
                 double? userInput = 0.0;

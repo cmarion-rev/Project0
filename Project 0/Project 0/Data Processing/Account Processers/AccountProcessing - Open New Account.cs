@@ -6,6 +6,9 @@ namespace Project_0
 {
     partial class AccountProcessing
     {
+        /// <summary>
+        /// Process new account creation.
+        /// </summary>
         private void OpenNewAccount()
         {
             // Check if a customer is selected.
@@ -54,6 +57,9 @@ namespace Project_0
             }
         }
 
+        /// <summary>
+        /// Create new checking account.
+        /// </summary>
         private void CreateNewCheckingAccount()
         {
             bool isGoodResult = false;
@@ -64,6 +70,8 @@ namespace Project_0
             {
                 // Display initial information for setting up initial balance.
                 CustomerHeader();
+
+                // Get user input for new checking account starting balance.
                 workingDisplay?.DisplayNewCheckingAccountBalance();
                 startingBalance = workingDisplay?.GetUserValueInput();
 
@@ -91,6 +99,9 @@ namespace Project_0
             activeAccount = workingAccountStorage?.GenerateNewCheckingAccount(activeCustomer, startingBalance.GetValueOrDefault(0.0));
         }
 
+        /// <summary>
+        /// Create new business account.
+        /// </summary>
         private void CreateNewBusinessAccount()
         {
             bool isGoodResult = false;
@@ -101,6 +112,8 @@ namespace Project_0
             {
                 // Display initial information for setting up initial balance.
                 CustomerHeader();
+
+                // Get user input for new business account starting balance.
                 workingDisplay?.DisplayNewBusinessAccountBalance();
                 startingBalance = workingDisplay?.GetUserValueInput();
 
@@ -128,6 +141,9 @@ namespace Project_0
             activeAccount = workingAccountStorage?.GenerateNewBusinessAccount(activeCustomer, startingBalance.GetValueOrDefault(0.0));
         }
 
+        /// <summary>
+        /// Create new loan account.
+        /// </summary>
         private void CreateNewLoanAccount()
         {
             bool isGoodResult = false;
@@ -138,6 +154,8 @@ namespace Project_0
             {
                 // Display initial information for setting up initial balance.
                 CustomerHeader();
+
+                // Get user input for new loan account starting balance.
                 workingDisplay?.DisplayNewLoanAccountBalance();
                 startingBalance = workingDisplay?.GetUserValueInput();
 
@@ -165,6 +183,9 @@ namespace Project_0
             activeAccount = workingAccountStorage?.GenerateNewLoanAccount(activeCustomer, startingBalance.GetValueOrDefault(0.0));
         }
 
+        /// <summary>
+        /// Create new term deposit account.
+        /// </summary>
         private void CreateNewTermAccount()
         {
             bool isGoodResult = false;
@@ -175,6 +196,8 @@ namespace Project_0
             {
                 // Display initial information for setting up initial balance.
                 CustomerHeader();
+
+                // Get user input for new term deposit account starting balance.
                 workingDisplay?.DisplayNewTermAccountBalance();
                 startingBalance = workingDisplay?.GetUserValueInput();
 

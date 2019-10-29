@@ -156,7 +156,15 @@ namespace Project_0
                 if (double.TryParse(inputLine, out result))
                 {
                     // Check if entered amount was a positive value.
+                    if (result > 0.0)
+                    {
+                        // Allow pass through.
 
+                    }
+                    else
+                    {
+                        result = -1.0;
+                    }
                 }
                 else
                 {

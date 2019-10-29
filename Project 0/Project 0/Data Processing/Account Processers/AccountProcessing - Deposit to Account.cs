@@ -6,6 +6,9 @@ namespace Project_0
 {
     partial class AccountProcessing
     {
+        /// <summary>
+        /// Process user deposit to account.
+        /// </summary>
         private void DepositToAccount()
         {
             if (activeCustomer != null)
@@ -16,6 +19,7 @@ namespace Project_0
                 // Check if any account exists.
                 if (allAccounts.Count > 0)
                 {
+                    // Get lists of depositable accounts.
                     List<CheckingAccount> allCheckingAccounts = activeCustomer.GetCheckingAccounts();
                     List<BusinessAccount> allBusinessAccounts = activeCustomer.GetBusinessAccounts();
 
@@ -37,11 +41,18 @@ namespace Project_0
             }
         }
 
+        /// <summary>
+        /// Process user selection of account to deposit.
+        /// </summary>
+        /// <param name="allAccounts">Master list of all accounts.</param>
+        /// <returns>Returns, True if process succeeded. Otherwise, False.</returns>
         private bool SelectDepositAccount(List<Account> allAccounts)
         {
             bool result = false;
 
             int? accountID = -1;
+
+            // Get user selection of deposit account number.
             workingDisplay?.DisplayDepositAccountOptions(allAccounts.ToArray());
             accountID = workingDisplay?.GetUserOptionNumberSelection();
 
@@ -50,12 +61,14 @@ namespace Project_0
             {
                 bool isValueFound = false;
                 int actualID = accountID.GetValueOrDefault(-1);
-                foreach (IAccountInfo currentAccount in allAccounts)
+
+                // Check for specific account in master account list.s
+                foreach (Account currentAccount in allAccounts)
                 {
                     if (currentAccount.AccountNumber == actualID)
                     {
                         isValueFound = true;
-                        activeAccount = (currentAccount as Account);
+                        activeAccount = currentAccount;
                         break;
                     }
                 }
@@ -74,10 +87,15 @@ namespace Project_0
             return result;
         }
 
+        /// <summary>
+        /// PRocess user deposit amount.
+        /// </summary>
+        /// <returns>Returns, True if process succeeded. Otherwise, False.</returns>
         private bool ProcessDepositAmount()
         {
             bool result = false;
 
+            // Check if activeAccount references a valid Account object.
             if (activeAccount != null)
             {
                 double? userInput = 0.0;

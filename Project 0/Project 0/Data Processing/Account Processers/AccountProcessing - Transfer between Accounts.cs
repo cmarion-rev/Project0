@@ -6,14 +6,20 @@ namespace Project_0
 {
     partial class AccountProcessing
     {
+        /// <summary>
+        /// Transfer balance between user selected accounts.
+        /// </summary>
         private void TransferBetweenAccounts()
         {
+            // Check if activeCustomer has a reference to a valid Customer object.
             if (activeCustomer != null)
             {
+                bool isGoodProcess = false;
+
+                // Get all potential usable accounts.
                 List<CheckingAccount> allCheckingAccounts = activeCustomer.GetCheckingAccounts();
                 List<BusinessAccount> allBusinessAccounts = activeCustomer.GetBusinessAccounts();
                 List<TermDepositAccount> allTermAccounts = activeCustomer.GetTermDepositAccounts();
-                bool isGoodProcess = false;
 
                 // Create reference accounts.
                 List<Account> allDepositableAccounts = new List<Account>();
@@ -35,11 +41,18 @@ namespace Project_0
             }
         }
 
+        /// <summary>
+        /// Process user selection of accounts to transfer between.
+        /// </summary>
+        /// <param name="allDepositAccounts">List of all accounts that can be deposited into.</param>
+        /// <param name="allWithdrawAccounts">List of all accounts that can be withdrawn from.</param>
+        /// <returns>Returns, True if process was successful. Otherwise, False.</returns>
         private bool ProcessAccountTransfer(List<Account> allDepositAccounts, List<Account> allWithdrawAccounts)
         {
+            bool result = false;
+            
             Account sourceAccount = null;
             Account destinationAccount = null;
-            bool result = false;
 
             // Run Loop to get source account.
             do
@@ -57,6 +70,8 @@ namespace Project_0
                 {
                     bool isGoodValue = false;
                     int sourceAccountNumber = accountID.GetValueOrDefault(-1);
+
+                    // Loop through all withdrawabl accounts to find specified account.
                     foreach (Account currentAccount in allWithdrawAccounts)
                     {
                         if (currentAccount.AccountNumber == sourceAccountNumber)
@@ -74,7 +89,7 @@ namespace Project_0
                         for (int index = 0; index < allDepositAccounts.Count; ++index)
                         {
                             // Check if current accout is selected number.
-                            if ((allDepositAccounts[index] as IAccountInfo).AccountNumber == sourceAccountNumber)
+                            if (allDepositAccounts[index].AccountNumber == sourceAccountNumber)
                             {
                                 allDepositAccounts.RemoveAt(index);
                                 break;
@@ -91,6 +106,7 @@ namespace Project_0
                 }
             } while (sourceAccount == null);
 
+            // Check if a valid source account was selected and found.
             if (sourceAccount != null)
             {
                 // Run Loop to get destination acount.
@@ -100,7 +116,7 @@ namespace Project_0
                     CustomerHeader();
                     ShortAccountHeader(sourceAccount);
 
-                    // Get user selection of transfer source.
+                    // Get user selection of transfer destination.
                     int? accountID = -1;
                     workingDisplay?.DisplayTransferDestinationAccount(allDepositAccounts.ToArray());
                     accountID = workingDisplay?.GetUserOptionNumberSelection();
@@ -146,13 +162,22 @@ namespace Project_0
             return result;
         }
 
+        /// <summary>
+        /// Process user amount to transfer between accounts.
+        /// </summary>
+        /// <param name="sourceAccount">Source Account object reference.</param>
+        /// <param name="destinationAccount">Destination Account object reference.</param>
+        /// <returns>Returns, True if process was successful. Otherwise, False.</returns>
         private bool ProcessTransferAmount(Account sourceAccount, Account destinationAccount)
         {
             bool result = false;
+            
             double? transferAmount = 0.0;
 
             // Display header.
             CustomerHeader();
+
+            // Get user input for amount to transfer.
             workingDisplay?.DisplayAccountTransfer(sourceAccount, destinationAccount);
             transferAmount = workingDisplay?.GetUserValueInput();
 
@@ -163,11 +188,11 @@ namespace Project_0
                 if (realAmount > 0.0)
                 {
                     // Check if source account can cover amount.
-                    bool isValidTransaction = CheckSourceAccountFunds(sourceAccount as IAccountInfo, realAmount);
+                    bool isValidTransaction = CheckSourceAccountFunds(sourceAccount, realAmount);
                     if (isValidTransaction)
                     {
                         // Deposit to destination account.
-                        TransfertoDestinationAccount(destinationAccount as IAccountInfo, realAmount);
+                        TransfertoDestinationAccount(destinationAccount, realAmount);
 
                         // Display successful transfer message.
                         workingDisplay?.DisplayTransferSuccessful(sourceAccount, destinationAccount);
@@ -194,7 +219,13 @@ namespace Project_0
             return result;
         }
 
-        private bool CheckSourceAccountFunds(IAccountInfo sourceAccount, double withdrawAmount)
+        /// <summary>
+        /// Checks if source account can withdraw specified amount.
+        /// </summary>
+        /// <param name="sourceAccount">Source Account object reference.</param>
+        /// <param name="withdrawAmount">Amount to withdraw.</param>
+        /// <returns>Returns, true if withdrawal was successful. Otherwise, False.</returns>
+        private bool CheckSourceAccountFunds(Account sourceAccount, double withdrawAmount)
         {
             bool result = false;
 
@@ -203,7 +234,12 @@ namespace Project_0
             return result;
         }
 
-        private void TransfertoDestinationAccount(IAccountInfo destinationAccount, double depositAmount)
+        /// <summary>
+        /// Deposits balance to destination account.
+        /// </summary>
+        /// <param name="destinationAccount">Destination Account object reference.</param>
+        /// <param name="depositAmount">Amount to deposit.</param>
+        private void TransfertoDestinationAccount(Account destinationAccount, double depositAmount)
         {
             destinationAccount.DepositAmount(Math.Round(depositAmount, 2));
         }

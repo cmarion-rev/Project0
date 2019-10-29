@@ -19,6 +19,7 @@ namespace Project_0
             {
                 result |= Utility.MainMenuOptions.REGISTER_NEW_CUSTOMER;
 
+                // Check if more that one customer exists to switch between.
                 if (workingCustomerStorage.GetAllCustomers().Length > 1)
                 {
                     result |= Utility.MainMenuOptions.CHANGE_CUSTOMER;
@@ -237,7 +238,7 @@ namespace Project_0
             if (allAccounts != null)
             {
                 // Check all accounts for a valid account.
-                foreach (IAccountInfo currentAccount in allAccounts)
+                foreach (Account currentAccount in allAccounts)
                 {
                     switch (currentAccount.AccountType)
                     {
@@ -247,6 +248,7 @@ namespace Project_0
                             break;
 
                         case Utility.AccountType.TERM:
+                            // Check if term account maturity has been reached.
                             result = (currentAccount as TermDepositAccount).MaturityDate.Subtract(DateTime.Now).TotalDays < 0;
                             break;
 
@@ -277,7 +279,7 @@ namespace Project_0
             if (allAccounts != null)
             {
                 // Check all accounts for a valid account.
-                foreach (IAccountInfo currentAccount in allAccounts)
+                foreach (Account currentAccount in allAccounts)
                 {
                     switch (currentAccount.AccountType)
                     {

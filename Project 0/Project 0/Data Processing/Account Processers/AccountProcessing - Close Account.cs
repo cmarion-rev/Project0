@@ -6,8 +6,12 @@ namespace Project_0
 {
     partial class AccountProcessing
     {
+        /// <summary>
+        /// Process close account.
+        /// </summary>
         private void CloseAccount()
         {
+            // Check if activeCustomer references a valid Customer object.
             if (activeCustomer != null)
             {
                 // Get all accounts for current selected customer.
@@ -16,11 +20,13 @@ namespace Project_0
                 // Check if any account exists.
                 if (allAccounts.Count > 0)
                 {
+                    bool isGoodProcess = false;
+
+                    // Get lists of individual account types.
                     List<CheckingAccount> allCheckingAccounts = activeCustomer.GetCheckingAccounts();
                     List<BusinessAccount> allBusinessAccounts = activeCustomer.GetBusinessAccounts();
                     List<TermDepositAccount> allTermAccounts = activeCustomer.GetTermDepositAccounts();
                     List<LoanAccount> allLoanAccounts = activeCustomer.GetLoanAccounts();
-                    bool isGoodProcess = false;
 
                     // Display header.
                     CustomerHeader();
@@ -40,12 +46,18 @@ namespace Project_0
             }
         }
 
+        /// <summary>
+        /// Process user selection of account to close.
+        /// </summary>
+        /// <param name="allAccounts">Master list of all accounts.</param>
+        /// <returns>Returns, True if process succeeded. Otherwise, False.</returns>
         private bool SelectCloseAccount(List<Account> allAccounts)
         {
             bool result = false;
 
             int? accountID = -1;
 
+            // Get user selection of account number.
             workingDisplay?.DisplayAccountCloseSelection();
             accountID = workingDisplay?.GetUserOptionNumberSelection();
 
@@ -54,7 +66,8 @@ namespace Project_0
             {
                 int actualValue = accountID.GetValueOrDefault(-1);
                 bool isAccountFound = false;
-                // Search list for valid accout number.
+
+                // Search list for valid account.
                 foreach (Account currentAccount in allAccounts)
                 {
                     if (currentAccount.AccountNumber == actualValue)
@@ -65,6 +78,7 @@ namespace Project_0
                     }
                 }
 
+                // Check if a valid account object reference was found.
                 if (isAccountFound)
                 {
                     bool canClose = true;
@@ -126,6 +140,11 @@ namespace Project_0
             return result;
         }
 
+        /// <summary>
+        /// Process user confirmation to close account.
+        /// </summary>
+        /// <param name="accountNumber">Account ID number.</param>
+        /// <returns>Returns, True if process was confirmed and succeeded. Otherwise, False.</returns>
         private bool ProcessCloseAccountConfirmation(int accountNumber)
         {
             bool result = true;
@@ -153,13 +172,20 @@ namespace Project_0
             return result;
         }
 
+        /// <summary>
+        /// Process final close steps.
+        /// </summary>
+        /// <param name="accountNumber">Account ID number.</param>
         private void FinalAccountCloseProcess(int accountNumber)
         {
             if (workingAccountStorage != null)
             {
+                // Close out account.
                 activeAccount?.CloseAccount();
+                // Remove account from main account storage object.
                 workingAccountStorage?.RemoveAccount(activeAccount);
                 ResetActiveAccount();
+                // Display final close account messaging.
                 workingDisplay?.DisplayAccountCloseCompleted(accountNumber);
             }
         }
