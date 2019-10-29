@@ -86,12 +86,19 @@ namespace Project_0
 
         #region FUNCTIONS
 
+        /// <summary>
+        /// Validates string to be character only.
+        /// </summary>
+        /// <param name="newName">String to verify.</param>
+        /// <returns>Returns, True if string contains only character/letters. Otherwise, False.</returns>
         public static bool ValidateName(string newName)
         {
             bool result = true;
 
+            // Check each letter in string for being only a character/letter.
             foreach (char letter in newName)
             {
+                // If current letter is not a valid character, break loop and return false.
                 if (!char.IsLetter(letter))
                 {
                     result = false;
@@ -102,18 +109,34 @@ namespace Project_0
             return result;
         }
 
+        /// <summary>
+        /// Capitalizes input string.
+        /// </summary>
+        /// <param name="newName">String to properly capitalize.</param>
+        /// <returns>Returns string with first character in uppercase and all other letters in lower case.</returns>
         public static string CaptializeName(string newName)
         {
             string result = "";
 
+            // Loop through all letter indexes in string.
             for (int index = 0; index < newName.Length; index++)
             {
+                // If index is 0, append new string with index character as uppercase; 
+                // Otherwise, append new string with index character as lowercase.
                 result += index > 0 ? char.ToLower(newName[index]) : char.ToUpper(newName[index]);
             }
 
             return result;
         }
 
+        /// <summary>
+        /// Seperates out all accounts into their specific individual lists.
+        /// </summary>
+        /// <param name="allAccounts">Master account list.</param>
+        /// <param name="allCheckingAccounts">List of only checking accounts.</param>
+        /// <param name="allBusinessAccounts">List of only business accounts.</param>
+        /// <param name="allTermAccounts">List of only term accounts.</param>
+        /// <param name="allLoanAccounts">List of only loan accounts.</param>
         public static void SeperateAccounts(List<Account> allAccounts,
                                             List<CheckingAccount> allCheckingAccounts,
                                             List<BusinessAccount> allBusinessAccounts,
@@ -159,13 +182,29 @@ namespace Project_0
             }
         }
 
+        /// <summary>
+        /// Refills master account list from each other individual account list.
+        /// </summary>
+        /// <param name="allAccounts">Master account list.</param>
+        /// <param name="allCheckingAccounts">List of only checking accounts.</param>
+        /// <param name="allBusinessAccounts">List of only business accounts.</param>
         public static void RebuildAccountListForDepositableAccounts(List<Account> allAccounts, List<CheckingAccount> allCheckingAccounts, List<BusinessAccount> allBusinessAccounts)
         {
+            // Clear out all previous data in master account list.
             allAccounts.Clear();
+
+            // Fill master account list with each individual list.
             allAccounts.AddRange(allCheckingAccounts);
             allAccounts.AddRange(allBusinessAccounts);
         }
 
+        /// <summary>
+        /// Refills master account list from each other individual account list.
+        /// </summary>
+        /// <param name="allAccounts">Master account list.</param>
+        /// <param name="allCheckingAccounts">List of only checking accounts.</param>
+        /// <param name="allBusinessAccounts">List of only business accounts.</param>
+        /// <param name="allTermAccounts">List of only term accounts.</param>
         public static void RebuildAccountListForWithdrawableAccounts(List<Account> allAccounts, List<CheckingAccount> allCheckingAccounts, List<BusinessAccount> allBusinessAccounts, List<TermDepositAccount> allTermAccounts)
         {
             // Clear out all accounts.

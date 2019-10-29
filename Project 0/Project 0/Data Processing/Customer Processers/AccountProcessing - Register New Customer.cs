@@ -14,10 +14,12 @@ namespace Project_0
             string firstName = "";
             string lastName = "";
 
+            // Loop for completed name.
             do
             {
                 bool continueProcessing = true;
 
+                // Display header.
                 workingDisplay?.ClearDisplay();
                 workingDisplay?.DisplayNewCustomerScreen();
 
@@ -48,15 +50,20 @@ namespace Project_0
         {
             bool result = false;
 
+            // Check for passed in first name.
             if (firstName.Length > 0)
             {
+                // Redisplay current first name.
                 workingDisplay?.DisplayCustomerFirstNameRequest(firstName);
                 result = true;
             }
             else
             {
+                // Get user to input for first name.
                 workingDisplay?.DisplayCustomerFirstNameRequest();
                 firstName = workingDisplay?.GetUserStringInput();
+
+                // Check for valid user input.
                 if (firstName == null)
                 {
                     // Display error to user and restart loop.
@@ -98,15 +105,20 @@ namespace Project_0
         {
             bool result = false;
 
+            // Check for passed in last name.
             if (lastName.Length > 0)
             {
+                // Redisplay last name.
                 workingDisplay?.DisplayCustomerLastNameRequest(lastName);
                 result = true;
             }
             else
             {
+                // Get user to input for first name.
                 workingDisplay?.DisplayCustomerLastNameRequest();
                 lastName = workingDisplay?.GetUserStringInput();
+
+                // Check for valid user input.
                 if (lastName == null)
                 {
                     // Display error to user and restart loop.
