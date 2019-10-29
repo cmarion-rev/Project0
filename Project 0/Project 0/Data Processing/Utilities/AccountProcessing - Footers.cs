@@ -13,6 +13,7 @@ namespace Project_0
         private void InvalidSelection(bool returnToMainMenu = false)
         {
             workingDisplay?.DisplayInvalidSelection();
+            // Check if sequence is returning to main menu.
             if (returnToMainMenu)
             {
                 workingDisplay?.DisplayReturningToMainMenu();
@@ -36,6 +37,7 @@ namespace Project_0
         private void OverdraftProtection(bool returnToMainMenu = false)
         {
             workingDisplay?.DisplayWithdrawalOverdraftProtection();
+            // Check if sequence is returning to main menu.
             if (returnToMainMenu)
             {
                 workingDisplay?.DisplayReturningToMainMenu();
@@ -50,6 +52,7 @@ namespace Project_0
         private void InvalidEntry(bool returnToMainMenu = false)
         {
             workingDisplay?.DisplayInvalidEntry();
+            // Check if sequence is returning to main menu.
             if (returnToMainMenu)
             {
                 workingDisplay?.DisplayReturningToMainMenu();
@@ -64,6 +67,7 @@ namespace Project_0
         private void InvalidAmount(bool returnToMainMenu = false)
         {
             workingDisplay?.DisplayInvalidAmount();
+            // Check if sequence is returning to main menu.
             if (returnToMainMenu)
             {
                 workingDisplay?.DisplayReturningToMainMenu();

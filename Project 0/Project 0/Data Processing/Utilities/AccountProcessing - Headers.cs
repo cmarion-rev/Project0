@@ -30,6 +30,7 @@ namespace Project_0
         /// <param name="currentAccount">Specific account to display. DEFAULT: Current ActiveAccount.</param>
         private void ShortAccountHeader(Account currentAccount = null)
         {
+            // Check if a valid account was provided for displaying header.
             if (currentAccount == null)
             {
                 workingDisplay?.DisplayAccountInfo(activeAccount);
