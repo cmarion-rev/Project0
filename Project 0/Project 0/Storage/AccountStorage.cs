@@ -392,10 +392,16 @@ namespace Project_0
 
         #region REMOVE ACCOUNTS
 
+        /// <summary>
+        /// Remove account from storage.
+        /// </summary>
+        /// <param name="newAccount">Account object reference to remove.</param>
+        /// <returns>Returns, True if the referenced account was in storage. Otherwise, False.</returns>
         public bool RemoveAccount(Account newAccount)
         {
             bool result = false;
 
+            // Check which account type this account is, to remove from.
             if (newAccount is CheckingAccount)
             {
                 result = RemoveCheckingAccount(newAccount as CheckingAccount);
@@ -416,11 +422,19 @@ namespace Project_0
             return result;
         }
 
+        /// <summary>
+        /// Remove business account from storage.
+        /// </summary>
+        /// <param name="newAccount">BusinessAccount object reference to remove.</param>
+        /// <returns>Returns, True if the referenced account was in storage. Otherwise, False.</returns>
         public bool RemoveBusinessAccount(BusinessAccount newAccount)
         {
             bool result = false;
+
+            // Get list index of reference account.
             int accountIndex = allAccounts[Utility.AccountType.BUSINESS].IndexOf(newAccount);
 
+            // Check if a good index was returned.
             if (accountIndex > -1)
             {
                 Customer currentCustomer = newAccount.Customer;
@@ -444,11 +458,19 @@ namespace Project_0
             return result;
         }
 
+        /// <summary>
+        /// Remove checking account from storage.
+        /// </summary>
+        /// <param name="newAccount">CheckingAccount object reference to remove.</param>
+        /// <returns>Returns, True if the referenced account was in storage. Otherwise, False.</returns>
         public bool RemoveCheckingAccount(CheckingAccount newAccount)
         {
             bool result = false;
+
+            // Get list index of reference account.
             int accountIndex = allAccounts[Utility.AccountType.CHECKING].IndexOf(newAccount);
 
+            // Check if a good index was returned.
             if (accountIndex > -1)
             {
                 Customer currentCustomer = newAccount.Customer;
@@ -466,11 +488,19 @@ namespace Project_0
             return result;
         }
 
+        /// <summary>
+        /// Remove loan account from storage.
+        /// </summary>
+        /// <param name="newAccount">LoanAccount object reference to remove.</param>
+        /// <returns>Returns, True if the referenced account was in storage. Otherwise, False.</returns>
         public bool RemoveLoanAccount(LoanAccount newAccount)
         {
             bool result = false;
+
+            // Get list index of reference account.
             int accountIndex = allAccounts[Utility.AccountType.LOAN].IndexOf(newAccount);
 
+            // Check if a good index was returned.
             if (accountIndex > -1)
             {
                 Customer currentCustomer = newAccount.Customer;
@@ -488,11 +518,19 @@ namespace Project_0
             return result;
         }
 
+        /// <summary>
+        /// Remove term account from storage.
+        /// </summary>
+        /// <param name="newAccount">TermDepositAccount object reference to remove.</param>
+        /// <returns>Returns, True if the referenced account was in storage. Otherwise, False.</returns>
         public bool RemoveTermAccount(TermDepositAccount newAccount)
         {
             bool result = false;
+
+            // Get list index of reference account.
             int accountIndex = allAccounts[Utility.AccountType.TERM].IndexOf(newAccount);
 
+            // Check if a good index was returned.
             if (accountIndex > -1)
             {
                 Customer currentCustomer = newAccount.Customer;
@@ -510,11 +548,25 @@ namespace Project_0
             return result;
         }
 
+        /// <summary>
+        /// Remove specific account from storage.
+        /// </summary>
+        /// <param name="currentCustomer">Owning customer.</param>
+        /// <param name="currentAccountType">Type of Account.</param>
+        /// <param name="currentAccount">Account reference object.</param>
+        /// <param name="accountIndex">Index of account object.</param>
+        /// <returns>Returns, True if removal was successfull. Otherwise, False.</returns>
         private bool RemoveSpecificAccount(Customer currentCustomer, Utility.AccountType currentAccountType, Account currentAccount, int accountIndex)
         {
-            bool result = true;
+            bool result = false;
 
-            result = currentCustomer.RemoveAccount(currentAccount);
+            // Remove account from current customer.
+            if (currentCustomer != null)
+            {
+                result = currentCustomer.RemoveAccount(currentAccount);
+            }
+
+            // Remove account from specific account type list and index.
             allAccounts[currentAccountType].RemoveAt(accountIndex);
 
             return true;
